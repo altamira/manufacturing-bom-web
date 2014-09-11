@@ -9,8 +9,10 @@ Instructions to compile this project:
 
 2. Clone this repository at your git home
 
-```sh
-$ cd GIT_HOME/bpm-manufacturing-bom/yo
+3. Follow this instruction to setup and run the environment
+
+```shell
+cd GIT_HOME/bpm-manufacturing-bom
 $ npm install -g yo
 $ npm install -g generator-angular
 $ npm install grunt-connect-proxy --save-dev
@@ -24,5 +26,6 @@ $ grunt build
 $ grunt serve
 ```
 
-Webapp uses [Mobile Angular UI](http://mobileangularui.com/docs/) as a responsive framework what requires setup too.
+
+Webapp uses [Mobile Angular UI](http://mobileangularui.com/docs/) as a responsive framework. To setup the environment follow this instructions [http://mobileangularui.com/blog/your-first-phonegap-app-with-mobile-angular-ui/](http://mobileangularui.com/blog/your-first-phonegap-app-with-mobile-angular-ui/).
 
