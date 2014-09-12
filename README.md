@@ -12,20 +12,11 @@ Instructions to compile this project:
 3. Follow this instruction to setup and run the environment
 
 ```shell
-cd GIT_HOME/bpm-manufacturing-bom
-$ npm install -g yo
-$ npm install -g generator-angular
-$ npm install grunt-connect-proxy --save-dev
-$ bower install
-$ cd bower_components/overthrow
-$ npm install
-$ grunt
-$ cd ../..
-$ npm install
-$ grunt build
-$ grunt serve
+cd GIT_HOME/manufacturing-bom-web
+npm install -g cordova
+npm install -g ionic
+ionic serve
 ```
 
-
-Webapp uses [Mobile Angular UI](http://mobileangularui.com/docs/) as a responsive framework. To setup the environment follow this instructions [http://mobileangularui.com/blog/your-first-phonegap-app-with-mobile-angular-ui/](http://mobileangularui.com/blog/your-first-phonegap-app-with-mobile-angular-ui/).
+This web app uses [Ionic Framework](http://ionicframework.com) as a responsive framework. To setup the environment follow this instructions [http://ionicframework.com/docs/guide/installation.html](http://ionicframework.com/docs/guide/installation.html).
 

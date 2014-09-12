@@ -1,0 +1,8 @@
+{
+  "name": "manufacturing-bom",
+  "app_id": "",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ]
+}
