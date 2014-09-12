@@ -18,5 +18,5 @@ npm install -g ionic
 ionic serve
 ```
 
-This web app uses [Ionic Framework](http://ionicframework.com) as a responsive framework. To setup the environment follow this instructions [http://ionicframework.com/docs/guide/installation.html](http://ionicframework.com/docs/guide/installation.html).
+This web app uses [Ionic Framework](http://ionicframework.com) as a multi-platform responsive framework. To setup the environment follow this instructions [http://ionicframework.com/docs/guide/installation.html](http://ionicframework.com/docs/guide/installation.html).
 
