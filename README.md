@@ -13,8 +13,7 @@ Instructions to compile this project:
 
 ```shell
 cd GIT_HOME/manufacturing-bom-web
-npm install -g cordova
-npm install -g ionic
+npm install -g cordova ionic gulp
 ionic serve
 ```
 
