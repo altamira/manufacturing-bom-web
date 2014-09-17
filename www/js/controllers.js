@@ -33,9 +33,10 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ChecklistCtrl', function($scope, $stateParams, $ionicPopup, $timeout,  $location) {
+.controller('ChecklistCtrl', function($scope, $stateParams, $ionicPopup, $timeout,  $state) {
 	
-	$scope.importOrder = function() {		
+	$scope.importOrder = function() {
+	
 		// An elaborate, custom popup
 		var importPopup = $ionicPopup.show({
 			templateUrl : 'templates/import-order.html',
@@ -68,10 +69,11 @@ angular.module('starter.controllers', [])
 		$scope.orders.splice(index, 1);	
 	};
 	
-	$scope.goDetail = function (url) {
-		
+	//trigered when user click on products row
+	$scope.goDetail = function (id) {
+		$state.go('app.single', {orderId: id});
     }
-  $scope.orders = [
+	$scope.orders = [
             { "number": 72102, "customer": "INBRANDS S/A" },
             { "number": 72116, "customer": "INBRANDS S/A" },
             { "number": 72001, "customer": "INBRANDS S.A" },
