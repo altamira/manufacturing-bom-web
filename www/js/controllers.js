@@ -33,7 +33,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ChecklistCtrl', function($scope, $stateParams, $ionicPopup, $timeout) {
+.controller('ChecklistCtrl', function($scope, $stateParams, $ionicPopup, $timeout,  $location) {
 	
 	$scope.importOrder = function() {		
 		// An elaborate, custom popup
@@ -62,6 +62,15 @@ angular.module('starter.controllers', [])
 	$scope.data = {
 		showDelete: false
 	};
+	
+	// Triggered to delte orders
+	$scope.deleteOrder = function(index) {     
+		$scope.orders.splice(index, 1);	
+	};
+	
+	$scope.goDetail = function (url) {
+		
+    }
   $scope.orders = [
             { "number": 72102, "customer": "INBRANDS S/A" },
             { "number": 72116, "customer": "INBRANDS S/A" },

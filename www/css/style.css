@@ -1,1 +1,7 @@
 /* Empty. Add your own CSS if you like */
+.list-item-padding{
+	padding:0px;
+}
+.list-item-bgcolor{
+	background-color:#FFFFFF;
+}
