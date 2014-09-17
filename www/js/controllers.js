@@ -33,7 +33,35 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ChecklistCtrl', function($scope, $stateParams) {
+.controller('ChecklistCtrl', function($scope, $stateParams, $ionicPopup, $timeout) {
+	
+	$scope.importOrder = function() {		
+		// An elaborate, custom popup
+		var importPopup = $ionicPopup.show({
+			templateUrl : 'templates/import-order.html',
+			title: 'Order Number',
+			scope: $scope,
+			buttons: [
+			{ text: 'Cancel' },
+			{ text: '<b>Save</b>',
+				type: 'button-positive',
+				onTap: function(e) {
+					
+				}
+			},
+			]
+		});
+		importPopup.then(function(res) {
+			console.log('Tapped!', res);
+		});
+		$timeout(function() {
+			importPopup.close(); //close the popup after 3 seconds for some reason
+		}, 30000);
+	};
+	
+	$scope.data = {
+		showDelete: false
+	};
   $scope.orders = [
             { "number": 72102, "customer": "INBRANDS S/A" },
             { "number": 72116, "customer": "INBRANDS S/A" },
