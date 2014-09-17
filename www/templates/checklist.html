@@ -17,7 +17,7 @@
 			<button class="button  button-icon icon ion-search"></button>
 		</div>
 		<div class="item item-input-inset list-item-padding" ng-repeat="order in orders | filter: order.search">
-			<label class="item-input-wrapper list-item-bgcolor list-item-padding" ng-click="importOrder()">
+			<label class="item-input-wrapper list-item-bgcolor list-item-padding" ng-click="goDetail({{order.number}})">
 				{{order.number}} {{order.customer}}
 			</label>
 			<button class="button button-icon icon ion-ios7-close-outline" ng-click="deleteOrder($index)"></button>
