@@ -9,7 +9,9 @@
 </ion-header-bar>
 <ion-content>
 	<ion-list  show-reorder="data.showReorder">
+		<!--Loop through All Orders-->
 		<div class="item" ng-repeat="order in orders">
+			<!--Order Related Headers-->
 			<div class="row  responsive-sm list-item-bgcolor element-border-all" >
 				<div class="col">
 					<p>Client</p>
@@ -46,7 +48,9 @@
 					<p></p>
 				</div>
 			</div>
+			<!--End-->
 			<br/>
+			<!--Loop Through All Order Items-->
 			<div class="item list-item-padding" ng-repeat="item in order.item">
 				<div class="row  responsive-sm list-item-bgcolor element-border-all" >
 					<p>ITEM {{item.item}}</p>
@@ -73,6 +77,7 @@
 						<p>PESO TOTAL</p>						
 					</div>
 				</div>
+				<!--Loop Through All Item Products-->
 				<div ng-repeat="product in item.product">
 					<div class="row  responsive-sm list-item-bgcolor element-border-all no-padding" >
 						<div class="col element-border-right">						
