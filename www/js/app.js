@@ -4,9 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+var orderApp = angular.module('starter', ['ionic', 'starter.controllers', 'restangular']);
 
-.run(function($ionicPlatform) {
+orderApp.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -62,11 +62,22 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       views: {
         'menuContent' :{
           templateUrl: "templates/checklist-form.html",
-          controller: 'ChecklistCtrl'
+          controller: 'CheckListDetailCtrl'
         }
       }
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/checklist');
+})
+.config(function(RestangularProvider) {
+	RestangularProvider.setBaseUrl('http://esb.altamira.com.br:8081/manufacturing/bom/checklist/');
+	RestangularProvider.setFullResponse(true);
+	RestangularProvider.setDefaultHeaders({'Content-Type': 'application/jsonp',
+		'X-Requested-With': 'XMLHttpRequest'
+	});
+	RestangularProvider.setDefaultHttpFields({
+		'withCredentials': true
+	});
+	RestangularProvider.setDefaultRequestParams('jsonp', {callback: 'JSON_CALLBACK'});
 });
 

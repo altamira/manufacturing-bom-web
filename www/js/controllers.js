@@ -66,7 +66,18 @@ angular.module('starter.controllers', [])
 	
 	// Triggered to delte orders
 	$scope.deleteOrder = function(index) {     
-		$scope.orders.splice(index, 1);	
+		
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Delete Order',
+			template: 'Are you sure you want to delete this order ?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+				$scope.orders.splice(index, 1);					
+			} else {
+				
+			}
+		});
 	};
 	
 	//trigered when user click on products row
@@ -377,3 +388,16 @@ angular.module('starter.controllers', [])
   ];
 })
 
+//orders detail controller
+// orderApp.controller('CheckListDetailCtrl', function($scope, Restangular) {
+	// $scope.people = Restangular.all('72271').getList();
+	// console.log($scope.people);
+// });
+
+orderApp.controller("CheckListDetailCtrl", ['$scope','$http', function($scope, $http){    
+            $http.get('js/order_detail.json').success (function(data){
+                $scope.orders = data;
+				console.log( $scope.orders);
+        });
+    }]
+);

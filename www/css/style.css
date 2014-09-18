@@ -5,3 +5,18 @@
 .list-item-bgcolor{
 	background-color:#FFFFFF;
 }
+.body-bg-color{
+	background-color:#FFFFFF;
+}
+.element-border-all{
+  border: 1px solid #464646 !important;
+}
+.element-border-right{
+  border-right: 1px solid #464646 !important;
+}
+.space-wrap{
+	white-space: normal !important;
+}
+.no-padding{
+	padding:0px;
+}

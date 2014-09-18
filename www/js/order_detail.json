@@ -1,0 +1,140 @@
+{
+	"order" : {
+		"number" : "72271",
+		"customer" : "DURATEX S.A",
+		"sales_representative" : "CLAYTON CAPELATTO REPRESENTAÇÕES",
+		"order_date" : "1410895028676",
+		"delivery_date" : "1410895028676",
+		"quotation" : "00085088",
+		"comment" : " ",
+		"item" : [ {
+			"item" : "1",
+			"description" : "PORTA-PALETES - MÓDULO A 01 Conjunto de estruturas metálicas do tipo porta-paletes composto por 20 módulos medindo 2700 x 600 x 8800 mm, com 03 pares de longarinas aptos a suportar uma carga uniformemente distribuída de 2000 kgf cada. Composição: 20 montantes medindo 600 x 8800 mm e 60 pares de longarinas medindo 2700 mm.",
+			"product" : [ {
+				"code" : "PPLCOL00080265000000",
+				"color" : "CZ-PAD",
+				"description" : "COLUNA NORMAL CH12 2800MM",
+				"quantity" : "40.000",
+				"weight" : "568.509"
+			}, {
+				"code" : "PPLCOL00080265006000",
+				"color" : "CZ-PAD",
+				"description" : "COLUNA NORMAL CH12 MED 6000 MM",
+				"quantity" : "40.000",
+				"weight" : "1218.234"
+			}, {
+				"code" : "PPLDCJ00000000000300",
+				"color" : "CZ-PAD",
+				"description" : "DISTANCIADOR PPL 300MM C/ PARAF.",
+				"quantity" : "30.000",
+				"weight" : "19.867"
+			}, {
+				"code" : "ppldia00000152000000",
+				"color" : "CZ-PAD",
+				"description" : "DIAGONAL NOVA esp1,50 mm C/ PARAF 1003MM",
+				"quantity" : "100.000",
+				"weight" : "130.709"
+			}, {
+				"code" : "ppldia00000152000000",
+				"color" : "CZ-PAD",
+				"description" : "DIAGONAL NOVA esp1,50 mm C/ PARAF 1038MM",
+				"quantity" : "80.000",
+				"weight" : "108.013"
+			}, {
+				"code" : "PPLGAR00000000NORMAL",
+				"color" : "CZ-PAD",
+				"description" : "CONJ GARRA PPL NORMAL (01 PAR)",
+				"quantity" : "120.000",
+				"weight" : "103.857"
+			}, {
+				"code" : "PPLJUNPADRA000000000",
+				"color" : "CZ-PAD",
+				"description" : "JUNCAO PPL COL 80 MM C/ PARAF.",
+				"quantity" : "40.000",
+				"weight" : "43.898"
+			}, {
+				"code" : "PPLLOTCJ113000000000",
+				"color" : "CZ-PAD",
+				"description" : "LONGARINA TUBO 113 2700MM",
+				"quantity" : "120.000",
+				"weight" : "1819.599"
+			}, {
+				"code" : "PPLSAP02CHU000000000",
+				"color" : "CZ-PAD",
+				"description" : "SAPATA PPL NORMAL COM 02 CHUMBADOR",
+				"quantity" : "40.000",
+				"weight" : "36.912"
+			}, {
+				"code" : "ppltra00000152000000",
+				"color" : "CZ-PAD",
+				"description" : "TRAVESSA PPL esp 1,50 mm C/PARAF 500MM",
+				"quantity" : "200.000",
+				"weight" : "118.223"
+			} ]
+		}, {
+			"item" : "5",
+			"description" : "PORTA-PALETES - MÓDULO B 01 Conjunto de estruturas metálicas do tipo porta-paletes composto por 16 módulos medindo 1850 x 600 x 8800 mm, com 03 pares de longarinas aptos a suportar uma carga uniformemente distribuída de 2000 kgf cada. Composição: 16 montantes medindo 600 x 8800 mm e 48 pares de longarinas medindo 1850 mm.",
+			"product" : [ {
+				"code" : "PPLCOL00080265000000",
+				"color" : "CZ-PAD",
+				"description" : "COLUNA NORMAL CH12 2800MM",
+				"quantity" : "32.000",
+				"weight" : "454.807"
+			}, {
+				"code" : "PPLCOL00080265006000",
+				"color" : "CZ-PAD",
+				"description" : "COLUNA NORMAL CH12 MED 6000 MM",
+				"quantity" : "32.000",
+				"weight" : "974.587"
+			}, {
+				"code" : "PPLDCJ00000000000300",
+				"color" : "CZ-PAD",
+				"description" : "DISTANCIADOR PPL 300MM C/ PARAF.",
+				"quantity" : "24.000",
+				"weight" : "15.894"
+			}, {
+				"code" : "ppldia00000152000000",
+				"color" : "CZ-PAD",
+				"description" : "DIAGONAL NOVA esp1,50 mm C/ PARAF 1003MM",
+				"quantity" : "80.000",
+				"weight" : "104.567"
+			}, {
+				"code" : "ppldia00000152000000",
+				"color" : "CZ-PAD",
+				"description" : "DIAGONAL NOVA esp1,50 mm C/ PARAF 1038MM",
+				"quantity" : "64.000",
+				"weight" : "86.410"
+			}, {
+				"code" : "PPLGAR00000000NORMAL",
+				"color" : "CZ-PAD",
+				"description" : "CONJ GARRA PPL NORMAL (01 PAR)",
+				"quantity" : "96.000",
+				"weight" : "83.086"
+			}, {
+				"code" : "PPLJUNPADRA000000000",
+				"color" : "CZ-PAD",
+				"description" : "JUNCAO PPL COL 80 MM C/ PARAF.",
+				"quantity" : "32.000",
+				"weight" : "35.118"
+			}, {
+				"code" : "PPLLOTCJ113000000000",
+				"color" : "CZ-PAD",
+				"description" : "LONGARINA TUBO 113 1850MM",
+				"quantity" : "96.000",
+				"weight" : "1023.567"
+			}, {
+				"code" : "PPLSAP02CHU000000000",
+				"color" : "CZ-PAD",
+				"description" : "SAPATA PPL NORMAL COM 02 CHUMBADOR",
+				"quantity" : "32.000",
+				"weight" : "29.529"
+			}, {
+				"code" : "ppltra00000152000000",
+				"color" : "CZ-PAD",
+				"description" : "TRAVESSA PPL esp 1,50 mm C/PARAF 500MM",
+				"quantity" : "160.000",
+				"weight" : "94.579"
+			} ]
+		} ]
+	}
+}

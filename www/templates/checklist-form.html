@@ -1,5 +1,101 @@
-<ion-view title="Checklist">
-  <ion-content class="has-header">
-    <h1>Checklist</h1>
-  </ion-content>
-</ion-view>
+<ion-header-bar class="bar-positive">
+	<div class="buttons">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+		<h1 class="title">Order # </h1>
+		<button class="button button-icon icon ion-android-checkmark"></button>
+		<button class="button button-icon icon ion-printer"></button>
+		</button>
+	</div>
+</ion-header-bar>
+<ion-content>
+	<ion-list  show-reorder="data.showReorder">
+		<div class="item" ng-repeat="order in orders">
+			<div class="row  responsive-sm list-item-bgcolor element-border-all" >
+				<div class="col">
+					<p>Client</p>
+					<p>Represantate</p>
+				</div>
+				<div class="col col-80">
+					<p>{{order.customer}}</p>
+					<p>{{order.sales_representative}}</p>
+				</div>			
+				<div class="col">
+					<p>PEDIDO</p>
+					<p>{{order.number}}</p>
+				</div>
+			</div>
+			<div class="row  responsive-sm list-item-bgcolor element-border-all no-padding">
+				<div class="col col-10 element-border-right">
+					<p>Date PEDIDO</p>
+					<p>07/01/2014</p>
+				</div>
+				<div class="col col-40 element-border-right">
+					<p>PRAZO DE ENTREGA(SEMANA/ANO)</p>
+					<p></p>
+				</div>			
+				<div class="col col-20 element-border-right">
+					<p>N ORCAMENTO</p>
+					<p>{{order.quotation}}</p>
+				</div>
+				<div class="col col-20 element-border-right">
+					<p>N PROJECTO</p>
+					<p></p>
+				</div>
+				<div class="col col-40">
+					<p>ACABAMENTO</p>
+					<p></p>
+				</div>
+			</div>
+			<br/>
+			<div class="item list-item-padding" ng-repeat="item in order.item">
+				<div class="row  responsive-sm list-item-bgcolor element-border-all" >
+					<p>ITEM {{item.item}}</p>
+				</div>
+				<div class="row  responsive-sm list-item-bgcolor element-border-all" >
+					<p class="space-wrap">{{item.description}}</p>
+				</div>
+				<div class="row  responsive-sm list-item-bgcolor element-border-all no-padding" >
+					<div class="col element-border-right">						
+					</div>
+					<div class="col element-border-right">
+						<p>QUANTIDE</p>
+					</div>			
+					<div class="col col-50 element-border-right">
+						<p>DESCRICAO DO MATERIAL</p>						
+					</div>
+					<div class="col element-border-right">
+						<p>COR</p>
+					</div>
+					<div class="col element-border-right">
+						<p>PESO</p>						
+					</div>
+					<div class="col">
+						<p>PESO TOTAL</p>						
+					</div>
+				</div>
+				<div ng-repeat="product in item.product">
+					<div class="row  responsive-sm list-item-bgcolor element-border-all no-padding" >
+						<div class="col element-border-right">						
+						</div>
+						<div class="col element-border-right">
+							<p>{{product.quantity}}</p>
+						</div>			
+						<div class="col col-50 element-border-right">
+							<p>{{product.description}}</p>						
+						</div>
+						<div class="col element-border-right">
+							<p>{{product.color}}</p>
+						</div>
+						<div class="col  element-border-right">
+							<p></p>						
+						</div>
+						<div class="col">
+							<p></p>						
+						</div>
+					</div>
+				</div>
+				<br/>				
+			</div>
+		</div>	
+	</ion-list>       
+</ion-content>
