@@ -2,7 +2,8 @@
   "name": "manufacturing-bom",
   "private": "true",
   "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.0.0-beta.12"
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.12",
+    "underscore": "~1.7.0"
   },
   "dependencies": {
     "restangular": "~1.4.0"

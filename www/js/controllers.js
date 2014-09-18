@@ -390,8 +390,8 @@ angular.module('starter.controllers', [])
 
 //orders detail controller
 // orderApp.controller('CheckListDetailCtrl', function($scope, Restangular) {
-	// $scope.people = Restangular.all('72271').getList();
-	// console.log($scope.people);
+	// $scope.orders = Restangular.one('72271').get();
+	// console.log($scope.orders);
 // });
 
 orderApp.controller("CheckListDetailCtrl", ['$scope','$http', function($scope, $http){    

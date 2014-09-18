@@ -72,7 +72,7 @@ orderApp.run(function($ionicPlatform) {
 .config(function(RestangularProvider) {
 	RestangularProvider.setBaseUrl('http://esb.altamira.com.br:8081/manufacturing/bom/checklist/');
 	RestangularProvider.setFullResponse(true);
-	RestangularProvider.setDefaultHeaders({'Content-Type': 'application/jsonp',
+	RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json',
 		'X-Requested-With': 'XMLHttpRequest'
 	});
 	RestangularProvider.setDefaultHttpFields({
