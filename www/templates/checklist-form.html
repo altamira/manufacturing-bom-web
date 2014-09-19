@@ -1,8 +1,8 @@
 <ion-header-bar class="bar-positive">
 	<div class="buttons">
-		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+		<a href="#/app/checklists" class="button button-icon icon ion-ios7-arrow-back"></a>
 		<h1 class="title">Order # </h1>
-		<button class="button button-icon icon ion-android-checkmark"></button>
+		<button ng-click="checkedOrder()" class="button button-icon icon ion-checkmark"></button>
 		<button class="button button-icon icon ion-printer"></button>
 		</button>
 	</div>
@@ -29,13 +29,13 @@
 			<div class="row  responsive-sm list-item-bgcolor element-border-all no-padding">
 				<div class="col col-10 element-border-right">
 					<p>Date PEDIDO</p>
-					<p>07/01/2014</p>
+					<p>{{order.order_date | date:'MM/dd/yyyy'}}</p>
 				</div>
 				<div class="col col-40 element-border-right">
 					<p>PRAZO DE ENTREGA(SEMANA/ANO)</p>
-					<p></p>
+					<p>{{order.delivery_date | date:'WW/yyyy'}}</p>
 				</div>			
-				<div class="col col-20 element-border-right">
+				<div class="col col-20 element-border-right text-align-cener">
 					<p>N ORCAMENTO</p>
 					<p>{{order.quotation}}</p>
 				</div>
@@ -61,45 +61,61 @@
 				<div class="row  responsive-sm list-item-bgcolor element-border-all no-padding" >
 					<div class="col element-border-right">						
 					</div>
-					<div class="col element-border-right">
+					<div class="col element-border-right text-align-cener">
 						<p>QUANTIDE</p>
 					</div>			
 					<div class="col col-50 element-border-right">
 						<p>DESCRICAO DO MATERIAL</p>						
 					</div>
-					<div class="col element-border-right">
+					<div class="col element-border-right text-align-cener">
 						<p>COR</p>
 					</div>
-					<div class="col element-border-right">
+					<div class="col element-border-right text-align-right">
 						<p>PESO</p>						
 					</div>
-					<div class="col">
+					<div class="col text-align-right">
 						<p>PESO TOTAL</p>						
 					</div>
 				</div>
 				<!--Loop Through All Item Products-->
 				<div ng-repeat="product in item.product">
 					<div class="row  responsive-sm list-item-bgcolor element-border-all no-padding" >
-						<div class="col element-border-right">						
-						</div>
 						<div class="col element-border-right">
-							<p>{{product.quantity}}</p>
+							<label class="checkbox">
+								<input type="checkbox">
+							</label>
+						</div>
+						<div class="col element-border-right text-align-cener">
+							<p>{{product.quantity | number:0}}</p>
 						</div>			
 						<div class="col col-50 element-border-right">
 							<p>{{product.description}}</p>						
 						</div>
-						<div class="col element-border-right">
+						<div class="col element-border-right text-align-cener">
 							<p>{{product.color}}</p>
 						</div>
-						<div class="col  element-border-right">
-							<p></p>						
+						<div class="col  element-border-right text-align-right">
+							<p>{{product.weight}}</p>						
 						</div>
-						<div class="col">
-							<p></p>						
+						<div class="col text-align-right">
+							<p>{{product.weight * product.quantity | number:0}}</p>						
 						</div>
 					</div>
 				</div>
+				<div class="row  responsive-sm list-item-bgcolor element-border-all  no-padding" >
+					<div class="col  col-90 element-border-right text-align-right">
+						<p>PESO TOTAL(kg)</p>						
+					</div>
+					<div class="col text-align-right">
+						<p>{{getItemTotal(item) | number:3}}</p>						
+					</div>
+				</div>
 				<br/>				
+			</div>
+			<br/>				
+			<div class="row  responsive-sm list-item-bgcolor element-border-all" >
+				<p><b>OBSERVACOES DO PEDIDO</b><br>				
+				ENTREGAR NA OBRA: RUA DAS PALMEIRAS,4587-LAPA -SP</p>
 			</div>
 		</div>	
 	</ion-list>       

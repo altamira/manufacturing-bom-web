@@ -389,15 +389,61 @@ angular.module('starter.controllers', [])
 })
 
 //orders detail controller
-// orderApp.controller('CheckListDetailCtrl', function($scope, Restangular) {
-	// $scope.orders = Restangular.one('72271').get();
-	// console.log($scope.orders);
-// });
+orderApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, Restangular) {
 
-orderApp.controller("CheckListDetailCtrl", ['$scope','$http', function($scope, $http){    
-            $http.get('js/order_detail.json').success (function(data){
-                $scope.orders = data;
-				console.log( $scope.orders);
-        });
-    }]
-);
+	//get data from api
+	Restangular.one('72271').get().then(function(response) {
+		$scope.orders = {order: response.data.order}
+				
+	}, function(response) {
+		alert('error')
+	});
+	
+	$scope.getItemTotal = function(item) {     
+		var itemtotal = 0;
+		angular.forEach(item.product, function(prd){
+			itemtotal += prd.quantity * prd.weight			
+		})
+		return itemtotal;
+	};		
+	
+	// Triggered to delte orders
+	$scope.checkedOrder = function(index) {     
+
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Checke Order',
+			template: 'Is the order checked completly ?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+								
+			} else {
+				
+			}
+		});
+	};
+});
+
+// orderApp.controller("CheckListDetailCtrl", ['$scope','$http', '$ionicPopup', function($scope, $http, $ionicPopup){    
+            // $http.get('js/order_detail.json').success (function(data){
+                // $scope.orders = data;
+				// console.log( $scope.orders);
+        // });
+		
+		// // Triggered to delte orders
+		// $scope.checkedOrder = function(index) {     
+
+			// var confirmPopup = $ionicPopup.confirm({
+				// title: 'Checke Order',
+				// template: 'Is the order checked completly ?'
+			// });
+			// confirmPopup.then(function(res) {
+				// if(res) {
+									
+				// } else {
+					
+				// }
+			// });
+		// };
+    // }]
+// );
