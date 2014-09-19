@@ -389,12 +389,12 @@ angular.module('starter.controllers', [])
 })
 
 //orders detail controller
-orderApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, Restangular) {
-
+orderApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, $stateParams, Restangular) {
+	
 	//get data from api
-	Restangular.one('72271').get().then(function(response) {
+	Restangular.one($stateParams.orderId).get().then(function(response) {
 		$scope.orders = {order: response.data.order}
-				
+		console.log($scope.orders.order.item);		
 	}, function(response) {
 		alert('error')
 	});
