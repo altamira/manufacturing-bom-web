@@ -393,8 +393,8 @@ orderApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, $stateP
 	
 	//get data from api
 	Restangular.one($stateParams.orderId).get().then(function(response) {
-		$scope.orders = {order: response.data.order}
-		console.log($scope.orders.order.item);		
+		$scope.order = response.data;
+		console.log($scope.order.item);		
 	}, function(response) {
 		alert('error')
 	});
