@@ -6,7 +6,7 @@
 	background-color:#FFFFFF;
 }
 .body-bg-color{
-	background-color:#FFFFFF;
+	background-color:#FFFFFF !important;
 }
 .element-border-all{
   border: 1px solid #464646 !important;
