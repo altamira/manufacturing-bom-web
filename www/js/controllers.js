@@ -393,7 +393,18 @@ orderApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, $stateP
 	
 	//get data from api
 	Restangular.one($stateParams.orderId).get().then(function(response) {
-		$scope.order = response.data;			
+		$scope.order = response.data;
+		var itemtotal = 0;
+		var ordertotal = 0;
+		
+		angular.forEach($scope.order.item, function(item){
+			angular.forEach(item.product, function(prd){
+				ordertotal += prd.weight
+				console.log(itemtotal);
+			})			
+		})
+		$scope.total = ordertotal;
+		
 	}, function(response) {
 		alert('error')
 	});
