@@ -393,19 +393,24 @@ orderApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, $stateP
 	
 	//get data from api
 	Restangular.one($stateParams.orderId).get().then(function(response) {
-		$scope.order = response.data;
-		console.log($scope.order.item);		
+		$scope.order = response.data;			
 	}, function(response) {
 		alert('error')
 	});
 	
+	$scope.getWeek = function(time) {  
+		var weekInfo = moment(time).week() + "/" + moment(time).year() + " ( "+ moment(time).startOf('week').format("DD/MM/YYYY") + " a " + moment(time).endOf('week').format("DD/MM/YYYY") + ")";
+		return weekInfo;			
+	};
+	
 	$scope.getItemTotal = function(item) {     
 		var itemtotal = 0;
 		angular.forEach(item.product, function(prd){
-			itemtotal += prd.quantity * prd.weight			
+			//itemtotal += prd.quantity * prd.weight
+			itemtotal += prd.weight
 		})
 		return itemtotal;
-	};		
+	};	
 	
 	// Triggered to delte orders
 	$scope.checkedOrder = function(index) {     

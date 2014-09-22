@@ -10,6 +10,7 @@
 <ion-content>
 	<ion-list  show-reorder="data.showReorder">
 		<!--Order Related Headers-->
+		<br/>
 		<div class="row  responsive-sm list-item-bgcolor element-border-all" >
 			<div class="col">
 				<p>Client</p>
@@ -31,7 +32,7 @@
 			</div>
 			<div class="col col-40 element-border-right">
 				<p>PRAZO DE ENTREGA(SEMANA/ANO)</p>
-				<p>{{order.delivery | date:'WW/yyyy'}}</p>
+				<p>{{getWeek(order.delivery)}}</p>
 			</div>			
 			<div class="col col-20 element-border-right text-align-cener">
 				<p>N ORCAMENTO</p>
@@ -93,10 +94,10 @@
 						<p>{{product.color}}</p>
 					</div>
 					<div class="col  element-border-right text-align-right">
-						<p>{{product.weight}}</p>						
+						<p>{{product.weight / product.quantity | number:2}}</p>						
 					</div>
 					<div class="col text-align-right">
-						<p>{{product.weight * product.quantity | number:0}}</p>						
+						<p>{{product.weight | number:2}}</p>						
 					</div>
 				</div>
 			</div>
@@ -109,6 +110,15 @@
 				</div>
 			</div>
 			<br/>				
+		</div>
+		<br/>				
+		<div class="row  responsive-sm list-item-bgcolor element-border-all  no-padding" >
+			<div class="col  col-90 element-border-right text-align-right">
+				<p>PESO TOTAL DO PEDIDO(kg)</p>						
+			</div>
+			<div class="col text-align-right">
+				<p></p>						
+			</div>
 		</div>
 		<br/>				
 		<div class="row  responsive-sm list-item-bgcolor element-border-all" >
