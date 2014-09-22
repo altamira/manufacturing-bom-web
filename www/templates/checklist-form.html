@@ -50,7 +50,7 @@
 		<!--End-->
 		<br/>
 		<!--Loop Through All Order Items-->
-		<div class="item list-item-padding" ng-repeat="item in order.item">
+		<div class="item list-item-padding" ng-repeat="item in order.item | orderBy:'item'">
 			<div class="row  responsive-sm list-item-bgcolor element-border-all" >
 				<p>ITEM {{item.item}}</p>
 			</div>
