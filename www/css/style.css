@@ -1,12 +1,15 @@
 /* Empty. Add your own CSS if you like */
+
+/*Added to make the view color white instead of default color black*/
+ion-nav-view{
+	background-color:#FFFFFF !important;
+}
+
 .list-item-padding{
 	padding:0px;
 }
 .list-item-bgcolor{
 	background-color:#FFFFFF;
-}
-.body-bg-color{
-	background-color:#FFFFFF !important;
 }
 
 .space-wrap{
