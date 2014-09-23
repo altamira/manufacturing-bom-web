@@ -8,12 +8,7 @@
 .body-bg-color{
 	background-color:#FFFFFF !important;
 }
-.element-border-all{
-  border: 1px solid #464646 !important;
-}
-.element-border-right{
-  border-right: 1px solid #464646 !important;
-}
+
 .space-wrap{
 	white-space: normal !important;
 }
@@ -28,4 +23,27 @@
 }
 .text-color-white{
 	color:#FFFFFF;
+}
+.checklist-body{
+	margin-left: 30px;
+	margin-right: 30px;
+	background-color:#FFFFFF!important;
+}
+.row-custom-styles{
+	background-color:#C8C8C8 ;
+	padding-right:2px;
+	padding-left: 2px;
+	padding-bottom:1px;
+	padding-top:1px;
+	vertical-align: middle;
+}
+.col-bg-color{
+	background-color:#FFFFFF!important;	
+	
+}
+.col-padding{
+	margin-right:2px;	
+}
+.label-font-style{
+	font-size: 10px;
 }

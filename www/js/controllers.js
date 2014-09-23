@@ -389,18 +389,16 @@ angular.module('starter.controllers', [])
 })
 
 //orders detail controller
-orderApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, $stateParams, Restangular) {
+orderApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, $window, $stateParams, Restangular) {
 	
 	//get data from api
 	Restangular.one($stateParams.orderId).get().then(function(response) {
 		$scope.order = response.data;
-		var itemtotal = 0;
 		var ordertotal = 0;
 		
 		angular.forEach($scope.order.item, function(item){
 			angular.forEach(item.product, function(prd){
-				ordertotal += prd.weight
-				console.log(itemtotal);
+				ordertotal += prd.weight				
 			})			
 		})
 		$scope.total = ordertotal;
@@ -438,28 +436,9 @@ orderApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, $stateP
 			}
 		});
 	};
+	
+	// open the report in a new tab
+	$scope.openReport = function() { 
+		$window.open(' http://altamira.elasticbeanstalk.com/webapi/reports/materials/'+ $stateParams.orderId);
+	};
 });
-
-// orderApp.controller("CheckListDetailCtrl", ['$scope','$http', '$ionicPopup', function($scope, $http, $ionicPopup){    
-            // $http.get('js/order_detail.json').success (function(data){
-                // $scope.orders = data;
-				// console.log( $scope.orders);
-        // });
-		
-		// // Triggered to delte orders
-		// $scope.checkedOrder = function(index) {     
-
-			// var confirmPopup = $ionicPopup.confirm({
-				// title: 'Checke Order',
-				// template: 'Is the order checked completly ?'
-			// });
-			// confirmPopup.then(function(res) {
-				// if(res) {
-									
-				// } else {
-					
-				// }
-			// });
-		// };
-    // }]
-// );

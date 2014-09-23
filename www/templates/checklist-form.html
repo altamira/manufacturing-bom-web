@@ -1,130 +1,142 @@
 <ion-header-bar class="bar-positive">
-	<div class="buttons">
+	<div class="buttons" style="margin-left: 30px;margin-right: 30px;">
 		<a href="#/app/checklists" class="button button-icon icon ion-ios7-arrow-back"></a>
 		<h4 class="text-color-white">&nbsp;&nbsp;Order # {{order.number}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
 		<button ng-click="checkedOrder()" class="button button-icon icon ion-checkmark"></button>
-		<button class="button button-icon icon ion-printer"></button>
+		<button ng-click="openReport({{order.number}})" class="button button-icon icon ion-printer"></button>
 		</button>
 	</div>
 </ion-header-bar>
-<ion-content>
-	<ion-list  show-reorder="data.showReorder">
-		<!--Order Related Headers-->
+<ion-content class="checklist-body">
+	<!--Order Related Headers-->
 		<br/>
-		<div class="row  responsive-sm list-item-bgcolor element-border-all" >
-			<div class="col">
-				<p>Client</p>
-				<p>Represantate</p>
-			</div>
-			<div class="col col-80">
-				<p>{{order.customer}}</p>
-				<p>{{order.representative}}</p>
-			</div>			
-			<div class="col">
-				<p>PEDIDO</p>
-				<p>{{order.number}}</p>
+		<div>
+			<div class="row row-custom-styles" >
+				<div class="col col-bg-color">
+					<label>Client</label>
+					<p>Represantate</p>
+				</div>
+				<div class="col col-80 col-bg-color">
+					<label>{{order.customer}}</label>
+					<p>{{order.representative}}</p>
+				</div>			
+				<div class="col col-bg-color">
+					<label>PEDIDO</label>
+					<p>{{order.number}}</p>
+				</div>
 			</div>
 		</div>
-		<div class="row  responsive-sm list-item-bgcolor element-border-all no-padding">
-			<div class="col col-10 element-border-right">
-				<p>Date PEDIDO</p>
-				<p>{{order.created | date:'dd/MM/yyyy'}}</p>
-			</div>
-			<div class="col col-40 element-border-right">
-				<p>PRAZO DE ENTREGA(SEMANA/ANO)</p>
-				<p>{{getWeek(order.delivery)}}</p>
-			</div>			
-			<div class="col col-20 element-border-right text-align-cener">
-				<p>N ORCAMENTO</p>
-				<p>{{order.quotation}}</p>
-			</div>
-			<div class="col col-20 element-border-right">
-				<p>N PROJECTO</p>
-				<p></p>
-			</div>
-			<div class="col col-40">
-				<p>ACABAMENTO</p>
-				<p></p>
+		<div>
+			<div class="row  row-custom-styles">
+				<div class="col col-10 col-bg-color col-padding">
+					<label  class="label-font-style">Date PEDIDO</label>
+					<p>{{order.created | date:'dd/MM/yyyy'}}</p>
+				</div>
+				<div class="col col-40  col-bg-color col-padding">
+					<label  class="label-font-style">PRAZO DE ENTREGA(SEMANA/ANO)</label>
+					<p>{{getWeek(order.delivery)}}</p>
+				</div>			
+				<div class="col col-20 col-bg-color col-padding">
+					<label  class="label-font-style">N ORCAMENTO</label>
+					<p>{{order.quotation}}</p>
+				</div>
+				<div class="col col-20 col-bg-color col-padding">
+					<label  class="label-font-style">N PROJECTO</label>
+					<p>project</p>
+				</div>
+				<div class="col col-40 col-bg-color">
+					<label  class="label-font-style">ACABAMENTO</label>
+					<p>finish</p>
+				</div>
 			</div>
 		</div>
 		<!--End-->
 		<br/>
 		<!--Loop Through All Order Items-->
 		<div class="item list-item-padding" ng-repeat="item in order.item | orderBy:'item'">
-			<div class="row  responsive-sm list-item-bgcolor element-border-all" >
-				<p>ITEM {{item.item}}</p>
+			<div>
+				<div class="row row-custom-styles" >
+					<div class="col col-bg-color">
+						<p>ITEM {{item.item}}</p>
+					</div>				
+				</div>
 			</div>
-			<div class="row  responsive-sm list-item-bgcolor element-border-all" >
-				<p class="space-wrap">{{item.description}}</p>
+			<div>
+				<div class="row row-custom-styles" >
+					<div class="col col-bg-color">
+						<p class="space-wrap">{{item.description}}</p>
+					</div>					
+				</div>
 			</div>
-			<div class="row  responsive-sm list-item-bgcolor element-border-all no-padding" >
-				<div class="col element-border-right">						
-				</div>
-				<div class="col element-border-right text-align-cener">
-					<p>QUANTIDE</p>
-				</div>			
-				<div class="col col-50 element-border-right">
-					<p>DESCRICAO DO MATERIAL</p>						
-				</div>
-				<div class="col element-border-right text-align-cener">
-					<p>COR</p>
-				</div>
-				<div class="col element-border-right text-align-right">
-					<p>PESO</p>						
-				</div>
-				<div class="col text-align-right">
-					<p>PESO TOTAL</p>						
+			<div>
+				<div class="row row-custom-styles" >
+					<div class="col col-bg-color col-padding">						
+					</div>
+					<div class="col col-bg-color col-padding text-align-cener">
+						<label  class="label-font-style">QUANTIDE</label>
+					</div>			
+					<div class="col col-67 col-bg-color col-padding">
+						<label  class="label-font-style">DESCRICAO DO MATERIAL</label>						
+					</div>
+					<div class="col col-bg-color col-padding text-align-cener">
+						<label  class="label-font-style">COR</label>
+					</div>
+					<div class="col col-bg-color col-padding text-align-right">
+						<label  class="label-font-style">PESO</label>						
+					</div>
+					<div class="col col-10 col-bg-color text-align-right">
+						<label  class="label-font-style">PESO TOTAL</label>						
+					</div>
 				</div>
 			</div>
 			<!--Loop Through All Item Products-->
 			<div ng-repeat="product in item.product">
-				<div class="row  responsive-sm list-item-bgcolor element-border-all no-padding" >
-					<div class="col element-border-right">
+				<div class="row row-custom-styles" >
+					<div class="col col-bg-color col-padding">
 						<label class="checkbox">
 							<input type="checkbox">
 						</label>
 					</div>
-					<div class="col element-border-right text-align-cener">
+					<div class="col col-bg-color col-padding text-align-cener">
 						<p>{{product.quantity | number:0}}</p>
 					</div>			
-					<div class="col col-50 element-border-right">
+					<div class="col col-67 col-bg-color col-padding">
 						<p>{{product.description}}</p>						
 					</div>
-					<div class="col element-border-right text-align-cener">
+					<div class="col col-bg-color col-padding">
 						<p>{{product.color}}</p>
 					</div>
-					<div class="col  element-border-right text-align-right">
+					<div class="col  col-bg-color col-padding text-align-right">
 						<p>{{product.weight / product.quantity | number:2}}</p>						
 					</div>
-					<div class="col text-align-right">
+					<div class="col col-10 col-bg-color text-align-right">
 						<p>{{product.weight | number:2}}</p>						
 					</div>
 				</div>
 			</div>
-			<div class="row  responsive-sm list-item-bgcolor element-border-all  no-padding" >
-				<div class="col  col-90 element-border-right text-align-right">
-					<p>PESO TOTAL(kg)</p>						
+			<div class="row row-custom-styles" >
+				<div class="col  col-90  col-bg-color col-padding text-align-right">
+					<label  class="label-font-style">PESO TOTAL(kg)</label>						
 				</div>
-				<div class="col text-align-right">
+				<div class="col  col-bg-color text-align-right">
 					<p>{{getItemTotal(item) | number:2}}</p>						
 				</div>
 			</div>
 			<br/>				
 		</div>
-		<br/>				
-		<div class="row  responsive-sm list-item-bgcolor element-border-all  no-padding" >
-			<div class="col  col-90 element-border-right text-align-right">
-				<p>PESO TOTAL DO PEDIDO(kg)</p>						
+				
+		<div class="row row-custom-styles  no-padding" >
+			<div class="col  col-90 col-bg-color col-padding text-align-right">
+				<label  class="label-font-style">PESO TOTAL DO PEDIDO(kg)</label>						
 			</div>
-			<div class="col text-align-right">
+			<div class="col col-bg-color last-col-padding text-align-right">
 				<p>{{total | number:2}}</p>						
 			</div>
 		</div>
 		<br/>				
-		<div class="row  responsive-sm list-item-bgcolor element-border-all" >
-			<p><b>OBSERVACOES DO PEDIDO</b><br>				
-			ENTREGAR NA OBRA: RUA DAS PALMEIRAS,4587-LAPA -SP</p>
-		</div>
-
-	</ion-list>       
+		<div class="row row-custom-styles" >
+			<div class="col col-bg-color">
+				<p><b>OBSERVACOES DO PEDIDO</b><br>ENTREGAR NA OBRA: RUA DAS PALMEIRAS,4587-LAPA -SP</p>					
+			</div>			
+		</div>     
 </ion-content>
