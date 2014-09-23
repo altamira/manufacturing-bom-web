@@ -11,7 +11,7 @@
 	<!--Order Related Headers-->
 		<br/>
 		<div>
-			<div class="row row-custom-styles" >
+			<div class="row order-row-custom-styles" >
 				<div class="col col-bg-color">
 					<label>Client</label>
 					<p>Represantate</p>
@@ -27,7 +27,7 @@
 			</div>
 		</div>
 		<div>
-			<div class="row  row-custom-styles">
+			<div class="row  order-row-custom-styles">
 				<div class="col col-10 col-bg-color col-padding">
 					<label  class="label-font-style">Date PEDIDO</label>
 					<p>{{order.created | date:'dd/MM/yyyy'}}</p>
@@ -55,23 +55,21 @@
 		<!--Loop Through All Order Items-->
 		<div class="item list-item-padding" ng-repeat="item in order.item | orderBy:'item'">
 			<div>
-				<div class="row row-custom-styles" >
+				<div class="item  row row-custom-styles" >
 					<div class="col col-bg-color">
 						<p>ITEM {{item.item}}</p>
 					</div>				
 				</div>
 			</div>
 			<div>
-				<div class="row row-custom-styles" >
+				<div class="item  row row-custom-styles" >
 					<div class="col col-bg-color">
 						<p class="space-wrap">{{item.description}}</p>
 					</div>					
 				</div>
 			</div>
 			<div>
-				<div class="row row-custom-styles" >
-					<div class="col col-bg-color col-padding">						
-					</div>
+				<div class="row row-custom-styles item item-checkbox" >
 					<div class="col col-bg-color col-padding text-align-cener">
 						<label  class="label-font-style">QUANTIDE</label>
 					</div>			
@@ -90,20 +88,19 @@
 				</div>
 			</div>
 			<!--Loop Through All Item Products-->
+			
 			<div ng-repeat="product in item.product">
-				<div class="row row-custom-styles" >
-					<div class="col col-bg-color col-padding">
-						<label class="checkbox">
-							<input type="checkbox">
-						</label>
-					</div>
+				<div class="row row-custom-styles item item-checkbox" >
+					<label class="checkbox">
+						<input type="checkbox">
+					</label>
 					<div class="col col-bg-color col-padding text-align-cener">
 						<p>{{product.quantity | number:0}}</p>
 					</div>			
 					<div class="col col-67 col-bg-color col-padding">
 						<p>{{product.description}}</p>						
 					</div>
-					<div class="col col-bg-color col-padding">
+					<div class="col col-bg-color col-padding text-align-cener">
 						<p>{{product.color}}</p>
 					</div>
 					<div class="col  col-bg-color col-padding text-align-right">
@@ -114,7 +111,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="row row-custom-styles" >
+			<div class="row row-custom-styles  item item-checkbox" >
+				
 				<div class="col  col-90  col-bg-color col-padding text-align-right">
 					<label  class="label-font-style">PESO TOTAL(kg)</label>						
 				</div>
@@ -125,7 +123,7 @@
 			<br/>				
 		</div>
 				
-		<div class="row row-custom-styles  no-padding" >
+		<div class="row order-row-custom-styles  no-padding" >
 			<div class="col  col-90 col-bg-color col-padding text-align-right">
 				<label  class="label-font-style">PESO TOTAL DO PEDIDO(kg)</label>						
 			</div>
@@ -134,7 +132,7 @@
 			</div>
 		</div>
 		<br/>				
-		<div class="row row-custom-styles" >
+		<div class="row order-row-custom-styles" >
 			<div class="col col-bg-color">
 				<p><b>OBSERVACOES DO PEDIDO</b><br>ENTREGAR NA OBRA: RUA DAS PALMEIRAS,4587-LAPA -SP</p>					
 			</div>			
