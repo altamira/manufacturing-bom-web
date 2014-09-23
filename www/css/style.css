@@ -29,15 +29,17 @@
 	margin-right: 30px;
 	background-color:#FFFFFF!important;
 }
+.row + .row {
+	margin-top: 0px;
+	padding-top: 0;
+}
 .order-row-custom-styles{
 	background-color:#C8C8C8 ;
 	padding:1px;
-	vertical-align: middle;
 }
-.row-custom-styles{
-	background-color:#C8C8C8 ;
-	padding:0 1px;
-	vertical-align: middle;
+.no-item-margin-border{
+	margin:0px;
+	border:none;	
 }
 .col-bg-color{
 	background-color:#FFFFFF!important;	

@@ -10,109 +10,102 @@
 <ion-content class="checklist-body">
 	<!--Order Related Headers-->
 		<br/>
-		<div>
-			<div class="row order-row-custom-styles" >
-				<div class="col col-bg-color">
-					<label>Client</label>
-					<p>Represantate</p>
-				</div>
-				<div class="col col-80 col-bg-color">
-					<label>{{order.customer}}</label>
-					<p>{{order.representative}}</p>
-				</div>			
-				<div class="col col-bg-color">
-					<label>PEDIDO</label>
-					<p>{{order.number}}</p>
-				</div>
+		<div class="row order-row-custom-styles" >
+			<div class="col col-bg-color">
+				<label>Client</label>
+				<p>Represantate</p>
+			</div>
+			<div class="col col-80 col-bg-color">
+				<label>{{order.customer}}</label>
+				<p>{{order.representative}}</p>
+			</div>			
+			<div class="col col-bg-color">
+				<label>PEDIDO</label>
+				<p>{{order.number}}</p>
 			</div>
 		</div>
-		<div>
-			<div class="row  order-row-custom-styles">
-				<div class="col col-10 col-bg-color col-padding">
-					<label  class="label-font-style">Date PEDIDO</label>
-					<p>{{order.created | date:'dd/MM/yyyy'}}</p>
-				</div>
-				<div class="col col-40  col-bg-color col-padding">
-					<label  class="label-font-style">PRAZO DE ENTREGA(SEMANA/ANO)</label>
-					<p>{{getWeek(order.delivery)}}</p>
-				</div>			
-				<div class="col col-20 col-bg-color col-padding">
-					<label  class="label-font-style">N ORCAMENTO</label>
-					<p>{{order.quotation}}</p>
-				</div>
-				<div class="col col-20 col-bg-color col-padding">
-					<label  class="label-font-style">N PROJECTO</label>
-					<p>project</p>
-				</div>
-				<div class="col col-40 col-bg-color">
-					<label  class="label-font-style">ACABAMENTO</label>
-					<p>finish</p>
-				</div>
+		<div class="row  order-row-custom-styles">
+			<div class="col col-10 col-bg-color col-padding">
+				<label  class="label-font-style">Date PEDIDO</label>
+				<p>{{order.created | date:'dd/MM/yyyy'}}</p>
+			</div>
+			<div class="col col-40  col-bg-color col-padding">
+				<label  class="label-font-style">PRAZO DE ENTREGA(SEMANA/ANO)</label>
+				<p>{{getWeek(order.delivery)}}</p>
+			</div>			
+			<div class="col col-20 col-bg-color col-padding">
+				<label  class="label-font-style">N ORCAMENTO</label>
+				<p>{{order.quotation}}</p>
+			</div>
+			<div class="col col-20 col-bg-color col-padding">
+				<label  class="label-font-style">N PROJECTO</label>
+				<p>project</p>
+			</div>
+			<div class="col col-40 col-bg-color">
+				<label  class="label-font-style">ACABAMENTO</label>
+				<p>finish</p>
 			</div>
 		</div>
 		<!--End-->
 		<br/>
+		
 		<!--Loop Through All Order Items-->
-		<div class="item list-item-padding" ng-repeat="item in order.item | orderBy:'item'">
-			<div>
-				<div class="item  row row-custom-styles" >
-					<div class="col col-bg-color">
-						<p>ITEM {{item.item}}</p>
-					</div>				
+		<div ng-repeat="item in order.item | orderBy:'item'">
+			<!--row to show item no-->
+			<div class="row order-row-custom-styles" >
+				<div class="col col-bg-color">
+					<p>ITEM {{item.item}}</p>
+				</div>				
+			</div>
+			<!--row to show item description-->
+			<div class="row order-row-custom-styles" >
+				<div class="col col-bg-color">
+					<p class="space-wrap">{{item.description}}</p>
+				</div>					
+			</div>
+			<!--row to show product headers -->
+			<div class="row order-row-custom-styles item item-checkbox no-item-margin-border" >
+				<div class="col col-bg-color col-padding text-align-cener">
+					<label  class="label-font-style">QUANTIDE</label>
+				</div>			
+				<div class="col col-67 col-bg-color col-padding">
+					<label  class="label-font-style">DESCRICAO DO MATERIAL</label>						
+				</div>
+				<div class="col col-bg-color col-padding text-align-cener">
+					<label  class="label-font-style">COR</label>
+				</div>
+				<div class="col col-bg-color col-padding text-align-right">
+					<label  class="label-font-style">PESO</label>						
+				</div>
+				<div class="col col-10 col-bg-color text-align-right">
+					<label  class="label-font-style">PESO TOTAL</label>						
 				</div>
 			</div>
-			<div>
-				<div class="item  row row-custom-styles" >
-					<div class="col col-bg-color">
-						<p class="space-wrap">{{item.description}}</p>
-					</div>					
-				</div>
-			</div>
-			<div>
-				<div class="row row-custom-styles item item-checkbox" >
-					<div class="col col-bg-color col-padding text-align-cener">
-						<label  class="label-font-style">QUANTIDE</label>
-					</div>			
-					<div class="col col-67 col-bg-color col-padding">
-						<label  class="label-font-style">DESCRICAO DO MATERIAL</label>						
-					</div>
-					<div class="col col-bg-color col-padding text-align-cener">
-						<label  class="label-font-style">COR</label>
-					</div>
-					<div class="col col-bg-color col-padding text-align-right">
-						<label  class="label-font-style">PESO</label>						
-					</div>
-					<div class="col col-10 col-bg-color text-align-right">
-						<label  class="label-font-style">PESO TOTAL</label>						
-					</div>
-				</div>
-			</div>
+			
 			<!--Loop Through All Item Products-->
 			
-			<div ng-repeat="product in item.product">
-				<div class="row row-custom-styles item item-checkbox" >
-					<label class="checkbox">
-						<input type="checkbox">
-					</label>
-					<div class="col col-bg-color col-padding text-align-cener">
-						<p>{{product.quantity | number:0}}</p>
-					</div>			
-					<div class="col col-67 col-bg-color col-padding">
-						<p>{{product.description}}</p>						
-					</div>
-					<div class="col col-bg-color col-padding text-align-cener">
-						<p>{{product.color}}</p>
-					</div>
-					<div class="col  col-bg-color col-padding text-align-right">
-						<p>{{product.weight / product.quantity | number:2}}</p>						
-					</div>
-					<div class="col col-10 col-bg-color text-align-right">
-						<p>{{product.weight | number:2}}</p>						
-					</div>
+			<div class="row order-row-custom-styles item item-checkbox no-item-margin-border" ng-repeat="product in item.product">
+				<label class="checkbox">
+					<input type="checkbox">
+				</label>
+				<div class="col col-bg-color col-padding text-align-cener">
+					<p>{{product.quantity | number:0}}</p>
+				</div>			
+				<div class="col col-67 col-bg-color col-padding">
+					<p>{{product.description}}</p>						
+				</div>
+				<div class="col col-bg-color col-padding text-align-cener">
+					<p>{{product.color}}</p>
+				</div>
+				<div class="col  col-bg-color col-padding text-align-right">
+					<p>{{product.weight / product.quantity | number:2}}</p>						
+				</div>
+				<div class="col col-10 col-bg-color text-align-right">
+					<p>{{product.weight | number:2}}</p>						
 				</div>
 			</div>
-			<div class="row row-custom-styles  item item-checkbox" >
-				
+			
+			<div class="row order-row-custom-styles  item item-checkbox no-item-margin-border" >				
 				<div class="col  col-90  col-bg-color col-padding text-align-right">
 					<label  class="label-font-style">PESO TOTAL(kg)</label>						
 				</div>
@@ -123,7 +116,7 @@
 			<br/>				
 		</div>
 				
-		<div class="row order-row-custom-styles  no-padding" >
+		<div class="row order-row-custom-styles" >
 			<div class="col  col-90 col-bg-color col-padding text-align-right">
 				<label  class="label-font-style">PESO TOTAL DO PEDIDO(kg)</label>						
 			</div>
@@ -132,7 +125,7 @@
 			</div>
 		</div>
 		<br/>				
-		<div class="row order-row-custom-styles" >
+		<div class="row order-row-custom-styles">
 			<div class="col col-bg-color">
 				<p><b>OBSERVACOES DO PEDIDO</b><br>ENTREGAR NA OBRA: RUA DAS PALMEIRAS,4587-LAPA -SP</p>					
 			</div>			
