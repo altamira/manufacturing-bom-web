@@ -47,6 +47,7 @@ orderApp.run(function($ionicPlatform) {
         }
       }
     })
+	
     .state('app.checklists', {
       url: "/checklist",
       views: {
@@ -65,7 +66,27 @@ orderApp.run(function($ionicPlatform) {
           controller: 'CheckListDetailCtrl'
         }
       }
+    })
+	
+	.state('app.manufacturesearch', {
+      url: "/manufacturesearch",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/manufacture-search.html",
+          controller: 'ManufacturingProcsSearchCtrl'
+        }
+      }
+    })
+	.state('app.mfgprocessform', {
+      url: "/manufacturesearch/:code",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/mfg-process-form.html",
+          controller: 'ManufcProcsFormCtrl'
+        }
+      }
     });
+	
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/checklist');
 })

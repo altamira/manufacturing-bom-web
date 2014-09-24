@@ -27,10 +27,14 @@ ion-nav-view{
 .text-color-white{
 	color:#FFFFFF;
 }
-.checklist-body{
+.content-body{
 	margin-left: 30px;
 	margin-right: 30px;
 	background-color:#FFFFFF!important;
+}
+.header-margin{
+	margin-left: 30px;
+	margin-right: 30px;
 }
 .row + .row {
 	margin-top: 0px;
@@ -53,4 +57,14 @@ ion-nav-view{
 }
 .label-font-style{
 	font-size: 10px;
+}
+
+.btn-separator:after {
+    content: ' ';
+    display: block;
+    float: left;
+    background: #DDD;
+    margin: 0px;
+    min-height: 40px;
+    width: 1px;
 }
