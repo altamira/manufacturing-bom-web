@@ -9,9 +9,11 @@ ion-nav-view{
 	padding:0px;
 }
 .list-item-bgcolor{
-	background-color:#FFFFFF;
+	background-color:#FFFFFF;	
 }
-
+.border-all{
+	border: 1px solid #EEEEEE;
+}
 .space-wrap{
 	white-space: normal !important;
 }
@@ -67,4 +69,14 @@ ion-nav-view{
     margin: 0px;
     min-height: 40px;
     width: 1px;
+}
+.pf-label-width {
+    width: 8%;
+}
+.no-padding-top-bottom{
+	padding-top:0px;
+	padding-bottom:0px;
+}
+.icon-font-size{
+	font-size: 16px;
 }

@@ -1,13 +1,58 @@
 <ion-header-bar class="bar-positive">
 	<div class="buttons header-margin">
-		<a href="#/app/manufacturesearch" class="button button-icon icon ion-ios7-arrow-back"></a>
+		<a href="#/app/manufacturesearch" class="button button-icon fa fa-chevron-left"></a>
 		<span class="btn-separator"></span>
 		<h4 class="text-color-white">&nbsp;&nbsp;{{process.code}}&nbsp;&nbsp;</h4>
 		<span class="btn-separator"></span>
-		<button class="button button-icon icon ion-checkmark"></button>
-		<button class="button button-icon icon ion-printer"></button>		
+		<button class="button button-icon fa fa-check"></button>
+		<button class="button button-icon fa fa-times"></button>
+		<button class="button button-icon fa fa-print"></button>		
 	</div>
 </ion-header-bar>
 <ion-content class="content-body">
-	       
+	<ion-list>
+		<div class="item item-input-inset no-item-margin-border">
+			<span class="input-label">CODIGO</span>
+			<label class="item-input-wrapper  list-item-bgcolor border-all">
+				<input type="text" value="{{process.code}}">
+			</label>			
+		</div>
+		<div class="item item-input-inset no-item-margin-border">
+			<span class="input-label">DESCRICAO</span>
+			<label class="item-input-wrapper list-item-bgcolor border-all">
+				<input type="text" value="{{process.code}}">
+			</label>			
+		</div>
+		<div class="item  item-divider">
+			<label>REVISOES</<label>						 
+		</div>
+		<div class="item item-input-inset no-item-margin-border no-padding-top-bottom"  ng-repeat="revision in process.revision">
+			<span class="input-label">
+				{{revision.date | date:'dd/MM/yyyy'}}
+			</span>
+			<label>
+				{{revision.by}}
+			</label>				
+		</div>
+		<div class="item item-divider item-icon-right">
+			<label>OPERACOES</label>
+			<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 3px;"></i>
+		</div>
+		<div ng-repeat="operation in process.operation">
+			<div class="item item-input-inset" >
+				<label class="item-input-wrapper list-item-bgcolor ">
+					{{operation.sequence}} - {{operation.name}}
+				</label>
+				<i class="fa fa-times-circle-o"></i>				
+			</div>
+			
+			<div class="item item-input-inset" ng-repeat="input in operation.input">
+				<span class="input-label pf-label-width"></span>				
+				<label class="item-input-wrapper list-item-bgcolor ">
+					{{input.description}}
+				</label>
+				<i class="fa fa-times-circle-o"></i>
+			</div>			
+		</div>
+	</ion-list>     
 </ion-content>
