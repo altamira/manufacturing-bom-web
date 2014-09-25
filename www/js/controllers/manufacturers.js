@@ -1,4 +1,4 @@
-orderApp.controller('ManufacturingProcsSearchCtrl', function($scope, $stateParams, $ionicPopup, $timeout,  $state) {
+altamiraApp.controller('ManufacturingProcsSearchCtrl', function($scope, $stateParams, $ionicPopup, $timeout,  $state) {
 	
 	$scope.processes = [
             { "code": "PPLCOL00113000000000", "customer": "COLUNA NORMAL CH12 2800MM" },

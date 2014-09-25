@@ -1,5 +1,5 @@
 //orders detail controller
-orderApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $window, $stateParams, Restangular) {
+altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $window, $stateParams, Restangular) {
 	
 	//get data from api
 	

@@ -389,7 +389,7 @@ angular.module('starter.controllers', [])
 })
 
 //orders detail controller
-orderApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, $window, $stateParams, Restangular) {
+altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, $window, $stateParams, Restangular) {
 	
 	//get data from api
 	Restangular.one($stateParams.orderId).get().then(function(response) {
