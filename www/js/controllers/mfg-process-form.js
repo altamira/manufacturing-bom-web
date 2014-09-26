@@ -1,5 +1,5 @@
 //orders detail controller
-altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $window, $stateParams, Restangular) {
+altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $window, $state, $stateParams, Restangular) {
 	
 	//get data from api
 	$scope.process = {
@@ -127,5 +127,41 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 			}
 		]
 	};	
+	
+	// Triggered to delte sequences
+	$scope.deleteSequence = function(index) {     
+		
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Delete Process',
+			template: 'Are you sure you want to delete this process operation ?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+				$scope.process.operation.splice(index, 1);					
+			} else {
+				
+			}
+		});
+	};
+	
+	// Triggered to delte sequences input
+	$scope.deleteSequenceInput = function(parentIndex,index) {     
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Delete Process',
+			template: 'Are you sure you want to delete this material ?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+				$scope.process.operation[parentIndex].input.splice(index, 1);					
+			} else {
+				
+			}
+		});
+	};
+	
+	//trigered when user click on sequence row
+	$scope.goToOperationForm = function (id) {
+		$state.go('app.mfgoperationform',{sequence:id});
+    }
 	
 });

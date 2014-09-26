@@ -30,7 +30,7 @@ altamiraApp.controller('ManufacturingProcsSearchCtrl', function($scope, $statePa
 	
 	//trigered when user click on process row
 	$scope.goDetail = function (id) {
-		$state.go('app.mfgprocessform', {code: id});
+		$state.go('app.mfgprocessform', {code: id});		
     }
 	
 });

@@ -20,7 +20,7 @@
 		<div class="item item-input-inset no-item-margin-border">
 			<span class="input-label">DESCRICAO</span>
 			<label class="item-input-wrapper list-item-bgcolor border-all">
-				<input type="text" value="{{process.code}}">
+				<input type="text" value="{{process.description}}">
 			</label>			
 		</div>
 		<div class="item  item-divider">
@@ -40,10 +40,10 @@
 		</div>
 		<div ng-repeat="operation in process.operation">
 			<div class="item item-input-inset" >
-				<label class="item-input-wrapper list-item-bgcolor ">
+				<label class="item-input-wrapper list-item-bgcolor" ng-click="goToOperationForm({{operation.sequence}})">
 					{{operation.sequence}} - {{operation.name}}
 				</label>
-				<i class="fa fa-times-circle-o"></i>				
+				<i class="fa fa-times-circle-o" ng-click="deleteSequence($index)"></i>				
 			</div>
 			
 			<div class="item item-input-inset" ng-repeat="input in operation.input">
@@ -51,7 +51,7 @@
 				<label class="item-input-wrapper list-item-bgcolor ">
 					{{input.description}}
 				</label>
-				<i class="fa fa-times-circle-o"></i>
+				<i class="fa fa-times-circle-o"  ng-click="deleteSequenceInput($parent.$index,$index)"></i>
 			</div>			
 		</div>
 	</ion-list>     

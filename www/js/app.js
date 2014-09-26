@@ -72,7 +72,7 @@ altamiraApp.run(function($ionicPlatform) {
       url: "/manufacturesearch",
       views: {
         'menuContent' :{
-          templateUrl: "templates/manufacture-search.html",
+          templateUrl: "templates/mfg-process-search.html",
           controller: 'ManufacturingProcsSearchCtrl'
         }
       }
@@ -83,6 +83,16 @@ altamiraApp.run(function($ionicPlatform) {
         'menuContent' :{
           templateUrl: "templates/mfg-process-form.html",
           controller: 'ManufcProcsFormCtrl'
+        }
+      }
+    })
+	.state('app.mfgoperationform', {
+      //url: "/manufacturesearch/:code/operation/:sequence",
+	  url: "/manufacturesearch/:sequence",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/mfg-operation-form.html",
+          controller: 'ManufcOprtnFormCtrl'
         }
       }
     });
