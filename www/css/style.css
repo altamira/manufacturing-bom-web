@@ -82,3 +82,8 @@ ion-nav-view{
 .icon-font-size{
 	font-size: 16px;
 }
+.quantity-select-box{
+	height:34px;
+	box-sizing:border-box;
+	border: 1px solid #EEEEEE;
+}
