@@ -84,6 +84,7 @@ ion-nav-view{
 }
 .quantity-select-box{
 	height:34px;
+	width:70px;
 	box-sizing:border-box;
 	border: 1px solid #EEEEEE;
 }

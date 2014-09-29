@@ -1,9 +1,11 @@
 <ion-header-bar class="bar-positive">
 	<div class="buttons header-margin">
-		<a href="#/app/checklists" class="button button-icon icon ion-ios7-arrow-back"></a>
+		<a href="#/app/checklists" class="button button-icon"><i class="fa fa-chevron-left fa-lg"></i></a>
+		<span class="btn-separator"></span>
 		<h4 class="text-color-white">&nbsp;&nbsp;Order # {{order.number}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
-		<button ng-click="checkedOrder()" class="button button-icon icon ion-checkmark"></button>
-		<button ng-click="openReport({{order.number}})" class="button button-icon icon ion-printer"></button>
+		<span class="btn-separator"></span>
+		<button ng-click="checkedOrder()" class="button button-icon"><i class="fa fa-check fa-lg"></i></button>
+		<button ng-click="openReport({{order.number}})" class="button button-icon"><i class="fa fa-print fa-lg"></i></button>
 		
 	</div>
 </ion-header-bar>
