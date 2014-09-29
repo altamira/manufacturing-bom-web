@@ -8,20 +8,20 @@
   <ion-content>
     <form ng-submit="doLogin()">
       <div class="list">
-        <label class="item item-input-inset no-item-margin-border">
+        <div class="item item-input-inset no-item-margin-border">
 			<span class="input-label">CODIGO</span>
-			<label class="item-input-wrapper list-item-bgcolor border-all">
+			<div class="item-input-wrapper list-item-bgcolor border-all">
 				<input type="text" value="PPLCOL00113000000000" ng-model="newItemData.code">
-				<i class="icon ion-search placeholder-icon"></i>
-			</label>
-        </label>
-        <label class="item item-input-inset no-item-margin-border">
+				<i class="fa fa-search placeholder-icon" ng-click="goToProcsSearch()"></i>
+			</div>
+		</div>
+        <div class="item item-input-inset no-item-margin-border">
 			<span class="input-label">DESCRICAO</span>
-			<label class="item-input-wrapper list-item-bgcolor border-all">
+			<div class="item-input-wrapper list-item-bgcolor border-all">
 				<input type="text" value="COLUNA NORMAL CH12 2800MM" ng-model="newItemData.description">
-				<i class="icon ion-search placeholder-icon"></i>
-			</label>
-        </label>
+				<i class="fa fa-search placeholder-icon" ng-click="goToProcsSearch()"></i>
+			</div>
+        </div>
 		<label class="item item-input-inset no-item-margin-border ">
 			<span class="input-label">QUANTITADE</span>
 			<label class="border-all">

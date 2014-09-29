@@ -1,5 +1,5 @@
 //orders detail controller
-altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $stateParams, Restangular) {
+altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular) {
 	//get data from api
 	$scope.operation = {
 				"sequence": 10,
@@ -80,6 +80,12 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	// Open the login modal
 	$scope.addNewItem = function() {
 		$scope.modal.show();
+	};
+	
+	// Open the login modal
+	$scope.goToProcsSearch = function() {
+		$scope.modal.hide();
+		$state.go('app.manufacturesearch');
 	};
 	
 	// Perform the login action when the user submits the login form

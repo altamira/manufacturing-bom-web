@@ -161,7 +161,8 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	
 	//trigered when user click on sequence row
 	$scope.goToOperationForm = function (id) {
-		$state.go('app.mfgoperationform',{sequence:id});
+		//$state.go('app.mfgoperationform',{sequence:id});
+		$state.go('app.mfgoperationform');
     }
 	
 });

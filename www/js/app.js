@@ -78,23 +78,26 @@ altamiraApp.run(function($ionicPlatform) {
       }
     })
 	.state('app.mfgprocessform', {
-      url: "/manufacturesearch/:code",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/mfg-process-form.html",
-          controller: 'ManufcProcsFormCtrl'
-        }
-      }
+		//URL will be changed after getting the API url
+		//url: "/manufacturesearch/:code",
+		url: "/manufactureprocess",
+		views: {
+			'menuContent' :{
+			  templateUrl: "templates/mfg-process-form.html",
+			  controller: 'ManufcProcsFormCtrl'
+			}
+		}
     })
 	.state('app.mfgoperationform', {
-      //url: "/manufacturesearch/:code/operation/:sequence",
-	  url: "/manufacturesearch/:sequence",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/mfg-operation-form.html",
-          controller: 'ManufcOprtnFormCtrl'
-        }
-      }
+		//URL will be changed after getting the API url
+		//url: "/manufacturesearch/:code/operation/:sequence",
+		url: "/manufactureoperation",
+		views: {
+			'menuContent' :{
+			  templateUrl: "templates/mfg-operation-form.html",
+			  controller: 'ManufcOprtnFormCtrl'
+			}
+		}
     });
 	
   // if none of the above states are matched, use this as the fallback
