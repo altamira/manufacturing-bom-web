@@ -1,12 +1,12 @@
 <ion-header-bar class="bar-positive">
 	<div class="buttons header-margin">
-		<a href="#/app/manufacturesearch" class="button button-icon"><i class="fa fa-chevron-left fa-lg"></i></a>
+		<a href="#/app/manufacturesearch" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
 		<span class="btn-separator"></span>
 		<h4 class="text-color-white">&nbsp;&nbsp;{{process.code}}&nbsp;&nbsp;</h4>
 		<span class="btn-separator"></span>
-		<button class="button button-icon"><i class="fa fa-check fa-lg"></i></button>
-		<button class="button button-icon"><i class="fa fa-times fa-lg"></i></button>
-		<button class="button button-icon"><i class="fa fa-print fa-lg"></i></button>		
+		<button class="button button-icon" ng-click="saveProcess()"><i class="fa fa-check"></i></button>
+		<button class="button button-icon" ng-click="deleteProcess()"><i class="fa fa-times"></i></button>
+		<button class="button button-icon"><i class="fa fa-print"></i></button>		
 	</div>
 </ion-header-bar>
 <ion-content class="content-body">
@@ -47,8 +47,7 @@
 			</div>
 			
 			<div class="item item-input-inset" ng-repeat="input in operation.input">
-				<span class="input-label pf-label-width"></span>				
-				<label class="item-input-wrapper list-item-bgcolor ">
+				<label class="item-input-wrapper list-item-bgcolor procs-sequnce-margin ">
 					{{input.description}}
 				</label>
 				<i class="fa fa-times-circle-o"  ng-click="deleteSequenceInput($parent.$index,$index)"></i>

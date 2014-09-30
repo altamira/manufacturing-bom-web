@@ -29,7 +29,38 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 					}
 				]
 			};
+	// Triggered to mark as checked the operation
+	$scope.saveOperation = function(index) {     
 
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Save Operation',
+			template: 'Do you want to save the changes ?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+								
+			} else {
+				
+			}
+		});
+	};
+	
+	// Triggered to mark as checked the operation
+	$scope.deleteOperation = function(index) {     
+
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Delete Operation',
+			template: 'Do you want to delete the operation ?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+								
+			} else {
+				
+			}
+		});
+	};
+	
 	// Triggered to delte sequences input
 	$scope.deleteOperationInput = function(index) {     
 		

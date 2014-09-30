@@ -72,8 +72,8 @@ ion-nav-view{
     min-height: 40px;
     width: 1px;
 }
-.pf-label-width {
-    width: 8%;
+.procs-sequnce-margin {
+   margin-left: 8%;
 }
 .no-padding-top-bottom{
 	padding-top:0px;

@@ -34,7 +34,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ChecklistCtrl', function($scope, $stateParams, $ionicPopup, $timeout,  $state) {
-	
+	$scope.orderData = {};
 	$scope.importOrder = function() {
 	
 		// An elaborate, custom popup
@@ -421,7 +421,7 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicPopup, $win
 		return itemtotal;
 	};	
 	
-	// Triggered to delte orders
+	// Triggered to mark as checked orders
 	$scope.checkedOrder = function(index) {     
 
 		var confirmPopup = $ionicPopup.confirm({

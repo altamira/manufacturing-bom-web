@@ -1,13 +1,12 @@
 <ion-header-bar class="bar-positive">
 	<div class="buttons header-margin">
-		<a href="#/app/manufactureprocess" class="button button-icon"><i class="fa fa-chevron-left fa-lg"></i></a>
+		<a href="#/app/manufactureprocess" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
 		<span class="btn-separator"></span>
 		<h4 class="text-color-white">&nbsp;&nbsp;{{operation.sequence}}-{{operation.name}}&nbsp;&nbsp;</h4>
 		<span class="btn-separator"></span>
-		<button class="button button-icon"><i class="fa fa-plus fa-lg"></i></button>
-		<button class="button button-icon"><i class="fa fa-check fa-lg"></i></button>
-		<button class="button button-icon"><i class="fa fa-times fa-lg"></i></button>
-		<button class="button button-icon"><i class="fa fa-print fa-lg"></i></button>		
+		<button class="button button-icon" ng-click="saveOperation()" ><i class="fa fa-check"></i></button>
+		<button class="button button-icon" ng-click="deleteOperation()"><i class="fa fa-times"></i></button>
+		<button class="button button-icon"><i class="fa fa-print"></i></button>		
 	</div>
 </ion-header-bar>
 <ion-content class="content-body">

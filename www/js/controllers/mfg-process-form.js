@@ -144,6 +144,38 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 		});
 	};
 	
+	// Triggered to mark as checked the process
+	$scope.saveProcess = function(index) {     
+
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Save Process',
+			template: 'Do you want to save the changes ?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+								
+			} else {
+				
+			}
+		});
+	};
+	
+	// Triggered to mark as checked the process
+	$scope.deleteProcess = function(index) {     
+
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Delete Process',
+			template: 'Do you want to delete the process ?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+								
+			} else {
+				
+			}
+		});
+	};
+	
 	// Triggered to delte sequences input
 	$scope.deleteSequenceInput = function(parentIndex,index) {     
 		var confirmPopup = $ionicPopup.confirm({
