@@ -1,73 +1,74 @@
-<ion-header-bar class="bar-positive">
-	<div class="buttons header-margin">
-		<a href="#/app/manufactureprocess" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
-		<span class="btn-separator"></span>
-		<h4 class="text-color-white">&nbsp;&nbsp;{{operation.sequence}}-{{operation.name}}&nbsp;&nbsp;</h4>
-		<span class="btn-separator"></span>
-		<button class="button button-icon" ng-click="saveOperation()" ><i class="fa fa-check"></i></button>
-		<button class="button button-icon" ng-click="deleteOperation()"><i class="fa fa-times"></i></button>
-		<button class="button button-icon"><i class="fa fa-print"></i></button>		
-	</div>
-</ion-header-bar>
-<ion-content class="content-body">
-	<ion-list>
-		<div class="item no-item-margin-border text-align-cener">
-			<span>
-				OPERACAO&nbsp;&nbsp;{{operation.sequence}}-{{operation.name}}
-			</span>			
+<form name="mfgOprtnForm" novalidate>
+	<ion-header-bar class="bar-positive">
+		<div class="buttons header-margin">
+			<a href="#/app/manufactureprocess" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
+			<span class="btn-separator"></span>
+			<h4 class="text-color-white">&nbsp;&nbsp;{{operation.sequence}}-{{operation.name}}&nbsp;&nbsp;</h4>
+			<span class="btn-separator"></span>
+			<button class="button button-icon" ng-click="saveOperation()" ><i class="fa fa-check"></i></button>
+			<button class="button button-icon" ng-click="deleteOperation()"><i class="fa fa-times"></i></button>
+			<button class="button button-icon"><i class="fa fa-print"></i></button>		
 		</div>
-		<div class="item item-input-inset no-item-margin-border">
-			<span class="input-label">CODIGO</span>
-			<label class="item-input-wrapper  list-item-bgcolor border-all">
-				<input type="text" value="PPLCOL00113000000000">
-			</label>			
-		</div>
-		<div class="item item-input-inset no-item-margin-border">
-			<span class="input-label">DESCRICAO</span>
-			<label class="item-input-wrapper list-item-bgcolor border-all">
-				<input type="text" value="COLUNA NORMAL CH12 2800MM">
-			</label>			
-		</div>
-		<div class="item item-input-inset">
-			<span class="input-label">DESCRICAO</span>
-			<label class="item-input-wrapper list-item-bgcolor border-all">
-				<textarea value="{{operation.description}}"></textarea>
-			</label>			
-		</div>
-		<div class="item item-input-inset no-item-margin-border">
-			<span class="input-label">CROQUI</span>
-			<label>
-				<input type="file" />
-			</label>			
-		</div>
-		<br/>
-		<br>
-		<div class="item item-divider item-icon-right">
-			<label>MATERIA PRIMA/INSUMOS/COMPONENTS</label>
-			<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 3px;" ng-click="addNewItem()"></i>
-		</div>
-		<div ng-repeat="input in operation.input">
-			<div class="item item-input-inset" >
-				<label class="item-input-wrapper list-item-bgcolor" ng-click="goToOperationForm({{operation.sequence}})">
-					{{input.code}} - {{input.description}}
-				</label>
-				<i class="fa fa-times-circle-o" ng-click="deleteOperationInput($index)"></i>				
+	</ion-header-bar>
+	<ion-content class="content-body">
+		<ion-list>
+			<div class="item no-item-margin-border text-align-cener">
+				<span>
+					OPERACAO&nbsp;&nbsp;{{operation.sequence}}-{{operation.name}}
+				</span>			
 			</div>
-		</div>
-		<br/>
-		<br>
-		<div class="item item-divider item-icon-right">
-			<label>PRODUTO ACABADO / EM PROCESSO DE FABRICACAO</label>
-			<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 3px;" ng-click="openAddItem()"></i>
-		</div>
-		<div ng-repeat="output in operation.output">
-			<div class="item item-input-inset" >
-				<label class="item-input-wrapper list-item-bgcolor" ng-click="goToOperationForm({{operation.sequence}})">
-					{{output.code}} - {{output.description}}
-				</label>
-				<i class="fa fa-times-circle-o" ng-click="deleteOperationOutput($index)"></i>				
-			</div>					
-		</div>
-		
-	</ion-list>     
-</ion-content>
+			<div class="item item-input-inset no-item-margin-border">
+				<span class="input-label">CODIGO</span>
+				<label class="item-input-wrapper  list-item-bgcolor border-all">
+					<input type="text" value="PPLCOL00113000000000">
+				</label>			
+			</div>
+			<div class="item item-input-inset no-item-margin-border">
+				<span class="input-label">DESCRICAO</span>
+				<label class="item-input-wrapper list-item-bgcolor border-all">
+					<input type="text" value="COLUNA NORMAL CH12 2800MM">
+				</label>			
+			</div>
+			<div class="item item-input-inset">
+				<span class="input-label">DESCRICAO</span>
+				<label class="item-input-wrapper list-item-bgcolor border-all">
+					<textarea value="{{operation.description}}" ng-model="operation.description"></textarea>
+				</label>			
+			</div>
+			<div class="item item-input-inset no-item-margin-border">
+				<span class="input-label" >CROQUI</span>
+				<label>
+					<input type="file" ng-model="operation.croqui"/>
+				</label>			
+			</div>
+			<br/>
+			<br>
+			<div class="item item-divider item-icon-right">
+				<label>MATERIA PRIMA/INSUMOS/COMPONENTS</label>
+				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 3px;" ng-click="addNewItem()"></i>
+			</div>
+			<div ng-repeat="input in operation.input">
+				<div class="item item-input-inset" >
+					<label class="item-input-wrapper list-item-bgcolor" ng-click="goToOperationForm({{operation.sequence}})">
+						{{input.code}} - {{input.description}}
+					</label>
+					<i class="fa fa-times-circle-o" ng-click="deleteOperationInput($index)"></i>				
+				</div>
+			</div>
+			<br/>
+			<br>
+			<div class="item item-divider item-icon-right">
+				<label>PRODUTO ACABADO / EM PROCESSO DE FABRICACAO</label>
+				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 3px;" ng-click="openAddItem()"></i>
+			</div>
+			<div ng-repeat="output in operation.output">
+				<div class="item item-input-inset" >
+					<label class="item-input-wrapper list-item-bgcolor" ng-click="goToOperationForm({{operation.sequence}})">
+						{{output.code}} - {{output.description}}
+					</label>
+					<i class="fa fa-times-circle-o" ng-click="deleteOperationOutput($index)"></i>				
+				</div>					
+			</div>		
+		</ion-list>     
+	</ion-content>
+</form>

@@ -53,7 +53,14 @@ altamiraApp.controller('ManufacturingProcsSearchCtrl', function($scope, $statePa
 	//trigered when user click on process row
 	$scope.goDetail = function (id) {
 		//$state.go('app.mfgprocessform', {code: id});
-		$state.go('app.mfgprocessform');			
+		$state.go('app.mfgprocessform');
+		$state.newProcessCreation = false;		
     }
 	
+	//trigered when user click on process row
+	$scope.newProcess = function () {
+		//$state.go('app.mfgprocessform', {code: id});
+		$state.go('app.mfgprocessform');
+		$state.newProcessCreation = true;
+    }
 });
