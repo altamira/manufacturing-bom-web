@@ -1,34 +1,38 @@
 //orders detail controller
 altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular) {
 	//get data from api
-	$scope.operation = {
-				"sequence": 10,
-				"name": "PERFILAMENTO",
-				"description": "",
-				"croqui": "",
-				"input": [
-					{
-						"code": "ALPRFQ30-KG20000F330",
-						"description": "ACO FINA QUENTE PRETO ROLO 2,00MM 330MM",
-						"quantity": 32.34,
-						"unit": "kg"
-					},
-					{
-						"code": "PERF-PPLTUBO113",
-						"description": "PERFILADEIRA TUBO 113",
-						"quantity": 3,
-						"unit": "min"
-					}
-				],
-				"output": [
-					{
-						"code": "PPLCOL00113000000000-01",
-						"description": "PERFIL LONG TUBO 113",
-						"quantity": 52.34,
-						"unit": "kg"
-					}
-				]
-			};
+	if(!$state.newOprtCreation){
+		$scope.operation = {
+			"sequence": 10,
+			"name": "PERFILAMENTO",
+			"description": "",
+			"croqui": "",
+			"input": [
+				{
+					"code": "ALPRFQ30-KG20000F330",
+					"description": "ACO FINA QUENTE PRETO ROLO 2,00MM 330MM",
+					"quantity": 32.34,
+					"unit": "kg"
+				},
+				{
+					"code": "PERF-PPLTUBO113",
+					"description": "PERFILADEIRA TUBO 113",
+					"quantity": 3,
+					"unit": "min"
+				}
+			],
+			"output": [
+				{
+					"code": "PPLCOL00113000000000-01",
+					"description": "PERFIL LONG TUBO 113",
+					"quantity": 52.34,
+					"unit": "kg"
+				}
+			]
+		};
+	}else{
+		$scope.operation = {};
+	}
 	// Triggered to mark as checked the operation
 	$scope.saveOperation = function(index) {     
 
