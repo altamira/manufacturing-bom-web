@@ -109,3 +109,7 @@ ion-nav-view{
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+.mfg-add-item-title{
+	max-width: 70% !important;
+    
+}
