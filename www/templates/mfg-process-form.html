@@ -3,7 +3,7 @@
 		<div class="buttons header-margin">
 			<a href="#/app/manufacturesearch" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
 			<span class="btn-separator"></span>
-			<h4 class="text-color-white">&nbsp;&nbsp;{{process.code}}&nbsp;&nbsp;</h4>
+			<h4 class="mfg-page-titles">&nbsp;&nbsp;{{process.code}}&nbsp;&nbsp;</h4>
 			<span class="btn-separator"></span>
 			<button class="button button-icon" ng-click="saveProcess()"><i class="fa fa-check"></i></button>
 			<button class="button button-icon" ng-click="deleteProcess()"><i class="fa fa-times"></i></button>
@@ -11,7 +11,7 @@
 		</div>
 	</ion-header-bar>
 	<ion-content class="content-body">
-		<ion-list>
+		<div class="list">
 			<div class="item item-input-inset no-item-margin-border">
 				<span class="input-label">CODIGO</span>
 				<label class="item-input-wrapper  list-item-bgcolor border-all">
@@ -38,23 +38,18 @@
 			<br/>
 			<div class="item item-divider item-icon-right">
 				<label>OPERACOES</label>
-				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 3px;" ng-click="newOperationForm()"></i>
+				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="newOperationForm()"></i>
 			</div>
 			<div ng-repeat="operation in process.operation">
-				<div class="item item-input-inset" >
-					<label class="item-input-wrapper list-item-bgcolor" ng-click="goToOperationForm({{operation.sequence}})">
-						{{operation.sequence}} - {{operation.name}}
-					</label>
-					<i class="fa fa-times-circle-o" ng-click="deleteSequence($index)"></i>				
-				</div>
-				
-				<div class="item item-input-inset" ng-repeat="input in operation.input">
-					<label class="item-input-wrapper list-item-bgcolor procs-sequnce-margin" ng-click="goToProcessForm()">
-						{{input.description}}
-					</label>
-					<i class="fa fa-times-circle-o"  ng-click="deleteSequenceInput($parent.$index,$index)"></i>
+				<div class="item item-icon-right">
+					<p class="no-item-margin-border" ng-click="goToOperationForm({{operation.sequence}})">{{operation.sequence}} - {{operation.name}}</p>
+					<i class="icon fa fa-times-circle-o" ng-click="deleteSequence($index)"></i>				
+				</div>				
+				<div class="item item-icon-right" ng-repeat="input in operation.input">
+					<p class="procs-sequnce-margin" ng-click="goToProcessForm()">{{input.description}}</p>
+					<i class="icon fa fa-times-circle-o"  ng-click="deleteSequenceInput($parent.$index,$index)"></i>
 				</div>			
 			</div>
-		</ion-list>     
+		</div>
 	</ion-content>
 </form>

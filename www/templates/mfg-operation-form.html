@@ -3,7 +3,7 @@
 		<div class="buttons header-margin">
 			<a href="#/app/manufactureprocess" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
 			<span class="btn-separator"></span>
-			<h4 class="text-color-white">&nbsp;&nbsp;{{operation.sequence}}-{{operation.name}}&nbsp;&nbsp;</h4>
+			<h4 class="mfg-page-titles">&nbsp;&nbsp;{{operation.sequence}}-{{operation.name}}&nbsp;&nbsp;</h4>
 			<span class="btn-separator"></span>
 			<button class="button button-icon" ng-click="saveOperation()" ><i class="fa fa-check"></i></button>
 			<button class="button button-icon" ng-click="deleteOperation()"><i class="fa fa-times"></i></button>
@@ -45,30 +45,38 @@
 			<br>
 			<div class="item item-divider item-icon-right">
 				<label>MATERIA PRIMA/INSUMOS/COMPONENTS</label>
-				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 3px;" ng-click="addNewItem()"></i>
+				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="addNewItem()"></i>
 			</div>
-			<div ng-repeat="input in operation.input">
+			<!--<div ng-repeat="input in operation.input">
 				<div class="item item-input-inset" >
 					<label class="item-input-wrapper list-item-bgcolor" ng-click="goToOperationForm({{operation.sequence}})">
 						{{input.code}} - {{input.description}}
 					</label>
 					<i class="fa fa-times-circle-o" ng-click="deleteOperationInput($index)"></i>				
 				</div>
+			</div>-->
+			<div class="item item-icon-right" ng-repeat="input in operation.input">
+				<p class="no-item-margin-border" ng-click="goToOperationForm({{operation.sequence}})">{{input.code}} - {{input.description}}</p>
+				<i class="icon fa fa-times-circle-o" ng-click="deleteOperationInput($index)"></i>
 			</div>
 			<br/>
 			<br>
 			<div class="item item-divider item-icon-right">
 				<label>PRODUTO ACABADO / EM PROCESSO DE FABRICACAO</label>
-				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 3px;" ng-click="openAddItem()"></i>
+				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="openAddItem()"></i>
 			</div>
-			<div ng-repeat="output in operation.output">
+			<!--<div ng-repeat="output in operation.output">
 				<div class="item item-input-inset" >
 					<label class="item-input-wrapper list-item-bgcolor" ng-click="goToOperationForm({{operation.sequence}})">
 						{{output.code}} - {{output.description}}
 					</label>
 					<i class="fa fa-times-circle-o" ng-click="deleteOperationOutput($index)"></i>				
 				</div>					
-			</div>		
+			</div>-->
+			<div class="item item-icon-right" ng-repeat="output in operation.output">
+				<p class="no-item-margin-border" ng-click="goToOperationForm({{operation.sequence}})">{{output.code}} - {{output.description}}</p>
+				<i class="icon fa fa-times-circle-o" ng-click="deleteOperationOutput($index)"></i>
+			</div>
 		</ion-list>     
 	</ion-content>
 </form>
