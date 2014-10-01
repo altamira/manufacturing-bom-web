@@ -3,11 +3,7 @@
 		<div class="buttons header-margin">
 			<a href="#/app/manufacturesearch" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
 			<span class="btn-separator"></span>
-<<<<<<< HEAD
 			<h4 class="mfg-page-titles">&nbsp;&nbsp;{{process.code}}&nbsp;&nbsp;</h4>
-=======
-			<h4 class="text-color-white">&nbsp;&nbsp;{{process.code}}&nbsp;&nbsp;</h4>
->>>>>>> d03f750f3d8c57afa784ea203196d18f32826dc8
 			<span class="btn-separator"></span>
 			<button class="button button-icon" ng-click="saveProcess()"><i class="fa fa-check"></i></button>
 			<button class="button button-icon" ng-click="deleteProcess()"><i class="fa fa-times"></i></button>
@@ -15,17 +11,12 @@
 		</div>
 	</ion-header-bar>
 	<ion-content class="content-body">
-<<<<<<< HEAD
 		<div class="list">
-=======
-		<ion-list>
->>>>>>> d03f750f3d8c57afa784ea203196d18f32826dc8
 			<div class="item item-input-inset no-item-margin-border">
 				<span class="input-label">CODIGO</span>
 				<label class="item-input-wrapper  list-item-bgcolor border-all">
 					<input type="text" value="{{process.code}}" ng-model="process.code">
 				</label>			
-<<<<<<< HEAD
 			</div>
 			<div class="item item-input-inset no-item-margin-border">
 				<span class="input-label">DESCRICAO</span>
@@ -60,46 +51,5 @@
 				</div>			
 			</div>
 		</div>
-=======
-			</div>
-			<div class="item item-input-inset no-item-margin-border">
-				<span class="input-label">DESCRICAO</span>
-				<label class="item-input-wrapper list-item-bgcolor border-all">
-					<input type="text" value="{{process.description}}" ng-model="process.description">
-				</label>			
-			</div>
-			<div class="item  item-divider">
-				<label>REVISOES</<label>						 
-			</div>
-			<div class="item item-input-inset no-item-margin-border no-padding-top-bottom"  ng-repeat="revision in process.revision">
-				<span class="input-label">
-					{{revision.date | date:'dd/MM/yyyy'}}
-				</span>
-				<label>
-					{{revision.by}}
-				</label>				
-			</div>
-			<br/>
-			<div class="item item-divider item-icon-right">
-				<label>OPERACOES</label>
-				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 3px;" ng-click="newOperationForm()"></i>
-			</div>
-			<div ng-repeat="operation in process.operation">
-				<div class="item item-input-inset" >
-					<label class="item-input-wrapper list-item-bgcolor" ng-click="goToOperationForm({{operation.sequence}})">
-						{{operation.sequence}} - {{operation.name}}
-					</label>
-					<i class="fa fa-times-circle-o" ng-click="deleteSequence($index)"></i>				
-				</div>
-				
-				<div class="item item-input-inset" ng-repeat="input in operation.input">
-					<label class="item-input-wrapper list-item-bgcolor procs-sequnce-margin" ng-click="goToProcessForm()">
-						{{input.description}}
-					</label>
-					<i class="fa fa-times-circle-o"  ng-click="deleteSequenceInput($parent.$index,$index)"></i>
-				</div>			
-			</div>
-		</ion-list>     
->>>>>>> d03f750f3d8c57afa784ea203196d18f32826dc8
 	</ion-content>
 </form>
