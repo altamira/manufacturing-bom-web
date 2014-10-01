@@ -47,14 +47,6 @@
 				<label>MATERIA PRIMA/INSUMOS/COMPONENTS</label>
 				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="addNewItem()"></i>
 			</div>
-			<!--<div ng-repeat="input in operation.input">
-				<div class="item item-input-inset" >
-					<label class="item-input-wrapper list-item-bgcolor" ng-click="goToOperationForm({{operation.sequence}})">
-						{{input.code}} - {{input.description}}
-					</label>
-					<i class="fa fa-times-circle-o" ng-click="deleteOperationInput($index)"></i>				
-				</div>
-			</div>-->
 			<div class="item item-icon-right" ng-repeat="input in operation.input">
 				<p class="no-item-margin-border" ng-click="goToOperationForm({{operation.sequence}})">{{input.code}} - {{input.description}}</p>
 				<i class="icon fa fa-times-circle-o" ng-click="deleteOperationInput($index)"></i>
@@ -65,14 +57,6 @@
 				<label>PRODUTO ACABADO / EM PROCESSO DE FABRICACAO</label>
 				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="openAddItem()"></i>
 			</div>
-			<!--<div ng-repeat="output in operation.output">
-				<div class="item item-input-inset" >
-					<label class="item-input-wrapper list-item-bgcolor" ng-click="goToOperationForm({{operation.sequence}})">
-						{{output.code}} - {{output.description}}
-					</label>
-					<i class="fa fa-times-circle-o" ng-click="deleteOperationOutput($index)"></i>				
-				</div>					
-			</div>-->
 			<div class="item item-icon-right" ng-repeat="output in operation.output">
 				<p class="no-item-margin-border" ng-click="goToOperationForm({{operation.sequence}})">{{output.code}} - {{output.description}}</p>
 				<i class="icon fa fa-times-circle-o" ng-click="deleteOperationOutput($index)"></i>
