@@ -8,8 +8,7 @@
 </ion-header-bar>
 
 <ion-content class="content-body">
-	<ion-list  show-reorder="data.showReorder">
-		
+	<ion-list>		
 		<div class="item item-input-inset">
 			<label class="item-input-wrapper">
 				<i class="fa fa-search placeholder-icon"></i>
@@ -17,11 +16,9 @@
 			</label>
 			<button class="button  button-icon"><i class="fa fa-search"></i></button>
 		</div>
-		<div class="item item-input-inset list-item-padding" ng-repeat="order in orders | filter: order.search">
-			<label class="item-input-wrapper list-item-bgcolor " ng-click="goDetail({{order.number}})">
-				{{order.number}} {{order.customer}}
-			</label>
-			<button class="button button-icon" ng-click="deleteOrder($index)"><i class="fa fa-times-circle-o"></i></button>
-		</div>			
+		<div class="item item-icon-right" ng-repeat="order in orders | filter: order.search">
+			<p class="no-item-margin-border" ng-click="goDetail({{order.number}})">{{order.number}} {{order.customer}}</p>
+			<i class="icon fa fa-times-circle-o" ng-click="deleteOrder($index)"></i>
+		</div>
 	</ion-list>       
 </ion-content>
