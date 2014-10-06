@@ -113,3 +113,10 @@ ion-nav-view{
 	max-width: 70% !important;
     
 }
+.input-label-flex { 
+	overflow:hidden; 
+	display: flex;
+}
+.input-type-flex { 
+	flex: 2 1 100px; 
+} 
