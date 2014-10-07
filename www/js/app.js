@@ -4,20 +4,20 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var altamiraApp = angular.module('starter', ['ionic', 'starter.controllers', 'restangular']);
+var altamiraApp = angular.module('starter', ['ionic', 'starter.controllers', 'ngAnimate', 'restangular']);
 
 altamiraApp.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
+	$ionicPlatform.ready(function() {
+		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+		// for form inputs)
+		if(window.cordova && window.cordova.plugins.Keyboard) {
+			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+		}
+		if(window.StatusBar) {
+			// org.apache.cordova.statusbar required
+			StatusBar.styleDefault();
+		}
+	});
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -29,7 +29,7 @@ altamiraApp.run(function($ionicPlatform) {
       templateUrl: "templates/menu.html",
       controller: 'AppCtrl'
     })
-
+	
     .state('app.search', {
       url: "/search",
       views: {
@@ -57,8 +57,12 @@ altamiraApp.run(function($ionicPlatform) {
         }
       }
     })
-
-    .state('app.single', {
+	.state('checklistdetail', {
+      url: "/checklist/:orderId",
+      templateUrl: "templates/checklist-form.html",
+          controller: 'CheckListDetailCtrl'
+    })
+    /*.state('app.single', {
       url: "/checklist/:orderId",
       views: {
         'menuContent' :{
@@ -66,7 +70,7 @@ altamiraApp.run(function($ionicPlatform) {
           controller: 'CheckListDetailCtrl'
         }
       }
-    })
+    })*/
 	
 	.state('app.manufacturesearch', {
       url: "/manufacturesearch",
