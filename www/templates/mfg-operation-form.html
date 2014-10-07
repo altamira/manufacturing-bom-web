@@ -36,11 +36,24 @@
 				</label>			
 			</div>
 			<div class="item item-input-inset no-item-margin-border">
+				<span class="input-label input-label-flex">NAME</span>
+				<label class="item-input-wrapper  list-item-bgcolor border-all input-type-flex">
+					<input type="text" value="{{operation.name}}" ng-model="operation.name">
+				</label>			
+			</div>
+			<div class="item item-input-inset no-item-margin-border">
+				<span class="input-label input-label-flex">SEQUENCE</span>
+				<label class="item-input-wrapper list-item-bgcolor border-all input-type-flex">
+					<input type="text" value="{{operation.sequence}}" ng-model="operation.sequence">
+				</label>			
+			</div>			
+			<div class="item item-input-inset no-item-margin-border">
 				<span class="input-label input-label-flex" >CROQUI</span>
 				<label class="input-type-flex">
 					<input type="file" ng-model="operation.croqui"/>
 				</label>			
 			</div>
+			
 			<br/>
 			<br>
 			<div class="item item-divider item-icon-right">
