@@ -124,13 +124,13 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	};
 	
 	// Perform the login action when the user submits the login form
-	$scope.doLogin = function() {
+	$scope.saveItem = function() {
 		console.log('Doing login', $scope.newItemData);
 
 		// Simulate a login delay. Remove this and replace with your login
 		// code if using a login system
 		$timeout(function() {
-		$scope.closeLogin();
+			$scope.closeAddItem();
 		}, 1000);
 	};
 });

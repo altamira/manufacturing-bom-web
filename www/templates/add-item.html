@@ -6,41 +6,43 @@
 		</div>
 	</ion-header-bar>
 	<ion-content class="has-header">
-    <form ng-submit="doLogin()">
-      <div class="list">
-        <div class="item item-input-inset no-item-margin-border">
-			<span class="input-label input-type-flex">CODIGO</span>
-			<div class="item-input-wrapper list-item-bgcolor border-all input-type-flex">
-				<input type="text" value="PPLCOL00113000000000" ng-model="newItemData.code">
-				<i class="fa fa-search placeholder-icon" ng-click="goToProcsSearch()"></i>
+		<form ng-submit="saveItem()">
+			<div class="list">
+				<div class="item item-input-inset no-item-margin-border">
+					<span class="input-label input-label-flex">CODIGO</span>
+					<div class="item-input-wrapper list-item-bgcolor border-all input-type-flex">
+						<input type="text" value="PPLCOL00113000000000" ng-model="newItemData.code">
+						<i class="fa fa-search placeholder-icon" ng-click="goToProcsSearch()"></i>
+					</div>
+				</div>
+				<div class="item item-input-inset no-item-margin-border">
+					<span class="input-label input-label-flex">DESCRICAO</span>
+					<div class="item-input-wrapper list-item-bgcolor border-all input-type-flex">
+						<input type="text" value="COLUNA NORMAL CH12 2800MM" ng-model="newItemData.description">
+						<i class="fa fa-search placeholder-icon" ng-click="goToProcsSearch()"></i>
+					</div>
+				</div>
+				<div class="item item-input-inset no-item-margin-border ">
+					<span class="input-label input-label-flex" >QUANTITADE</span>
+					<div class="item item-input-inset no-item-margin-border no-padding input-type-flex">
+						<label class="border-all">
+							<input type="text" ng-model="newItemData.quantity">
+						</label>&nbsp;&nbsp;&nbsp;
+						<select class="quantity-select-box">
+							<option>gm</option>
+							<option selected>Kg</option>
+						</select>
+					</div>
+				</div>
+				<br/>
+				<br/>
+				<div class="item item-input-inset no-item-margin-border">
+					<span class="input-label"></span>
+					<button class="button icon-left fa fa-check"  type="submit">OK</button>&nbsp;&nbsp;&nbsp;
+					<button class="button icon-left fa fa-times" ng-click="closeAddItem()">CANCEL</button>				
+				</div>
 			</div>
-		</div>
-        <div class="item item-input-inset no-item-margin-border">
-			<span class="input-label input-type-flex">DESCRICAO</span>
-			<div class="item-input-wrapper list-item-bgcolor border-all input-type-flex">
-				<input type="text" value="COLUNA NORMAL CH12 2800MM" ng-model="newItemData.description">
-				<i class="fa fa-search placeholder-icon" ng-click="goToProcsSearch()"></i>
-			</div>
-        </div>
-		<label class="item item-input-inset no-item-margin-border ">
-			<span class="input-label input-type-flex">QUANTITADE</span>
-			<label class="border-all input-type-flex">
-				<input type="text" ng-model="newItemData.quantity">
-			</label>&nbsp;&nbsp;&nbsp;
-			<select class="quantity-select-box">
-				<option>gm</option>
-				<option selected>Kg</option>
-			</select>
-        </label>
-		<br/>
-		<br/>
-		<div class="item item-input-inset no-item-margin-border">
-			<span class="input-label"></span>
-			<button class="button icon-left fa fa-check"  type="submit">OK</button>&nbsp;&nbsp;&nbsp;
-			<button class="button icon-left fa fa-times" ng-click="closeAddItem()">CANCEL</button>				
-		</div>
-      </div>
-    </form>
-  </ion-content>
+		</form>
+	</ion-content>
 </div>
 

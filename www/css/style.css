@@ -125,3 +125,64 @@ ion-nav-view{
 .min-705 { min-width:705px; }
 .min-350 { min-width: 350px; }
 .max-50 { max-width: 50px; }
+.width-10{width: 10%;}
+.width-50{width: 50%;}
+.width-fix-50{width: 50px;}
+.width-10{width: 10%;}
+
+@media only screen and (max-width: 800px) {
+	.responsive-sm .col, .responsive-sm .col-10, .responsive-sm .col-20, .responsive-sm .col-25, .responsive-sm .col-33, .responsive-sm .col-34, .responsive-sm .col-50, .responsive-sm .col-66, .responsive-sm .col-67, .responsive-sm .col-75, .responsive-sm .col-80, .responsive-sm .col-90 {
+		margin-bottom: 1px;
+    
+	}
+    /* Force table to not be like tables anymore */
+    #no-more-tables table,
+    #no-more-tables thead,
+    #no-more-tables tbody,
+    #no-more-tables th,
+    #no-more-tables td,
+    #no-more-tables tr {
+		display: block;
+    }
+     
+    /* Hide table headers (but not display: none;, for accessibility) */
+    #no-more-tables thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+    }
+    #no-more-tables #calc-title {
+		display: none;
+	}	 
+     
+    #no-more-tables td {
+    /* Behave like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+		white-space: normal;
+		text-align:left;
+		max-width:100%;
+	}
+     
+    #no-more-tables td:before {
+    /* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		text-align:left;
+		font-weight: normal;
+		overflow:hidden;
+		font-size:10px;		
+    }
+     
+    /*
+    Label the data
+    */
+    #no-more-tables td:before { content: attr(data-title); }
+}
+

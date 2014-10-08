@@ -57,12 +57,12 @@ altamiraApp.run(function($ionicPlatform) {
         }
       }
     })
-	.state('checklistdetail', {
+	/*.state('checklistdetail', {
       url: "/checklist/:orderId",
-      templateUrl: "templates/checklist-form.html",
+      templateUrl: "templates/checklist-form2.html",
           controller: 'CheckListDetailCtrl'
-    })
-    /*.state('app.single', {
+    })*/
+    .state('app.single', {
       url: "/checklist/:orderId",
       views: {
         'menuContent' :{
@@ -70,7 +70,7 @@ altamiraApp.run(function($ionicPlatform) {
           controller: 'CheckListDetailCtrl'
         }
       }
-    })*/
+    })
 	
 	.state('app.manufacturesearch', {
       url: "/manufacturesearch",
