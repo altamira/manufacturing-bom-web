@@ -17,7 +17,7 @@
 					OPERACAO&nbsp;&nbsp;{{operation.sequence}}-{{operation.name}}
 				</span>			
 			</div>
-			<div class="item item-input-inset no-item-margin-border">
+			<!--<div class="item item-input-inset no-item-margin-border">
 				<span class="input-label input-label-flex">CODIGO</span>
 				<label class="item-input-wrapper  list-item-bgcolor border-all input-type-flex">
 					<input type="text" value="PPLCOL00113000000000">
@@ -46,14 +46,41 @@
 				<div class="item-input-wrapper list-item-bgcolor border-all input-type-flex" style="max-width:150px;">
 					<input type="text" value="{{operation.sequence}}" ng-model="operation.sequence">
 				</div>			
-			</div>			
+			</div>
 			<div class="item item-input-inset no-item-margin-border">
 				<span class="input-label input-label-flex" >CROQUI</span>
 				<label class="input-type-flex">
 					<input type="file" ng-model="operation.croqui"/>
 				</label>			
-			</div>
-			
+			</div>	-->
+			<!--The labels will be appear on top of the input field in small screen-->
+			<div id="input-div">
+				<label class="item item-input  no-item-margin-border">
+					<span class="input-label">CODIGO</span>
+					<input type="text" value="PPLCOL00113000000000">
+				</label>
+				<label class="item item-input no-item-margin-border">
+					<span class="input-label">DESCRICAO</span>
+					<input type="text" value="COLUNA NORMAL CH12 2800MM">
+				</label>
+				<hr style="color:#EEEEEE;"> 
+				<label class="item item-input no-item-margin-border">
+					<span class="input-label">DESCRICAO</span>
+					<textarea value="{{operation.description}}" ng-model="operation.description"></textarea>
+				</label>	
+				<label class="item item-input  no-item-margin-border">
+					<span class="input-label">NAME</span>
+					<input type="text" value="{{operation.name}}" ng-model="operation.name">
+				</label>
+				<label class="item item-input  no-item-margin-border">
+					<span class="input-label">SEQUENCE</span>
+					<input type="text" value="{{operation.sequence}}" ng-model="operation.sequence"  style="max-width:150px;">
+				</label>
+				<label class="item item-input  no-item-margin-border">
+					<span class="input-label">CROQUI</span>
+					<input type="file" ng-model="operation.croqui"/>
+				</label>
+			</div>			
 			<br/>
 			<br>
 			<div class="item item-divider item-icon-right">

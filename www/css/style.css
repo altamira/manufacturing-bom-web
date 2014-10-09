@@ -73,53 +73,7 @@ ion-nav-view{
     width: 1px;
 	position:relative;
 }
-
-.procs-sequnce-margin {
-   margin-left: 8%;
-   margin-top:0px;
-   margin-bottom:0px;
-   margin-right:0px;
-}
-.no-padding-top-bottom{
-	padding-top:0px;
-	padding-bottom:0px;
-}
-.icon-font-size{
-	font-size: 16px;
-}
-.quantity-select-box{
-	height:34px;
-	width:70px;
-	box-sizing:border-box;
-	border: 1px solid #EEEEEE;
-}
-.item-icon-right .icon {
-	font-size: 16px;    
-}
-.item .item-input-inset{
-	overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.mfg-page-titles{
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	color:#FFFFFF;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-.mfg-add-item-title{
-	max-width: 70% !important;
-    
-}
-.input-label-flex { 
-	display: flex;
-}
-.input-type-flex { 
-	flex: 2 1 100px; 
-} 
-
+/*CSS code for checklist form page*/
 .min-60 { min-width: 60px; }
 .min-50 { min-width: 50px; }
 .min-705 { min-width:705px; }
@@ -186,3 +140,113 @@ ion-nav-view{
     #no-more-tables td:before { content: attr(data-title); }
 }
 
+/*End for css of checklist form*/
+
+/*Start CSS for Manufacturing Process pages*/
+.procs-sequnce-margin {
+   margin-left: 8%;
+   margin-top:0px;
+   margin-bottom:0px;
+   margin-right:0px;
+}
+.no-padding-top-bottom{
+	padding-top:0px;
+	padding-bottom:0px;
+}
+.icon-font-size{
+	font-size: 16px;
+}
+.quantity-select-box{
+	height:34px;
+	width:70px;
+	box-sizing:border-box;
+	border: 1px solid #EEEEEE;
+}
+.item-icon-right .icon {
+	font-size: 16px;    
+}
+.item .item-input-inset{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.mfg-page-titles{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color:#FFFFFF;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.mfg-add-item-title{
+	max-width: 70% !important;
+    
+}
+.input-label-flex { 
+	display: flex;
+}
+.input-type-flex { 
+	flex: 2 1 100px; 
+} 
+#input-div > label > span{
+	color: #666;
+    font-size: 14px;
+}
+
+#input-div input[type=text],
+#input-div input[type=email],
+#input-div input[type=url],
+#input-div input[type=password]{
+	width: 100%;
+	border: 1px solid #ddd;
+	padding:5px;
+	color: #666;
+    font-size: 14px;
+}
+#input-div textarea {
+	width: 84%;
+	border: 1px solid #ddd;
+	padding:5px;
+	color: #666;
+    font-size: 14px;
+}
+@media (max-width: 600px) {	
+	#input-div > label {
+		background-color: transparent;
+		box-shadow: none;
+		display: block;
+	}
+	
+	#input-div input[type=text],
+	#input-div input[type=email],
+	#input-div input[type=url],
+	#input-div input[type=file],
+	#input-div input[type=password],
+	#input-div textarea,
+	#input-div select {
+		width: 100%; 
+		color: #666;
+		font-size: 14px;
+	}
+}
+@media (min-width: 1200px) {
+	form > div > label{
+		text-align: right;
+	}
+}
+hr {
+   display: block;
+   position: relative;
+   padding: 0;
+   margin: 8px auto;
+   height: 0;
+   width: 100%;
+   max-height: 0;
+   font-size: 1px;
+   line-height: 0;
+   clear: both;
+   border: none;
+   border-top: 1px solid #aaaaaa;
+   border-bottom: 1px solid #ffffff;
+}
+/*End for css of Manufacturing process pages*/
