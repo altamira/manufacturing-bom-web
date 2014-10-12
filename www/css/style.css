@@ -143,6 +143,7 @@ ion-nav-view{
 /*End for css of checklist form*/
 
 /*Start CSS for Manufacturing Process pages*/
+
 .procs-sequnce-margin {
    margin-left: 8%;
    margin-top:0px;
@@ -188,10 +189,6 @@ ion-nav-view{
 .input-type-flex { 
 	flex: 2 1 100px; 
 } 
-#input-div > label > span{
-	color: #666;
-    font-size: 14px;
-}
 
 #input-div input[type=text],
 #input-div input[type=email],
@@ -200,21 +197,22 @@ ion-nav-view{
 	width: 100%;
 	border: 1px solid #ddd;
 	padding:5px;
-	color: #666;
-    font-size: 14px;
 }
 #input-div textarea {
 	width: 84%;
 	border: 1px solid #ddd;
 	padding:5px;
-	color: #666;
-    font-size: 14px;
 }
 @media (max-width: 600px) {	
 	#input-div > label {
 		background-color: transparent;
 		box-shadow: none;
 		display: block;
+	}
+	
+	#input-div > label > span{
+		font-weight:bold;
+		font-size:10px;
 	}
 	
 	#input-div input[type=text],
@@ -225,15 +223,9 @@ ion-nav-view{
 	#input-div textarea,
 	#input-div select {
 		width: 100%; 
-		color: #666;
-		font-size: 14px;
 	}
 }
-@media (min-width: 1200px) {
-	form > div > label{
-		text-align: right;
-	}
-}
+
 hr {
    display: block;
    position: relative;

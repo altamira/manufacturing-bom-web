@@ -1,4 +1,4 @@
-//orders detail controller
+//mfg operation form  controller
 altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular) {
 	//get data from api
 	if(!$state.newOprtCreation){

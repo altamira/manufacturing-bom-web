@@ -1,5 +1,6 @@
-altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $ionicPopup, $timeout,  $state, Restangular, ImportOrder) {
+altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $ionicPopup, $timeout,  $state, Restangular, ImportOrders) {
 	$scope.orderData = {};
+	
 	$scope.importOrder = function() {
 	
 		// An elaborate, custom popup
@@ -17,27 +18,8 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $ionicPop
 			{ text: '<b>Save</b>',
 				type: 'button-positive',
 				onTap: function(res) {
-					//get the order number to be imported 
-					ImportOrder.one($scope.orderData.ordernumber).get().then(function(response) {
-						$scope.order = response.data;			
-						$http.post("http://sistema.altamira.com.br/data/rest/sales/order", response.data).success(function(data, status, headers){
-							console.log(status);
-						}).error(function (data, status, headers) {
-								alert("error");
-						});
-					}, function(response) {
-						//show error incase of failure
-						$timeout(function(){
-							if (response.status == 404) {
-								alert('Resource is not available.');
-							} else {
-								alert('Data can not be imported due to error.');
-							} 
-							
-							$scope.orderData = {};	
-							importPopup.close();
-						});				
-					});
+					ImportOrders.getOrder($scope.orderData.ordernumber).then(
+					);					
 				}
 			},
 			]

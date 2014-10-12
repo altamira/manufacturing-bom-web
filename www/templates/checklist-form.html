@@ -80,11 +80,11 @@
 					<thead>
 						<tr class="row order-row-custom-styles">
 							<th class="col col-bg-color col-padding max-50"></th>
-							<th class="col col-10 col-bg-color col-padding text-align-cener">QUANTIDE</th>
-							<th class="col col-bg-color col-padding">DESCRICAO DO MATERIAL</th>
-							<th class="col col-10 col-bg-color col-padding text-align-cener">COR</th>
-							<th class="col col-10 col-bg-color col-padding text-align-right">PESO</th>
-							<th class="col col-10 col-bg-color text-align-right">PESO TOTAL</th>
+							<th class="col col-10 col-bg-color col-padding text-align-cener label-font-style">QUANTIDE</th>
+							<th class="col col-bg-color col-padding text-align-left label-font-style">DESCRICAO DO MATERIAL</th>
+							<th class="col col-10 col-bg-color col-padding text-align-cener label-font-style">COR</th>
+							<th class="col col-10 col-bg-color col-padding text-align-right label-font-style">PESO</th>
+							<th class="col col-10 col-bg-color text-align-right label-font-style">PESO TOTAL</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -98,7 +98,7 @@
 							<td data-title="PESO TOTAL" class="col col-10 col-bg-color text-align-right"><p>{{product.weight | number:2}}</p></td>
 						</tr>
 						<tr class="row order-row-custom-styles">
-							<td id="calc-title" class="col col-90 col-bg-color col-padding text-align-right">PESO TOTAL(kg)</td>
+							<td id="calc-title" class="col col-90 col-bg-color col-padding text-align-right label-font-style">PESO TOTAL(kg)</td>
 							<td data-title="PESO TOTAL(kg)"  class="col col-bg-color text-align-right"><p>{{getItemTotal(item) | number:2}}</p></td>
 						</tr>
 					</tbody>
@@ -110,7 +110,7 @@
 			<table class="order-row-custom-styles" style="width:100%;">
 				<tbody>
 					<tr class="row order-row-custom-styles">
-						<td id="calc-title" class="col col-90 col-bg-color col-padding text-align-right">PESO TOTAL DO PEDIDO(kg)</td>
+						<td id="calc-title" class="col col-90 col-bg-color col-padding text-align-right label-font-style">PESO TOTAL DO PEDIDO(kg)</td>
 						<td data-title="PESO TOTAL DO PEDIDO(kg)"  class="col col-bg-color text-align-right"><p>{{total | number:2}}</p></td>
 					</tr>
 				</tbody>
