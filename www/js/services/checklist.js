@@ -1,10 +1,3 @@
-// Restangular service that uses Bing
-// altamiraApp.factory('ImportOrder', function(Restangular) {
-  // return Restangular.withConfig(function(RestangularConfigurer) {
-    // RestangularConfigurer.setBaseUrl(' http://integration.altamira.com.br/manufacturing/bom');
-	// RestangularConfigurer.setDefaultHeaders({Authorization: "Basic QWRtaW5pc3RyYXRvcjohYkZDWC45WCpUSg=="});
-  // });
-// });
 altamiraApp.factory('ImportOrders', function($http, $log, $q) {
 	return {
 		getOrder: function(orderNum) {
@@ -13,8 +6,11 @@ altamiraApp.factory('ImportOrders', function($http, $log, $q) {
 			$http({
 				method: 'GET', 
 				url: 'http://integracao.altamira.com.br/manufacturing/bom?'+orderNum,
-				headers: {'Authorization': 'Basic QWRtaW5pc3RyYXRvcjohYkZDWC45WCpUSg=='}
+				headers: {'Content-Type':'application/json',
+					'Authorization': 'Basic QWRtaW5pc3RyYXRvcjohYkZDWC45WCpUSg=='
+				}
 			}).success(function(data) {
+				console.log("data");
 				//post data to api
 				$http({
                     method: "post",
@@ -27,8 +23,8 @@ altamiraApp.factory('ImportOrders', function($http, $log, $q) {
 				});
 			}).error(function(msg, code) {
 				deferred.reject(msg);
-				$log.error(msg, code);
-				
+				//$log.error(msg, code);
+				console.log("error");
 			});
 			return deferred.promise;
 		}

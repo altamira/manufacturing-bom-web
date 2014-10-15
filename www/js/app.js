@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var altamiraApp = angular.module('starter', ['ionic', 'starter.controllers', 'ngAnimate', 'restangular']);
+var altamiraApp = angular.module('starter', ['ionic', 'starter.controllers', 'ngAnimate', 'ngResource', 'restangular']);
 
 altamiraApp.run(function($ionicPlatform) {
 	$ionicPlatform.ready(function() {
@@ -111,7 +111,8 @@ altamiraApp.run(function($ionicPlatform) {
 	RestangularProvider.setBaseUrl('http://altamira-api.elasticbeanstalk.com/webapi/order');
 	RestangularProvider.setFullResponse(true);
 	RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json',
-		'X-Requested-With': 'XMLHttpRequest'
+		'X-Requested-With': 'XMLHttpRequest',
+		'Authorization': "Basic QWRtaW5pc3RyYXRvcjohYkZDWC45WCpUSg=="
 	});
 	RestangularProvider.setDefaultHttpFields({
 		'withCredentials': true

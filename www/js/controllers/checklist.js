@@ -18,8 +18,37 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 			{ text: '<b>Save</b>',
 				type: 'button-positive',
 				onTap: function(res) {
-					ImportOrders.getOrder($scope.orderData.ordernumber).then(
-					);					
+					// ImportOrders.getOrder($scope.orderData.ordernumber).then(
+					// );
+					// Restangular.one('bom?' + $scope.orderData.ordernumber).get().then(function(response) {
+		
+					// }, function(response) {
+						// console.log("error");
+						
+					// });
+					$http({
+						method: 'GET', 
+						Origin:'http://localhost:8100',						
+						url: 'http://integracao.altamira.com.br/manufacturing/bom?'+$scope.orderData.ordernumber,
+						headers: {'Content-Type':'application/json',
+						'Accept': 'application/json',
+						'Authorization': 'Basic QWRtaW5pc3RyYXRvcjohYkZDWC45WCpUSg=='
+						}
+					}).success(function(data) {
+						console.log(data);
+						//post data to api
+						// $http({
+							// method: "post",
+							// url: "http://data.altamira.com.br/sales/order",
+							// data: data  
+						// }).success(function(data) {
+							
+						// }).error(function(data, status) { // called asynchronously if an error occurs
+
+						// });
+					}).error(function(msg, code) {
+						console.log("error");
+					});
 				}
 			},
 			]

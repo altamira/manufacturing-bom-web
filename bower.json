@@ -9,5 +9,8 @@
     "restangular": "~1.4.0",
     "moment": "~2.8.3",
     "font-awesome": "~4.2.0"
+  },
+  "resolutions": {
+    "angular": "1.2.26"
   }
 }
