@@ -12,11 +12,11 @@
 		<div class="item item-input-inset">
 			<label class="item-input-wrapper">
 				<i class="fa fa-search placeholder-icon"></i>
-				<input type="search" placeholder="Search" ng-model="order.search">
+				<input type="search" placeholder="Search" ng-model="orders.search">
 			</label>
-			<button class="button  button-icon"><i class="fa fa-search"></i></button>
+			<button class="button  button-icon" ng-click="callSearchRestService()"><i class="fa fa-search"></i></button>
 		</div>
-		<div class="item item-icon-right" ng-repeat="order in orders | filter: order.search">
+		<div class="item item-icon-right" ng-repeat="order in orders | filter: orders.search">
 			<p class="no-item-margin-border" ng-click="goDetail({{order.number}})">{{order.number}} {{order.customer}}</p>
 			<i class="icon fa fa-times-circle-o" ng-click="deleteOrder($index)"></i>
 		</div>

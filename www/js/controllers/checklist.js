@@ -1,4 +1,6 @@
 altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $ionicPopup, $timeout,  $state, Restangular, ImportOrders) {
+	
+	//import order pop up data array
 	$scope.orderData = {};
 	
 	$scope.importOrder = function() {
@@ -18,36 +20,30 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 			{ text: '<b>Save</b>',
 				type: 'button-positive',
 				onTap: function(res) {
-					// ImportOrders.getOrder($scope.orderData.ordernumber).then(
-					// );
-					// Restangular.one('bom?' + $scope.orderData.ordernumber).get().then(function(response) {
-		
-					// }, function(response) {
-						// console.log("error");
-						
-					// });
 					$http({
 						method: 'GET', 
 						Origin:'http://localhost:8100',						
 						url: 'http://integracao.altamira.com.br/manufacturing/bom?'+$scope.orderData.ordernumber,
 						headers: {'Content-Type':'application/json',
 						'Accept': 'application/json',
-						'Authorization': 'Basic QWRtaW5pc3RyYXRvcjohYkZDWC45WCpUSg=='
+						//'Authorization': 'Basic QWRtaW5pc3RyYXRvcjohYkZDWC45WCpUSg=='
 						}
 					}).success(function(data) {
-						console.log(data);
 						//post data to api
-						// $http({
-							// method: "post",
-							// url: "http://data.altamira.com.br/sales/order",
-							// data: data  
-						// }).success(function(data) {
-							
-						// }).error(function(data, status) { // called asynchronously if an error occurs
-
-						// });
+						$http({
+							method: "POST",
+							url: "http://data.altamira.com.br/sales/order",
+							data: data,
+							headers: {'Content-Type':'application/json'}
+						}).success(function(data, status) {
+							if(status == 201){
+								alert("Order Imported Successfully.");
+							}
+						}).error(function(data, status) { // called asynchronously if an error occurs
+							alert("Failed to Import Order.");
+						});
 					}).error(function(msg, code) {
-						console.log("error");
+						alert("Failed to Export Order due to some error.");
 					});
 				}
 			},
@@ -85,6 +81,16 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 	$scope.goDetail = function (id) {
 		$state.go('app.single', {orderId: id});
     };
+	
+	//function for the search button
+	$scope.callSearchRestService= function() {
+		if ($scope.orders.search.trim()) {
+			Restangular.all('sales/order').getList({search:$scope.orders.search,start:0,max:10}).then(function(response) {
+				$scope.orders = response.data;					
+			});	 
+		}
+	}
+
 	$scope.orders = [
             { "number": 72102, "customer": "INBRANDS S/A" },
             { "number": 72116, "customer": "INBRANDS S/A" },

@@ -108,11 +108,11 @@ altamiraApp.run(function($ionicPlatform) {
   $urlRouterProvider.otherwise('/app/checklist');
 })
 .config(function(RestangularProvider) {
-	RestangularProvider.setBaseUrl('http://altamira-api.elasticbeanstalk.com/webapi/order');
+	//RestangularProvider.setBaseUrl('http://data.altamira.com.br/data/rest/sales/order');
+	RestangularProvider.setBaseUrl('http://data.altamira.com.br/data/rest');
 	RestangularProvider.setFullResponse(true);
 	RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json',
-		'X-Requested-With': 'XMLHttpRequest',
-		'Authorization': "Basic QWRtaW5pc3RyYXRvcjohYkZDWC45WCpUSg=="
+		'X-Requested-With': 'XMLHttpRequest'
 	});
 	RestangularProvider.setDefaultHttpFields({
 		'withCredentials': true

@@ -2,12 +2,12 @@
 altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDelegate, $ionicSideMenuDelegate, $http, $ionicPopup, $window, $stateParams, Restangular) {
 	
 	//get data from api
-	/*Restangular.one($stateParams.orderId).get().then(function(response) {
+	Restangular.one('sales/order/'+$stateParams.orderId).get().then(function(response) {
 		$scope.order = response.data;
 		var ordertotal = 0;
 		
-		angular.forEach($scope.order.item, function(item){
-			angular.forEach(item.product, function(prd){
+		angular.forEach($scope.order.items, function(item){
+			angular.forEach(item.parts, function(prd){
 				ordertotal += prd.weight				
 			})			
 		})
@@ -15,11 +15,6 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDeleg
 		
 	}, function(response) {
 		alert('error')
-	});*/
-	$http.get('js/order_72510.json').success (function(response){
-		$scope.order = response;
-		//$scope.order = _($scope.order).toArray();
-		console.log($scope.order.items);
 	});
 	
 	$scope.getWeek = function(time) {  
@@ -29,7 +24,7 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDeleg
 	
 	$scope.getItemTotal = function(item) {     
 		var itemtotal = 0;
-		angular.forEach(item.product, function(prd){
+		angular.forEach(item.parts, function(prd){
 			//itemtotal += prd.quantity * prd.weight
 			itemtotal += prd.weight
 		})
