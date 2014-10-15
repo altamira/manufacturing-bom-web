@@ -20,7 +20,7 @@ altamiraApp.run(function($ionicPlatform) {
 	});
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
 
     .state('app', {
@@ -106,6 +106,12 @@ altamiraApp.run(function($ionicPlatform) {
 	
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/checklist');
+
+  //Enable cross domain calls
+  $httpProvider.defaults.useXDomain = true;
+    $httpProvider.defaults.withCredentials = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
 })
 .config(function(RestangularProvider) {
 	//RestangularProvider.setBaseUrl('http://data.altamira.com.br/data/rest/sales/order');

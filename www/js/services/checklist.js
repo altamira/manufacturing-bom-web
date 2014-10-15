@@ -14,8 +14,12 @@ altamiraApp.factory('ImportOrders', function($http, $log, $q) {
 				//post data to api
 				$http({
                     method: "post",
-					url: "http://data.altamira.com.br/sales/order",
-					data: data  
+					url: "http://data.altamira.com.br/data/rest/sales/order",
+					data: data,
+					xhrFields: {
+				       withCredentials: true
+				    },
+				    crossDomain: true  
 				}).success(function(data) {
 				
 				}).error(function(data, status) { // called asynchronously if an error occurs
@@ -25,6 +29,8 @@ altamiraApp.factory('ImportOrders', function($http, $log, $q) {
 				deferred.reject(msg);
 				//$log.error(msg, code);
 				console.log("error");
+
+				$log.error(msg, code);
 			});
 			return deferred.promise;
 		}
