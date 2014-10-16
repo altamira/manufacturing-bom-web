@@ -114,8 +114,8 @@ altamiraApp.run(function($ionicPlatform) {
 
 })
 .config(function(RestangularProvider) {
-	//RestangularProvider.setBaseUrl('http://data.altamira.com.br/data/rest/sales/order');
-	RestangularProvider.setBaseUrl('http://data.altamira.com.br/data/rest');
+	//RestangularProvider.setBaseUrl('http://data.altamira.com.br/data/rest');
+	RestangularProvider.setBaseUrl('http://data.altamira.com.br');
 	RestangularProvider.setFullResponse(true);
 	RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json',
 		'X-Requested-With': 'XMLHttpRequest'

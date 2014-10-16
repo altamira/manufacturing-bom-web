@@ -2,7 +2,7 @@
 altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDelegate, $ionicSideMenuDelegate, $http, $ionicPopup, $window, $stateParams, Restangular) {
 	
 	//get data from api
-	Restangular.one('sales/order/'+$stateParams.orderId).get().then(function(response) {
+	Restangular.one('manufacturing/bom/'+$stateParams.orderId).get().then(function(response) {
 		$scope.order = response.data;
 		var ordertotal = 0;
 		
@@ -17,11 +17,13 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDeleg
 		alert('error')
 	});
 	
+	//calculate the "PRAZO DE ENTREGA" field value
 	$scope.getWeek = function(time) {  
 		var weekInfo = moment(time).week() + "/" + moment(time).year() + " ( "+ moment(time).startOf('week').format("DD/MM/YYYY") + " a " + moment(time).endOf('week').format("DD/MM/YYYY") + ")";
 		return weekInfo;			
 	};
 	
+	//calculate the value for field "PESO TOTAL"
 	$scope.getItemTotal = function(item) {     
 		var itemtotal = 0;
 		angular.forEach(item.parts, function(prd){
@@ -32,17 +34,27 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDeleg
 	};	
 	
 	// Triggered to mark as checked orders
-	$scope.checkedOrder = function(index) {     
-
+	$scope.checkedOrder = function(id) {
 		var confirmPopup = $ionicPopup.confirm({
 			title: 'Checke Order',
 			template: 'Is the order checked completly ?'
 		});
 		confirmPopup.then(function(res) {
 			if(res) {
-								
+				// var order = Restangular.one('manufacturing/bom',id);
+				// order.put();
+				$http({
+					method: "PUT",
+					url: "http://data.altamira.com.br/manufacturing/bom/"+id,
+					data: $scope.order,
+					headers: {'Content-Type':'application/json'}
+				}).success(function(data, status) {
+					$state.go('app.checklists');
+				}).error(function(data, status) { // called asynchronously if an error occurs
+					alert("Failed due to some error.");
+				});
 			} else {
-				
+				console.log("NO");	
 			}
 		});
 	};
