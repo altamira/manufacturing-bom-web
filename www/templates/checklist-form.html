@@ -2,9 +2,9 @@
 	<div class="buttons header-margin">
 		<a href="#/app/checklists" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
 		<span class="btn-separator"></span>
-		<h4 class="mfg-page-titles">&nbsp;&nbsp;Order # {{order.number}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
+		<h4 class="mfg-page-titles">&nbsp;&nbsp;Pedido {{order.number}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
 		<span class="btn-separator"></span>
-		<button ng-click="checkedOrder(order.number)" class="button button-icon"><i class="fa fa-check"></i></button>
+		<button ng-show="!order.checked" ng-click="checkedOrder(order.number)" class="button button-icon"><i class="fa fa-check"></i></button>
 		<button ng-click="openReport({{order.number}})" class="button button-icon"><i class="fa fa-print"></i></button>		
 	</div>
 </ion-header-bar>
@@ -15,18 +15,18 @@
 			<div class="col col-80 col-bg-color">
 				<div class="row responsive-sm" >
 					<div class="col col-33">
-						<label>Client</label>				
+						<label  class="label-font-style">CLIENTE</label>				
 					</div>
 					<div class="col col-67">
-						<label>{{order.customer}}</label>				
+						{{order.customer}}				
 					</div>
 				</div>
 				<div class="row responsive-sm" >
 					<div class="col col-33">
-						<label>Representate</label>				
+						<label  class="label-font-style">REPRESENTANTE</label>				
 					</div>
 					<div class="col col col-67">
-						<label>{{order.representative}}</label>				
+						{{order.representative}}				
 					</div>
 				</div>
 			</div>		
@@ -37,7 +37,7 @@
 		</div>
 		<div class="row responsive-sm order-row-custom-styles">
 			<div class="col col-10 col-bg-color col-padding">
-				<label  class="label-font-style">Date PEDIDO</label>
+				<label  class="label-font-style">DATA PEDIDO</label>
 				<p>{{order.created | date:'dd/MM/yyyy'}}</p>
 			</div>
 			<div class="col col-40  col-bg-color col-padding">
@@ -45,16 +45,16 @@
 				<p>{{getWeek(order.delivery)}}</p>
 			</div>			
 			<div class="col col-20 col-bg-color col-padding">
-				<label  class="label-font-style">N ORCAMENTO</label>
+				<label  class="label-font-style">ORCAMENTO</label>
 				<p>{{order.quotation}}</p>
 			</div>
 			<div class="col col-20 col-bg-color col-padding">
-				<label  class="label-font-style">N PROJECTO</label>
-				<p>project</p>
+				<label  class="label-font-style">PROJETO</label>
+				<p>{{order.project}}</p>
 			</div>
 			<div class="col col-40 col-bg-color">
 				<label  class="label-font-style">ACABAMENTO</label>
-				<p>finish</p>
+				<p>{{order.finish}}</p>
 			</div>
 		</div>
 		<!--End-->
@@ -119,7 +119,7 @@
 		<br/>				
 		<div class="row order-row-custom-styles">
 			<div class="col col-bg-color">
-				<p><b>OBSERVACOES DO PEDIDO</b><br>ENTREGAR NA OBRA: RUA DAS PALMEIRAS,4587-LAPA -SP</p>					
+				<p><b>OBSERVACOES DO PEDIDO</b><br>{{order.comments}}</p>					
 			</div>			
 		</div>
 </ion-content>

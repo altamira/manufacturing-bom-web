@@ -63,7 +63,7 @@ altamiraApp.run(function($ionicPlatform) {
           controller: 'CheckListDetailCtrl'
     })*/
     .state('app.single', {
-      url: "/checklist/:orderId",
+      url: "/checklist/:orderNumber",
       views: {
         'menuContent' :{
           templateUrl: "templates/checklist-form.html",
@@ -123,6 +123,9 @@ altamiraApp.run(function($ionicPlatform) {
 	RestangularProvider.setDefaultHttpFields({
 		'withCredentials': true
 	});
+  RestangularProvider.setRestangularFields({
+    id: "number"
+  });
 	RestangularProvider.setDefaultRequestParams('jsonp', {callback: 'JSON_CALLBACK'});
 });
 

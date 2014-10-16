@@ -90,8 +90,8 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 	};
 	
 	//trigered when user click on products row
-	$scope.goDetail = function (id) {
-		$state.go('app.single', {orderId: id});
+	$scope.goDetail = function (number) {
+		$state.go('app.single', {orderNumber: number});
     };
 	
 	//function for the search button

@@ -2,7 +2,7 @@
 altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDelegate, $ionicSideMenuDelegate, $http, $ionicPopup, $window, $stateParams, Restangular) {
 	
 	//get data from api
-	Restangular.one('manufacturing/bom/'+$stateParams.orderId).get().then(function(response) {
+	Restangular.one('manufacturing/bom', $stateParams.orderNumber).get().then(function(response) {
 		$scope.order = response.data;
 		var ordertotal = 0;
 		
@@ -43,7 +43,7 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDeleg
 			if(res) {
 				// var order = Restangular.one('manufacturing/bom',id);
 				// order.put();
-				$http({
+				/*$http({
 					method: "PUT",
 					url: "http://data.altamira.com.br/manufacturing/bom/"+id,
 					data: $scope.order,
@@ -52,6 +52,10 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDeleg
 					$state.go('app.checklists');
 				}).error(function(data, status) { // called asynchronously if an error occurs
 					alert("Failed due to some error.");
+				});*/
+				$scope.order.customPUT().then(function () {
+					alert("Order Mark as Checked Successfully.");
+					$state.go('app.checklists');
 				});
 			} else {
 				console.log("NO");	
@@ -61,7 +65,7 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDeleg
 	
 	// open the report in a new tab
 	$scope.openReport = function() { 
-		$window.open(' http://altamira.elasticbeanstalk.com/webapi/reports/materials/'+ $stateParams.orderId);
+		$window.open(' http://report.altamira.com.br/manufacturing/bom/'+ $stateParams.orderNumber);
 	};
 	
 });
