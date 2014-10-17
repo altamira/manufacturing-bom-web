@@ -1,5 +1,5 @@
 //orders detail controller
-altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDelegate, $ionicSideMenuDelegate, $http, $ionicPopup, $window, $stateParams, Restangular) {
+altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScrollDelegate, $ionicSideMenuDelegate, $http, $ionicPopup, $window, $stateParams, Restangular) {
 	
 	//get data from api
 	Restangular.one('manufacturing/bom', $stateParams.orderNumber).get().then(function(response) {
@@ -41,18 +41,6 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $ionicScrollDeleg
 		});
 		confirmPopup.then(function(res) {
 			if(res) {
-				// var order = Restangular.one('manufacturing/bom',id);
-				// order.put();
-				/*$http({
-					method: "PUT",
-					url: "http://data.altamira.com.br/manufacturing/bom/"+id,
-					data: $scope.order,
-					headers: {'Content-Type':'application/json'}
-				}).success(function(data, status) {
-					$state.go('app.checklists');
-				}).error(function(data, status) { // called asynchronously if an error occurs
-					alert("Failed due to some error.");
-				});*/
 				$scope.order.customPUT().then(function () {
 					alert("Order Mark as Checked Successfully.");
 					$state.go('app.checklists');
