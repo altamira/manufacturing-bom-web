@@ -4,9 +4,8 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 	//get data from api
 	Restangular.one('manufacturing/bom', $stateParams.orderNumber).get().then(function(response) {
 		$scope.order = response.data;
-		$scope.order.checkedFlag = true;
-		var ordertotal = 0;
 		
+		var ordertotal = 0;
 		angular.forEach($scope.order.items, function(item){
 			angular.forEach(item.parts, function(prd){
 				ordertotal += prd.weight				

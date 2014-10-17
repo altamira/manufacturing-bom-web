@@ -1,7 +1,7 @@
 altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $ionicPopup, $timeout,  $state, Restangular) {
 	$scope.searchData = {};
 	$scope.searchData.search = "";
-	
+		
 	//get data from api
 	Restangular.one('manufacturing/bom').get({start:0,max:10}).then(function(response) {
 		$scope.orders  = response.data;
@@ -84,48 +84,38 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 		showDelete: false
 	};
 	
-	/*// Triggered to delte orders
-	$scope.deleteOrder = function(index,orderNumber) {     
-		
-		var confirmPopup = $ionicPopup.confirm({
-			title: 'Delete Order',
-			template: 'Are you sure you want to delete this order ?'
-		});
-		confirmPopup.then(function(res) {
-			if(res) {
-				Restangular.one('manufacturing/bom/'+orderNumber).remove();
-				$scope.orders.splice(index, 1);
-			} else {
-				
-			}
-		});
-	};*/
 	// Triggered to mark as checked orders
-	$scope.checkedOrder = function(id) {
-		var confirmPopup = $ionicPopup.confirm({
-			title: 'Checke Order',
-			template: 'Is the order checked completly ?'
-		});
-		confirmPopup.then(function(res) {
-			if(res) {
-				Restangular.one('manufacturing/bom', id).get().then(function(response) {
-					$scope.order = response.data;
-					$scope.order.customPUT().then(function () {
-						$ionicPopup.alert({
-							title: 'Success',
-							content: 'Order Mark as Checked Successfully.'
-						}).then(function(res) {
-							$state.go('app.checklists');
-						});					
+	$scope.checkedOrder = function(isChecked,id) {
+		//If order is not checked show pop up for check
+		if(!isChecked){
+			var confirmPopup = $ionicPopup.confirm({
+				title: 'Checke Order',
+				template: 'Is the order checked completly ?'
+			});
+			confirmPopup.then(function(res) {
+				if(res) {
+					Restangular.one('manufacturing/bom', id).get().then(function(response) {
+						$scope.order = response.data;
+						$scope.order.customPUT().then(function () {
+							$ionicPopup.alert({
+								title: 'Success',
+								content: 'Order Mark as Checked Successfully.'
+							}).then(function(res) {
+								$state.go($state.current, {}, {reload: true});
+							});					
+						});
+					}, function(response) {
+						alert('error')
 					});
-				}, function(response) {
-					alert('error')
-				});
-				
-			} else {
-				console.log("NO");	
-			}
-		});
+					
+				} else {
+					console.log("NO");	
+				}
+			});
+		}else{
+			//if order is already checked re-direct to the detail page
+			$state.go('app.single', {orderNumber: id});
+		}
 	};
 	
 	//trigered when user click on products row
