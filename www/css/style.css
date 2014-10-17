@@ -242,3 +242,11 @@ hr {
    border-bottom: 1px solid #ffffff;
 }
 /*End for css of Manufacturing process pages*/
+
+/**/
+.order-import-font{
+	font-size: 32px !important;
+	color:black !important;
+	font-weight:bold;
+}
+/**/
