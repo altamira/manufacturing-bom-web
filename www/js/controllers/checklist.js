@@ -29,6 +29,7 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 			{ text: '<b>Save</b>',
 				type: 'button-positive',
 				onTap: function(res) {
+					//get data from api
 					$http({
 						method: 'GET', 
 						Origin:'http://localhost:8100',						
@@ -39,22 +40,33 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 						}
 					}).success(function(data) {
 						//post data to api
-						$http({
-							method: "POST",
-							url: "http://data.altamira.com.br/manufacturing/bom",
-							data: data,
-							headers: {'Content-Type':'application/json'}
-						}).success(function(data, status) {
-							if(status == 201){
-								alert("Order Imported Successfully.");
-								$state.go($state.current, {}, {reload: true});
+						var postOrder = Restangular.all('manufacturing/bom');
+						postOrder.post(data).then(function(response) {
+							if(response.status == 201){
+								$ionicPopup.alert({
+									title: 'Success',
+									content: 'Order Imported Successfully.'
+								}).then(function(res) {
+									$state.go($state.current, {}, {reload: true});
+								});	
 							}
-						}).error(function(data, status) { 
+						}, function() {
 							// alert if an error occurs
-							alert("Failed to Import Order.");
-						});
+							$ionicPopup.alert({
+								title: 'Fail',
+								content: 'Failed to Import Order'
+							}).then(function(res) {
+								importPopup.close();
+							});
+						});						
 					}).error(function(msg, code) {
-						alert("Failed to Export Order due to some error.");
+						// alert if an error occurs
+						$ionicPopup.alert({
+							title: 'Fail',
+							content: 'Failed to Export Order due to some error.'
+						}).then(function(res) {
+							importPopup.close();
+						});
 					});
 				}
 			},
@@ -72,7 +84,7 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 		showDelete: false
 	};
 	
-	// Triggered to delte orders
+	/*// Triggered to delte orders
 	$scope.deleteOrder = function(index,orderNumber) {     
 		
 		var confirmPopup = $ionicPopup.confirm({
@@ -85,6 +97,33 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 				$scope.orders.splice(index, 1);
 			} else {
 				
+			}
+		});
+	};*/
+	// Triggered to mark as checked orders
+	$scope.checkedOrder = function(id) {
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Checke Order',
+			template: 'Is the order checked completly ?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+				Restangular.one('manufacturing/bom', id).get().then(function(response) {
+					$scope.order = response.data;
+					$scope.order.customPUT().then(function () {
+						$ionicPopup.alert({
+							title: 'Success',
+							content: 'Order Mark as Checked Successfully.'
+						}).then(function(res) {
+							$state.go('app.checklists');
+						});					
+					});
+				}, function(response) {
+					alert('error')
+				});
+				
+			} else {
+				console.log("NO");	
 			}
 		});
 	};

@@ -4,6 +4,7 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 	//get data from api
 	Restangular.one('manufacturing/bom', $stateParams.orderNumber).get().then(function(response) {
 		$scope.order = response.data;
+		$scope.order.checkedFlag = true;
 		var ordertotal = 0;
 		
 		angular.forEach($scope.order.items, function(item){
@@ -42,11 +43,36 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 		confirmPopup.then(function(res) {
 			if(res) {
 				$scope.order.customPUT().then(function () {
-					alert("Order Mark as Checked Successfully.");
-					$state.go('app.checklists');
+					$ionicPopup.alert({
+						title: 'Success',
+						content: 'Order Mark as Checked Successfully.'
+					}).then(function(res) {
+						$state.go('app.checklists');
+					});					
 				});
 			} else {
 				console.log("NO");	
+			}
+		});
+	};
+	
+	// Triggered to delte orders
+	$scope.deleteOrder = function(orderNumber) {   	
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Delete Order',
+			template: 'Are you sure you want to delete this order ?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+				Restangular.one('manufacturing/bom/'+orderNumber).remove().then(function () {
+					$ionicPopup.alert({
+						title: 'Success',
+						content: 'Order deleted Successfully.'
+					}).then(function(res) {		
+						$state.go('app.checklists');
+					});	
+				});				
+			} else {				
 			}
 		});
 	};

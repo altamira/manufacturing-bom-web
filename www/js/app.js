@@ -123,9 +123,9 @@ altamiraApp.run(function($ionicPlatform) {
 	RestangularProvider.setDefaultHttpFields({
 		'withCredentials': true
 	});
-  RestangularProvider.setRestangularFields({
-    id: "number"
-  });
+	RestangularProvider.setRestangularFields({
+		id: "number"
+	});
 	RestangularProvider.setDefaultRequestParams('jsonp', {callback: 'JSON_CALLBACK'});
 });
 

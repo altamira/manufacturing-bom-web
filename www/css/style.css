@@ -73,6 +73,9 @@ ion-nav-view{
     width: 1px;
 	position:relative;
 }
+/*CSS code for checklist page*/
+
+/**/
 /*CSS code for checklist form page*/
 .min-60 { min-width: 60px; }
 .min-50 { min-width: 50px; }
@@ -248,5 +251,6 @@ hr {
 	font-size: 32px !important;
 	color:black !important;
 	font-weight:bold;
+	text-align:center;
 }
 /**/
