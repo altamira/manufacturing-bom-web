@@ -1,4 +1,4 @@
-altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $ionicPopup, $timeout,  $state, Restangular, ImportOrders) {
+altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $ionicPopup, $timeout,  $state, Restangular) {
 	$scope.searchData = {};
 	$scope.searchData.search = "";
 	
