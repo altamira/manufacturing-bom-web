@@ -17,24 +17,23 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 		// An elaborate, custom popup
 		var importPopup = $ionicPopup.show({
 			templateUrl : 'templates/import-order.html',
-			title: 'Order Number',
+			title: 'Numero do Pedido',
 			scope: $scope,
 			buttons: [
-			{ text: 'Cancel',
+			{ text: 'Cancelar',
 				onTap: function(res) {	
 					$scope.orderData = {};
 					importPopup.close();
 				}					
 			},
-			{ text: '<b>Save</b>',
+			{ text: '<b>Importar</b>',
 				type: 'button-positive',
 				onTap: function(res) {
 					//get data from api
 					$http({
 						method: 'GET', 
-						Origin:'http://localhost:8100',						
-						url: 'http://integracao.altamira.com.br/manufacturing/bom?'+$scope.orderData.ordernumber,
-						headers: {'Content-Type':'application/json',
+						url: 'http://integracao.altamira.com.br/manufacturing/bom?' + $scope.orderData.ordernumber,
+						headers: {'Content-Type':'application/json; charset=iso-8859-1',
 						'Accept': 'application/json',
 						//'Authorization': 'Basic QWRtaW5pc3RyYXRvcjohYkZDWC45WCpUSg=='
 						}
@@ -44,8 +43,8 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 						postOrder.post(data).then(function(response) {
 							if(response.status == 201){
 								$ionicPopup.alert({
-									title: 'Success',
-									content: 'Order Imported Successfully.'
+									title: 'Pedido ' + $scope.orderData.ordernumber,
+									content: 'Pedido ' + $scope.orderData.ordernumber + ' foi importado com sucesso !'
 								}).then(function(res) {
 									$state.go($state.current, {}, {reload: true});
 								});	
@@ -53,8 +52,8 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 						}, function() {
 							// alert if an error occurs
 							$ionicPopup.alert({
-								title: 'Fail',
-								content: 'Failed to Import Order'
+								title: 'Falhou',
+								content: 'Erro ao importar o Pedido ' + $scope.orderData.ordernumber
 							}).then(function(res) {
 								importPopup.close();
 							});
@@ -62,8 +61,8 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 					}).error(function(msg, code) {
 						// alert if an error occurs
 						$ionicPopup.alert({
-							title: 'Fail',
-							content: 'Failed to Export Order due to some error.'
+							title: 'Falhou',
+							content: 'Erro ao exportar o Pedido: ' + $scope.orderData.ordernumber 
 						}).then(function(res) {
 							importPopup.close();
 						});
@@ -89,8 +88,8 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 		//If order is not checked show pop up for check
 		if(!isChecked){
 			var confirmPopup = $ionicPopup.confirm({
-				title: 'Checke Order',
-				template: 'Is the order checked completly ?'
+				title: 'Confirmação',
+				template: 'A Lista de Material foi conferida ?'
 			});
 			confirmPopup.then(function(res) {
 				if(res) {
@@ -98,14 +97,14 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 						$scope.order = response.data;
 						$scope.order.customPUT().then(function () {
 							$ionicPopup.alert({
-								title: 'Success',
-								content: 'Order Mark as Checked Successfully.'
+								title: 'Successo',
+								content: 'A Lista de Material do Pedido ' + $scope.order.number + ' foi marcada como conferida.' 
 							}).then(function(res) {
 								$state.go($state.current, {}, {reload: true});
 							});					
 						});
 					}, function(response) {
-						alert('error')
+						alert('Erro, a Lista de Material não foi alterada.')
 					});
 					
 				} else {
