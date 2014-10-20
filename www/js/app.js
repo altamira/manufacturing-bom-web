@@ -30,7 +30,7 @@ altamiraApp.run(function($ionicPlatform) {
       controller: 'AppCtrl'
     })
 	
-    .state('app.search', {
+    /*.state('app.search', {
       url: "/search",
       views: {
         'menuContent' :{
@@ -46,7 +46,7 @@ altamiraApp.run(function($ionicPlatform) {
           templateUrl: "templates/browse.html"
         }
       }
-    })
+    })*/
 	
     .state('app.checklists', {
       url: "/checklist",
@@ -108,24 +108,22 @@ altamiraApp.run(function($ionicPlatform) {
   $urlRouterProvider.otherwise('/app/checklist');
 
   //Enable cross domain calls
-  $httpProvider.defaults.useXDomain = true;
-    $httpProvider.defaults.withCredentials = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  //$httpProvider.defaults.useXDomain = true;
+  //$httpProvider.defaults.withCredentials = true;
+  //delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
 })
 .config(function(RestangularProvider) {
 	//RestangularProvider.setBaseUrl('http://data.altamira.com.br/data/rest');
 	RestangularProvider.setBaseUrl('http://data.altamira.com.br');
 	RestangularProvider.setFullResponse(true);
-	RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json',
-		'X-Requested-With': 'XMLHttpRequest'
-	});
-	RestangularProvider.setDefaultHttpFields({
+	RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json; charset=iso-8859-1'});
+	/*RestangularProvider.setDefaultHttpFields({
 		'withCredentials': true
-	});
+	});*/
 	RestangularProvider.setRestangularFields({
 		id: "number"
 	});
-	RestangularProvider.setDefaultRequestParams('jsonp', {callback: 'JSON_CALLBACK'});
+	//RestangularProvider.setDefaultRequestParams('jsonp', {callback: 'JSON_CALLBACK'});
 });
 

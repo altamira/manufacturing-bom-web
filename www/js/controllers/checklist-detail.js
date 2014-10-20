@@ -37,15 +37,15 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 	// Triggered to mark as checked orders
 	$scope.checkedOrder = function(id) {
 		var confirmPopup = $ionicPopup.confirm({
-			title: 'Checke Order',
-			template: 'Is the order checked completly ?'
+			title: 'Confirmação',
+			template: 'A Lista de Material foi conferida ?'
 		});
 		confirmPopup.then(function(res) {
 			if(res) {
 				$scope.order.customPUT().then(function () {
 					$ionicPopup.alert({
-						title: 'Success',
-						content: 'Order Mark as Checked Successfully.'
+						title: 'Concluido com sucesso',
+						content: 'A Lista de Material do Pedido ' + $scope.order.number + ' foi marcada como conferida.' 
 					}).then(function(res) {
 						$state.go('app.checklists');
 					});					
@@ -59,15 +59,15 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 	// Triggered to delte orders
 	$scope.deleteOrder = function(orderNumber) {   	
 		var confirmPopup = $ionicPopup.confirm({
-			title: 'Delete Order',
-			template: 'Are you sure you want to delete this order ?'
+			title: 'Excluir Pedido',
+			template: 'Confirma a exclusão do Pedido ' + $scope.order.number + ' ?'
 		});
 		confirmPopup.then(function(res) {
 			if(res) {
 				Restangular.one('manufacturing/bom/'+orderNumber).remove().then(function () {
 					$ionicPopup.alert({
 						title: 'Success',
-						content: 'Order deleted Successfully.'
+						content: 'Pedido excluido com sucesso.'
 					}).then(function(res) {		
 						$state.go('app.checklists');
 					});	
@@ -79,7 +79,8 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 	
 	// open the report in a new tab
 	$scope.openReport = function() { 
-		$window.open(' http://report.altamira.com.br/manufacturing/bom/'+ $stateParams.orderNumber);
+		//$window.open(' http://report.altamira.com.br/manufacturing/bom/'+ $stateParams.orderNumber);
+		$window.open('http://altamira.elasticbeanstalk.com/webapi/reports/materials/'+ $stateParams.orderNumber);
 	};
 	
 });
