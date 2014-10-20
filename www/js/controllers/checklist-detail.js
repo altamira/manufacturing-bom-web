@@ -8,8 +8,8 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 		var ordertotal = 0;
 		angular.forEach($scope.order.items, function(item){
 			angular.forEach(item.parts, function(prd){
-				//ordertotal += prd.weight
-				ordertotal += prd.quantity * prd.weight	
+				ordertotal += prd.weight
+				//ordertotal += prd.quantity * prd.weight	
 			})			
 		})
 		$scope.total = ordertotal;
@@ -34,8 +34,8 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 	$scope.getItemTotal = function(item) {     
 		var itemtotal = 0;
 		angular.forEach(item.parts, function(prd){
-			itemtotal += prd.quantity * prd.weight
-			//itemtotal += prd.weight
+			//itemtotal += prd.quantity * prd.weight
+			itemtotal += prd.weight
 		})
 		return itemtotal;
 	};	
