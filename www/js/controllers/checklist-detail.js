@@ -18,6 +18,12 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 		alert('error')
 	});
 	
+	//set the order date using timezone
+	$scope.orderDate = function(time) {  
+		var orderDateInfo = moment(time).zone('-0300').format("DD/MM/YYYY");
+		return orderDateInfo;			
+	};
+	
 	//calculate the "PRAZO DE ENTREGA" field value
 	$scope.getWeek = function(time) {  
 		var weekInfo = moment(time).week() + "/" + moment(time).year() + " ( "+ moment(time).startOf('week').format("DD/MM/YYYY") + " a " + moment(time).endOf('week').format("DD/MM/YYYY") + ")";
