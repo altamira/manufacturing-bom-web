@@ -21,9 +21,9 @@
 			<i class="icon fa fa-times-circle-o" ng-click="deleteOrder($index,{{order.number}})"></i>
 		</div>-->
 		<div class="item item-icon-right" ng-repeat="order in orders | filter: searchData.search">
-			<p class="no-item-margin-border" ng-click="goDetail({{order.number}})">{{order.number}} {{order.customer}}{{order.checked}}</p>
-			<i class="icon" ng-click="checkedOrder(order.checked,order.number)">
-				<label >
+			<p class="no-item-margin-border" ng-click="goDetail({{order.number}})">{{order.number}} {{order.customer}}</p>
+			<i class="icon" ng-click="checkedOrder(order.checked, order.number)">
+				<label>
 					<div class="checkbox checkbox-input-hidden disable-pointer-events">
 						<input type="checkbox" ng-checked="order.checked" readonly class="checked">
 						<i class="checkbox-icon"></i>
