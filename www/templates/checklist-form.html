@@ -95,8 +95,10 @@
 							<td data-title="QUANTIDE" class="col col-10 col-bg-color col-padding text-align-cener"><p>{{product.quantity | number:0}}</p></td>
 							<td data-title="DESCRICAO DO MATERIAL" class="col col-bg-color col-padding"><p>{{product.description}}</p>	</td>
 							<td data-title="COR" class="col col-10 col-bg-color col-padding text-align-cener"><p>{{product.color}}</p></td>
-							<td data-title="PESO" class="col col-10 col-bg-color col-padding text-align-right"><p>{{product.weight / product.quantity | number:2}}</p></td>
-							<td data-title="PESO TOTAL" class="col col-10 col-bg-color text-align-right"><p>{{product.weight | number:2}}</p></td>
+							<!--<td data-title="PESO" class="col col-10 col-bg-color col-padding text-align-right"><p>{{product.weight / product.quantity | number:2}}</p></td>
+							<td data-title="PESO TOTAL" class="col col-10 col-bg-color text-align-right"><p>{{product.weight | number:2}}</p></td>-->
+							<td data-title="PESO" class="col col-10 col-bg-color col-padding text-align-right"><p>{{product.weight | number:2}}</p></td>
+							<td data-title="PESO TOTAL" class="col col-10 col-bg-color text-align-right"><p>{{product.weight * product.quantity | number:2}}</p></td>
 						</tr>
 						<tr class="row order-row-custom-styles">
 							<td id="calc-title" class="col col-90 col-bg-color col-padding text-align-right label-font-style">PESO TOTAL(kg)</td>
