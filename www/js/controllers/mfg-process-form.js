@@ -70,12 +70,16 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 		});
 		confirmPopup.then(function(res) {
 			if(res) {
-				Restangular.one('manufacturing/operation/'+id).remove().then(function () {
+				Restangular.one('manufacturing/process/'+id).remove().then(function () {
 					$ionicPopup.alert({
 						title: 'Success',
 						content: 'Process deleted.'
 					}).then(function(res) {	
-						$state.go("app.manufacturesearch");
+						if(process == "Main"){
+							$state.go("app.manufacturesearch");
+						}else{
+							$state.go($state.current, {}, {reload: true});
+						}
 					});	
 				});					
 			} else {

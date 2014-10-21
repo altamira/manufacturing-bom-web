@@ -87,7 +87,7 @@
 				<label>MATERIA PRIMA/INSUMOS/COMPONENTS</label>
 				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="addNewItem()"></i>
 			</div>
-			<div class="item item-icon-right" ng-repeat="input in operation.input">
+			<div class="item item-icon-right" ng-repeat="input in operation.consume">
 				<p class="no-item-margin-border" ng-click="goToOperationForm({{operation.sequence}})">{{input.code}} - {{input.description}}</p>
 				<i class="icon fa fa-times-circle-o" ng-click="deleteOperationInput($index)"></i>
 			</div>
@@ -97,7 +97,7 @@
 				<label>PRODUTO ACABADO / EM PROCESSO DE FABRICACAO</label>
 				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="openAddItem()"></i>
 			</div>
-			<div class="item item-icon-right" ng-repeat="output in operation.output">
+			<div class="item item-icon-right" ng-repeat="output in operation.produce">
 				<p class="no-item-margin-border" ng-click="goToOperationForm({{operation.sequence}})">{{output.code}} - {{output.description}}</p>
 				<i class="icon fa fa-times-circle-o" ng-click="deleteOperationOutput($index)"></i>
 			</div>

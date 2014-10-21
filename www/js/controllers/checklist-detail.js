@@ -23,7 +23,6 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 	
 	//set the order date using timezone
 	$scope.orderDate = function(time) {  
-		//var orderDateInfo = moment(time).zone('-0000').format("DD/MM/YYYY");
 		var orderDateInfo = moment.utc(time).format("DD/MM/YYYY");
 		return orderDateInfo;			
 	};

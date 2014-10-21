@@ -6,7 +6,7 @@
 			<h4 class="mfg-page-titles">&nbsp;&nbsp;{{process.code}}&nbsp;&nbsp;</h4>
 			<span class="btn-separator"></span>
 			<button class="button button-icon" ng-click="saveProcess()"><i class="fa fa-check"></i></button>
-			<button class="button button-icon" ng-click="deleteProcess()"><i class="fa fa-times"></i></button>
+			<button class="button button-icon" ng-click="deleteProcess(process.id,'Main')"><i class="fa fa-times"></i></button>
 			<button class="button button-icon"><i class="fa fa-print"></i></button>		
 		</div>
 	</ion-header-bar>
@@ -59,7 +59,7 @@
 				</div>				
 				<div class="item item-icon-right" ng-repeat="input in operation.consume">
 					<p class="procs-sequnce-margin" ng-click="goToProcessForm(input.id)">{{input.description}}</p>
-					<i class="icon fa fa-times-circle-o"  ng-click="deleteSequenceInput($parent.$index,$index)"></i>
+					<i class="icon fa fa-times-circle-o"  ng-click="deleteProcess(input.id,'OperationProcs')"></i>
 				</div>			
 			</div>
 		</div>

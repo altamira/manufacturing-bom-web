@@ -2,7 +2,22 @@
 altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular) {
 	//get data from api
 	if(!$state.newOprtCreation){
-		$scope.operation = {
+		//get data from api
+		Restangular.one('manufacturing/operation', $stateParams.id).get().then(function(response) {	
+		
+			//get the operation data
+			$scope.operation = response.data;			
+		}, function(response) {
+			$ionicPopup.alert({
+				title: 'Failed',
+				content: 'Failed to get the Operation data.' 
+			}).then(function(response) {
+			
+				//move to the process list
+				$state.go('app.manufacturesearch');
+			});	
+		});		
+		/*$scope.operation = {
 			"sequence": 10,
 			"name": "PERFILAMENTO",
 			"description": "",
@@ -29,7 +44,7 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 					"unit": "kg"
 				}
 			]
-		};
+		};*/
 	}else{
 		$scope.operation = {};
 	}
@@ -50,7 +65,7 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	};
 	
 	// Triggered to mark as checked the operation
-	$scope.deleteOperation = function(index) {     
+	$scope.deleteOperation = function(id) {     
 
 		var confirmPopup = $ionicPopup.confirm({
 			title: 'Delete Operation',
