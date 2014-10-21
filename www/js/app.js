@@ -77,9 +77,7 @@ altamiraApp.run(function($ionicPlatform) {
       }
     })
 	.state('app.mfgprocessform', {
-		//URL will be changed after getting the API url
-		//url: "/manufacturesearch/:code",
-		url: "/manufactureprocess",
+		url: "/manufacturesearch/:code",
 		views: {
 			'menuContent' :{
 			  templateUrl: "templates/mfg-process-form.html",
@@ -88,9 +86,7 @@ altamiraApp.run(function($ionicPlatform) {
 		}
     })
 	.state('app.mfgoperationform', {
-		//URL will be changed after getting the API url
-		//url: "/manufacturesearch/:code/operation/:sequence",
-		url: "/manufactureoperation",
+		url: "/manufacturesearch/operation/:id",
 		views: {
 			'menuContent' :{
 			  templateUrl: "templates/mfg-operation-form.html",

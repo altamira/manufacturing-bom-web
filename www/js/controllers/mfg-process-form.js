@@ -3,136 +3,27 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	
 	//get data from api
 	if(!$state.newProcessCreation){
-		$scope.process = {
-			"code": "PPLCOL00113000000000",
-			"description": "COLUNA NORMAL CH12 2800MM",
-			"color": "Blue",
-			"weight": 0,
-			"width": 0,
-			"length": 0,
-			"finish": "finish",
-			"revision": [
-				{
-					"date": 1410895028676,
-					"by": "ROBERTO ZELLI"
-				},
-				{
-					"date": 1410895028676,
-					"by": "HELIO TODA"
-				},
-				{
-					"date": 1410895028676,
-					"by": "HELIO TODA"
-				},
-				{
-					"date": 1410895028676,
-					"by": "HELIO TODAAA"
-				},
-				{
-					"date": 1410895028676,
-					"by": "HELIO TODACCC"
-				}
-			],
-			"operation": [
-				{
-					"sequence": 10,
-					"name": "PERFILAMENTO",
-					"description": "",
-					"croqui": "",
-					"input": [
-						{
-							"code": "ALPRFQ30-KG20000F330",
-							"description": "ACO FINA QUENTE PRETO ROLO 2,00MM 330MM",
-							"quantity": 32.34,
-							"unit": "kg"
-						},
-						{
-							"code": "PERF-PPLTUBO113",
-							"description": "PERFILADEIRA TUBO 113",
-							"quantity": 3,
-							"unit": "min"
-						}
-					],
-					"output": [
-						{
-							"code": "PPLCOL00113000000000-01",
-							"description": "PERFIL LONG TUBO 113",
-							"quantity": 52.34,
-							"unit": "kg"
-						}
-					]
-				},
-				{
-					"sequence": 20,
-					"name": "PERFILAMENTO 2",
-					"description": "THIS IS TEST DESCRIPTION",
-					"croqui": "THIS IS TEST DESCRIPTION 2",
-					"input": [
-						{
-							"code": "ALPRFQ30-KG20000F330",
-							"description": "ACO FINA QUENTE PRETO ROLO 2,00MM 330MM",
-							"quantity": 32.34,
-							"unit": "kg"
-						},
-						{
-							"code": "PERF-PPLTUBO113",
-							"description": "PERFILADEIRA TUBO 113",
-							"quantity": 3,
-							"unit": "min"
-						},
-						{
-							"code": "ALPRFQ30-KG20000F330",
-							"description": "ACO FINA QUENTE PRETO ROLO 2,00MM 330MM",
-							"quantity": 32.34,
-							"unit": "kg"
-						},
-						{
-							"code": "PERF-PPLTUBO113",
-							"description": "PERFILADEIRA TUBO 113",
-							"quantity": 3,
-							"unit": "min"
-						},
-						{
-							"code": "ALPRFQ30-KG20000F330",
-							"description": "ACO FINA QUENTE PRETO ROLO 2,00MM 330MM",
-							"quantity": 32.34,
-							"unit": "kg"
-						},
-						{
-							"code": "PERF-PPLTUBO113",
-							"description": "PERFILADEIRA TUBO 113",
-							"quantity": 3,
-							"unit": "min"
-						},
-						{
-							"code": "ALPRFQ30-KG20000F330",
-							"description": "ACO FINA QUENTE PRETO ROLO 2,00MM 330MM",
-							"quantity": 32.34,
-							"unit": "kg"
-						},
-						{
-							"code": "PERF-PPLTUBO113",
-							"description": "PERFILADEIRA TUBO 113",
-							"quantity": 3,
-							"unit": "min"
-						}
-					],
-					"output": [
-						{
-							"code": "PPLCOL00113000000000-01",
-							"description": "PERFIL LONG TUBO 113",
-							"quantity": 52.34,
-							"unit": "kg"
-						}
-					]
-				}
-			]
-		};	
+	
+		//get data from api
+		Restangular.one('manufacturing/process', $stateParams.code).get().then(function(response) {	
+		
+			//get the process data
+			$scope.process = response.data;			
+		}, function(response) {
+			$ionicPopup.alert({
+				title: 'Failed',
+				content: 'Failed to get the Process data.' 
+			}).then(function(response) {
+			
+				//move to the process list
+				$state.go('app.manufacturesearch');
+			});	
+		});		
 	}else{
 		$scope.process = {};
 	}
 	// Triggered to delte sequences
-	$scope.deleteSequence = function(index) {     
+	$scope.deleteOperation = function(index) {     
 		
 		var confirmPopup = $ionicPopup.confirm({
 			title: 'Delete Process',
@@ -140,7 +31,14 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 		});
 		confirmPopup.then(function(res) {
 			if(res) {
-				$scope.process.operation.splice(index, 1);					
+				Restangular.one('manufacturing/operation/'+id).remove().then(function () {
+					$ionicPopup.alert({
+						title: 'Success',
+						content: 'Process deleted.'
+					}).then(function(res) {	
+						$state.go($state.current, {}, {reload: true});
+					});	
+				});				
 			} else {
 				
 			}
@@ -164,7 +62,7 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	};
 	
 	// Triggered to mark as checked the process
-	$scope.deleteProcess = function(index) {     
+	$scope.deleteProcess = function(id, process) {     
 
 		var confirmPopup = $ionicPopup.confirm({
 			title: 'Delete Process',
@@ -172,22 +70,14 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 		});
 		confirmPopup.then(function(res) {
 			if(res) {
-								
-			} else {
-				
-			}
-		});
-	};
-	
-	// Triggered to delte sequences input
-	$scope.deleteSequenceInput = function(parentIndex,index) {     
-		var confirmPopup = $ionicPopup.confirm({
-			title: 'Delete Process',
-			template: 'Are you sure you want to delete this material ?'
-		});
-		confirmPopup.then(function(res) {
-			if(res) {
-				$scope.process.operation[parentIndex].input.splice(index, 1);					
+				Restangular.one('manufacturing/operation/'+id).remove().then(function () {
+					$ionicPopup.alert({
+						title: 'Success',
+						content: 'Process deleted.'
+					}).then(function(res) {	
+						$state.go("app.manufacturesearch");
+					});	
+				});					
 			} else {
 				
 			}
@@ -196,20 +86,19 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	
 	//trigered when user click on sequence row
 	$scope.goToOperationForm = function (id) {
-		//$state.go('app.mfgoperationform',{sequence:id});
-		$state.go('app.mfgoperationform');
+		$state.go('app.mfgoperationform',{id:id});
 		$state.newOprtCreation = false;
     }
 	
 	//trigered when user click on to add a new operation
 	$scope.newOperationForm = function () {
-		$state.go('app.mfgoperationform');
+		$state.go('app.mfgoperationform',{id:""});
 		$state.newOprtCreation = true;
     }
 	
 	//trigered when user click on input row 
-	$scope.goToProcessForm = function () {
-		//$state.go('app.mfgprocessform', {code: id});
-		$state.go('app.mfgprocessform');
+	$scope.goToProcessForm = function (id) {
+		$state.go('app.mfgprocessform', {code: id});
+		$state.newProcessCreation = false;		
     }
 });

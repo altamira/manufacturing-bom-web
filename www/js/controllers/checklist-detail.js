@@ -4,7 +4,7 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 	//get data from api
 	Restangular.one('manufacturing/bom', $stateParams.orderNumber).get().then(function(response) {
 		$scope.order = response.data;
-		console.log(response.data);
+		
 		var ordertotal = 0;
 		angular.forEach($scope.order.items, function(item){
 			angular.forEach(item.parts, function(prd){
@@ -15,12 +15,15 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 		$scope.total = ordertotal;
 		
 	}, function(response) {
-		alert('error')
+		$ionicPopup.alert({
+			title: 'Failed',
+			content: 'Error' 
+		});	
 	});
 	
 	//set the order date using timezone
 	$scope.orderDate = function(time) {  
-		var orderDateInfo = moment(time).zone('-0300').format("DD/MM/YYYY");
+		var orderDateInfo = moment(time).zone('-0000').format("DD/MM/YYYY");
 		return orderDateInfo;			
 	};
 	

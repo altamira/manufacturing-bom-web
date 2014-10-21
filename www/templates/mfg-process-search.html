@@ -19,8 +19,8 @@
 			<button class="button  button-icon"><i class="fa fa-search"></i></button>
 		</div>
 		<div class="item item-icon-right" ng-repeat="process in processes | filter: process.search">
-			<p class="no-item-margin-border" ng-click="goDetail({{process.number}})">{{process.code}} -{{process.customer}}</p>
-			<i class="icon fa fa-times-circle-o" ng-click="deleteProcesses($index)"></i>
+			<p class="no-item-margin-border" ng-click="goDetail(process.id)">{{process.code}} -{{process.description}}</p>
+			<i class="icon fa fa-times-circle-o" ng-click="deleteProcesses(process.id)"></i>
 		</div>			
 	</div>	
 </ion-content>
