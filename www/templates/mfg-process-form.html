@@ -5,7 +5,7 @@
 			<span class="btn-separator"></span>
 			<h4 class="mfg-page-titles">&nbsp;&nbsp;{{process.code}}&nbsp;&nbsp;</h4>
 			<span class="btn-separator"></span>
-			<button class="button button-icon" ng-click="saveProcess()"><i class="fa fa-check"></i></button>
+			<button class="button button-icon" ng-click="mfgProcessForm.$valid && mfgProcessForm.$dirty ? saveProcess() : '';"><i class="fa fa-check"></i></button>
 			<button class="button button-icon" ng-click="deleteProcess(process.id,'Main')"><i class="fa fa-times"></i></button>
 			<button class="button button-icon"><i class="fa fa-print"></i></button>		
 		</div>
@@ -13,14 +13,26 @@
 	<ion-content class="content-body">
 		<div class="list">
 			<!--The labels will be appear on top of the input field in small screen-->
-			<div id="input-div">
-				<label class="item item-input  no-item-margin-border">
+			<div id="input-div" >
+				<label class="item item-input  no-item-margin-border ">
 					<span class="input-label">CODIGO</span>
-					<input type="text" value="{{process.code}}" ng-model="process.code">
+					<input type="text" value="{{process.code}}" name="code" ng-model="process.code" ng-minlength="10" required="required"/>
+				</label>
+				<label class="item no-item-margin-border " ng-show="mfgProcessForm.code.$error.required">
+					<span ng-show="mfgProcessForm.code.$error.required">Required</span>
+				</label>
+				<label class="item no-item-margin-border " ng-show="mfgProcessForm.code.$error.minlength">
+					<span ng-show="mfgProcessForm.code.$error.minlength">Minimum length required 10</span>
 				</label>
 				<label class="item item-input  no-item-margin-border">
 					<span class="input-label">DESCRICAO</span>
-					<input type="text" value="{{process.description}}" ng-model="process.description">
+					<input type="text" value="{{process.description}}" name="desc" ng-model="process.description" ng-minlength="10" required="required">
+				</label>
+				<label class="item no-item-margin-border" ng-show="mfgProcessForm.desc.$error.required">
+					<span ng-show="mfgProcessForm.desc.$error.required">Required</span>
+				</label>
+				<label class="item no-item-margin-border" ng-show="mfgProcessForm.desc.$error.minlength">
+					<span ng-show="mfgProcessForm.desc.$error.minlength">Minimum length required 10</span>
 				</label>				
 			</div>
 			<br>
@@ -55,7 +67,7 @@
 			<div ng-repeat="operation in process.operation">
 				<div class="item item-icon-right">
 					<p class="no-item-margin-border" ng-click="goToOperationForm(operation.id)">{{operation.sequence}} - {{operation.name}}</p>
-					<i class="icon fa fa-times-circle-o" ng-click="deleteOperation($index)"></i>				
+					<i class="icon fa fa-times-circle-o" ng-click="deleteOperation(operation.id)"></i>				
 				</div>				
 				<div class="item item-icon-right" ng-repeat="input in operation.consume">
 					<p class="procs-sequnce-margin" ng-click="goToProcessForm(input.id)">{{input.description}}</p>

@@ -1,5 +1,5 @@
 //orders detail controller
-altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $window, $state, $stateParams, Restangular) {
+altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $window, $state, $stateParams, Restangular, mfgService) {
 	
 	//get data from api
 	if(!$state.newProcessCreation){
@@ -22,31 +22,9 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	}else{
 		$scope.process = {};
 	}
-	// Triggered to delte sequences
-	$scope.deleteOperation = function(index) {     
-		
-		var confirmPopup = $ionicPopup.confirm({
-			title: 'Delete Process',
-			template: 'Are you sure you want to delete this process operation ?'
-		});
-		confirmPopup.then(function(res) {
-			if(res) {
-				Restangular.one('manufacturing/operation/'+id).remove().then(function () {
-					$ionicPopup.alert({
-						title: 'Success',
-						content: 'Process deleted.'
-					}).then(function(res) {	
-						$state.go($state.current, {}, {reload: true});
-					});	
-				});				
-			} else {
-				
-			}
-		});
-	};
 	
 	// Triggered to mark as checked the process
-	$scope.saveProcess = function() {     
+	$scope.saveProcess = function() {  
 
 		var confirmPopup = $ionicPopup.confirm({
 			title: 'Save Process',
@@ -54,33 +32,31 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 		});
 		confirmPopup.then(function(res) {
 			if(res) {
-				console.log($scope.process);				
-			} else {
+				console.log($scope.process);
 				
-			}
-		});
-	};
-	
-	// Triggered to mark as checked the process
-	$scope.deleteProcess = function(id, process) {     
-
-		var confirmPopup = $ionicPopup.confirm({
-			title: 'Delete Process',
-			template: 'Do you want to delete the process ?'
-		});
-		confirmPopup.then(function(res) {
-			if(res) {
-				Restangular.one('manufacturing/process/'+id).remove().then(function () {
-					$ionicPopup.alert({
-						title: 'Success',
-						content: 'Process deleted.'
-					}).then(function(res) {	
-						if(process == "Main"){
-							$state.go("app.manufacturesearch");
-						}else{
+				if($state.newProcessCreation){
+					var processData = Restangular.all('manufacturing/process');
+					var processSave = processData.post($scope.process);
+				}else{
+					var processSave = $scope.process.customPUT();
+				}
+				processSave.then(function(response) {
+					if(response.status == 201){
+						$ionicPopup.alert({
+							title: 'Pedido ' ,
+							content: 'Pedido  foi importado com sucesso !'
+						}).then(function(res) {
 							$state.go($state.current, {}, {reload: true});
-						}
-					});	
+						});	
+					}
+				}, function() {
+					// alert if an error occurs
+					$ionicPopup.alert({
+						title: 'Falhou',
+						content: 'Erro ao importar o Pedido '
+					}).then(function(res) {
+						
+					});
 				});					
 			} else {
 				
@@ -92,17 +68,27 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	$scope.goToOperationForm = function (id) {
 		$state.go('app.mfgoperationform',{id:id});
 		$state.newOprtCreation = false;
-    }
+    };
 	
 	//trigered when user click on to add a new operation
 	$scope.newOperationForm = function () {
 		$state.go('app.mfgoperationform',{id:""});
 		$state.newOprtCreation = true;
-    }
+    };
+	
+	// Triggered to mark as checked the process
+	$scope.deleteProcess = function(id, process = "") {     
+		return mfgService.deleteProcess(id, process);
+	};
 	
 	//trigered when user click on input row 
 	$scope.goToProcessForm = function (id) {
-		$state.go('app.mfgprocessform', {code: id});
-		$state.newProcessCreation = false;		
-    }
+		return mfgService.goToProcessForm(id);	
+    };
+	
+	// Triggered to delte sequences
+	$scope.deleteOperation = function(id) {     
+		return mfgService.deleteOperation(id);
+	};
+	
 });

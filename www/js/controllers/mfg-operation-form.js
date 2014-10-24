@@ -1,5 +1,5 @@
 //mfg operation form  controller
-altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular) {
+altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular, mfgService) {
 	//get data from api
 	if(!$state.newOprtCreation){
 		//get data from api
@@ -16,35 +16,7 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 				//move to the process list
 				$state.go('app.manufacturesearch');
 			});	
-		});		
-		/*$scope.operation = {
-			"sequence": 10,
-			"name": "PERFILAMENTO",
-			"description": "",
-			"croqui": "",
-			"input": [
-				{
-					"code": "ALPRFQ30-KG20000F330",
-					"description": "ACO FINA QUENTE PRETO ROLO 2,00MM 330MM",
-					"quantity": 32.34,
-					"unit": "kg"
-				},
-				{
-					"code": "PERF-PPLTUBO113",
-					"description": "PERFILADEIRA TUBO 113",
-					"quantity": 3,
-					"unit": "min"
-				}
-			],
-			"output": [
-				{
-					"code": "PPLCOL00113000000000-01",
-					"description": "PERFIL LONG TUBO 113",
-					"quantity": 52.34,
-					"unit": "kg"
-				}
-			]
-		};*/
+		});	
 	}else{
 		$scope.operation = {};
 	}
@@ -65,52 +37,14 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	};
 	
 	// Triggered to mark as checked the operation
-	$scope.deleteOperation = function(id) {     
-
-		var confirmPopup = $ionicPopup.confirm({
-			title: 'Delete Operation',
-			template: 'Do you want to delete the operation ?'
-		});
-		confirmPopup.then(function(res) {
-			if(res) {
-								
-			} else {
-				
-			}
-		});
+	$scope.deleteOperation = function(id) { 
+		return mfgService.deleteOperation(id);
 	};
 	
-	// Triggered to delte sequences input
-	$scope.deleteOperationInput = function(index) {     
-		
-		var confirmPopup = $ionicPopup.confirm({
-			title: 'Delete Process',
-			template: 'Are you sure you want to delete this material ?'
-		});
-		confirmPopup.then(function(res) {
-			if(res) {
-				$scope.operation.input.splice(index, 1);					
-			} else {
-				
-			}
-		});
+	// Triggered to mark as checked the process
+	$scope.deleteProcess = function(id, process) {     
+		return mfgService.deleteProcess(id, process);
 	};
-
-	// Triggered to delte sequences input
-	$scope.deleteOperationOutput = function(index) {     
-		
-		var confirmPopup = $ionicPopup.confirm({
-			title: 'Delete Process',
-			template: 'Are you sure you want to delete this material ?'
-		});
-		confirmPopup.then(function(res) {
-			if(res) {
-				$scope.operation.output.splice(index, 1);					
-			} else {
-				
-			}
-		});
-	};				
 	
 	// Form data for the login modal
 	$scope.newItemData = {};

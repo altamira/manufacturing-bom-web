@@ -1,4 +1,4 @@
-altamiraApp.controller('ManufacturingProcsSearchCtrl', function($scope, $stateParams, $ionicPopup, $timeout,  $state, Restangular) {
+altamiraApp.controller('ManufacturingProcsSearchCtrl', function($scope, $stateParams, $http, $ionicPopup, $timeout,  $state, Restangular, mfgService) {
 	
 	//get data from api
 	Restangular.one('manufacturing/process').get({start:0,max:10}).then(function(response) {
@@ -9,56 +9,34 @@ altamiraApp.controller('ManufacturingProcsSearchCtrl', function($scope, $statePa
 	
 	$scope.mfgProcessData = {};	
 	
-	$scope.importMfgProcess = function() {	
-		// An elaborate, custom popup
-		var importPopup = $ionicPopup.show({
-			templateUrl : 'templates/import-mfg-process.html',
-			title: 'Import Process',
-			scope: $scope,
-			buttons: [
-			{ text: 'Cancel' },
-			{ text: '<b>Save</b>',
-				type: 'button-positive',
-				onTap: function(e) {
-					
-				}
-			},
-			]
-		});
-		importPopup.then(function(res) {
-			console.log('Tapped!', res);
-		});
+	//define variable for search field
+	$scope.searchData = {};
+	$scope.searchData.search = "";
+	
+	//function for the search button
+	$scope.callSearchRestService= function() {
+		if($scope.searchData.search != "" && $scope.searchData.search.trim() != ""){
+			Restangular.one('manufacturing/process/search').get({search:$scope.searchData.search,start:0,max:10}).then(function(response) {
+				$scope.processes  = response.data;					
+			});	 
+		}else{
+			Restangular.one('manufacturing/process').get({start:0,max:10}).then(function(response) {
+				$scope.processes  = response.data;
+			}, function(response) {
+				alert('error')
+			});
+		}
 		
-	};
+	}
 	
 	// Triggered to delte processes
 	$scope.deleteProcesses = function(id) {     
-		
-		var confirmPopup = $ionicPopup.confirm({
-			title: 'Delete Process',
-			template: 'Are you sure you want to delete this process ?'
-		});
-		confirmPopup.then(function(res) {
-			if(res) {
-				Restangular.one('manufacturing/process/'+id).remove().then(function () {
-					$ionicPopup.alert({
-						title: 'Success',
-						content: 'Process deleted.'
-					}).then(function(res) {	
-						$state.go($state.current, {}, {reload: true});
-					});	
-				});	
-								
-			} else {
-				
-			}
-		});
+		return mfgService.deleteProcess(id);
 	};
 	
 	//trigered when user click on process row
 	$scope.goDetail = function (id) {
-		$state.go('app.mfgprocessform', {code: id});
-		$state.newProcessCreation = false;		
+		return mfgService.goToProcessForm(id);	
     }
 	
 	//trigered when user click on process row

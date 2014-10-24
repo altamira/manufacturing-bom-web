@@ -1,10 +1,13 @@
 altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $ionicPopup, $timeout,  $state, Restangular) {
 	$scope.searchData = {};
 	$scope.searchData.search = "";
+	$scope.itemsPerPage = 5;
+	$scope.currentPage = 0;
+	$scope.start = $scope.currentPage*$scope.itemsPerPage;
 	
 	//get data from api
-	Restangular.one('manufacturing/bom').get({start:0,max:10}).then(function(response) {
-		$scope.orders  = response.data;
+	Restangular.one('manufacturing/bom').get({start:$scope.start,max:$scope.itemsPerPage}).then(function(response) {
+		$scope.orders  = response.data;		
 	}, function(response) {
 		alert('error')
 	});
