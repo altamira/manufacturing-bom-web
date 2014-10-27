@@ -3,8 +3,7 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	//get data from api
 	if(!$state.newOprtCreation){
 		//get data from api
-		Restangular.one('manufacturing/operation', $stateParams.id).get().then(function(response) {	
-		
+		Restangular.one('manufacturing/operation', $stateParams.id).get().then(function(response) {			
 			//get the operation data
 			$scope.operation = response.data;			
 		}, function(response) {

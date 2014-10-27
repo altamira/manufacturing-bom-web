@@ -25,8 +25,7 @@ altamiraApp.controller('ManufacturingProcsSearchCtrl', function($scope, $statePa
 			}, function(response) {
 				alert('error')
 			});
-		}
-		
+		}		
 	}
 	
 	// Triggered to delte processes

@@ -77,7 +77,7 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
     };
 	
 	// Triggered to mark as checked the process
-	$scope.deleteProcess = function(id, process = "") {     
+	$scope.deleteProcess = function(id, process) {     
 		return mfgService.deleteProcess(id, process);
 	};
 	

@@ -12,6 +12,64 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 		alert('error')
 	});
 	
+	$scope.prevPage = function() {
+		if ($scope.currentPage > 0) {
+		  $scope.currentPage--;
+		}
+	};
+	
+	$scope.prevPageDisabled = function() {
+		return $scope.currentPage === 0 ? "disabled" : "";
+	};
+	
+	$scope.nextPage = function() {
+		if ($scope.currentPage < $scope.pageCount() - 1) {
+			$scope.currentPage++;
+		}
+	};
+		
+	$scope.nextPageDisabled = function() {
+		return $scope.currentPage === $scope.pageCount() - 1 ? "disabled" : "";
+	};
+
+	$scope.pageCount = function() {
+		return Math.ceil($scope.total/$scope.itemsPerPage);
+	};
+
+	$scope.$watch("currentPage", function(newValue, oldValue) {
+		Restangular.one('manufacturing/bom').get({start:newValue*$scope.itemsPerPage, max:$scope.itemsPerPage}).then(function(response) {
+			$scope.orders  = response.data;		
+		});
+		$scope.total = Restangular.one('manufacturing/bom').get().then(function(response) {
+			$scope.total  = response.data.length;
+		}, function(response) {
+			$scope.total = 0;
+		});
+	});
+	
+	$scope.setPage = function(n) {
+		$scope.currentPage = n;
+	};
+	
+	$scope.range = function() {
+		var rangeSize = 5;
+		var ret = [];
+		var start;
+
+		start = $scope.currentPage;
+		if(rangeSize > $scope.pageCount()){
+			rangeSize = $scope.pageCount();
+			start = 0;
+		}else if ( start > $scope.pageCount()-rangeSize ) {
+			start = $scope.pageCount()-rangeSize+1;
+		}
+
+		for (var i=start; i < start+rangeSize; i++) {
+			ret.push(i);
+		}
+		return ret;
+	};
+	
 	//import order pop up data array
 	$scope.orderData = {};
 	
