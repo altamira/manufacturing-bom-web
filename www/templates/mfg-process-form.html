@@ -19,7 +19,7 @@
 					<input type="text" value="{{process.code}}" name="code" ng-model="process.code" ng-minlength="10" required="required"/>
 				</label>
 				<label class="item no-item-margin-border " ng-show="mfgProcessForm.code.$error.required">
-					<span ng-show="mfgProcessForm.code.$error.required">Required</span>
+					<span ng-show="mfgProcessForm.$dirty && mfgProcessForm.code.$error.required">Required</span>
 				</label>
 				<label class="item no-item-margin-border " ng-show="mfgProcessForm.code.$error.minlength">
 					<span ng-show="mfgProcessForm.code.$error.minlength">Minimum length required 10</span>

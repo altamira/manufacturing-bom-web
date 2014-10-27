@@ -24,16 +24,13 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	}
 	
 	// Triggered to mark as checked the process
-	$scope.saveProcess = function() {  
-
+	$scope.saveProcess = function() { 
 		var confirmPopup = $ionicPopup.confirm({
 			title: 'Save Process',
 			template: 'Do you want to save the changes ?'
 		});
 		confirmPopup.then(function(res) {
 			if(res) {
-				console.log($scope.process);
-				
 				if($state.newProcessCreation){
 					var processData = Restangular.all('manufacturing/process');
 					var processSave = processData.post($scope.process);
