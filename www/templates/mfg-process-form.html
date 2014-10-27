@@ -7,7 +7,7 @@
 			<span class="btn-separator"></span>
 			<button class="button button-icon" ng-click="mfgProcessForm.$valid && mfgProcessForm.$dirty ? saveProcess() : '';"><i class="fa fa-check"></i></button>
 			<button class="button button-icon" ng-click="deleteProcess(process.id,'Main')"><i class="fa fa-times"></i></button>
-			<button class="button button-icon"><i class="fa fa-print"></i></button>		
+			<button class="button button-icon" ng-click="openReport(process.id)"><i class="fa fa-print"></i></button>		
 		</div>
 	</ion-header-bar>
 	<ion-content class="content-body">
@@ -18,21 +18,21 @@
 					<span class="input-label">CODIGO</span>
 					<input type="text" value="{{process.code}}" name="code" ng-model="process.code" ng-minlength="10" required="required"/>
 				</label>
-				<label class="item no-item-margin-border " ng-show="mfgProcessForm.code.$error.required">
+				<label class="item no-item-margin-border " ng-show="mfgProcessForm.$dirty && mfgProcessForm.code.$error.required">
 					<span ng-show="mfgProcessForm.$dirty && mfgProcessForm.code.$error.required">Required</span>
 				</label>
-				<label class="item no-item-margin-border " ng-show="mfgProcessForm.code.$error.minlength">
-					<span ng-show="mfgProcessForm.code.$error.minlength">Minimum length required 10</span>
+				<label class="item no-item-margin-border " ng-show="mfgProcessForm.$dirty && mfgProcessForm.code.$error.minlength">
+					<span ng-show="mfgProcessForm.$dirty && mfgProcessForm.code.$error.minlength">Minimum length required 10</span>
 				</label>
 				<label class="item item-input  no-item-margin-border">
 					<span class="input-label">DESCRICAO</span>
 					<input type="text" value="{{process.description}}" name="desc" ng-model="process.description" ng-minlength="10" required="required">
 				</label>
-				<label class="item no-item-margin-border" ng-show="mfgProcessForm.desc.$error.required">
-					<span ng-show="mfgProcessForm.desc.$error.required">Required</span>
+				<label class="item no-item-margin-border" ng-show="mfgProcessForm.$dirty && mfgProcessForm.desc.$error.required">
+					<span ng-show="mfgProcessForm.$dirty && mfgProcessForm.desc.$error.required">Required</span>
 				</label>
-				<label class="item no-item-margin-border" ng-show="mfgProcessForm.desc.$error.minlength">
-					<span ng-show="mfgProcessForm.desc.$error.minlength">Minimum length required 10</span>
+				<label class="item no-item-margin-border" ng-show="mfgProcessForm.$dirty && mfgProcessForm.desc.$error.minlength">
+					<span ng-show="mfgProcessForm.$dirty && mfgProcessForm.desc.$error.minlength">Minimum length required 10</span>
 				</label>				
 			</div>
 			<br>
