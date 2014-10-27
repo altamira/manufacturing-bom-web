@@ -88,7 +88,6 @@ altamiraApp.controller('CheckListDetailCtrl', function($scope, $state, $ionicScr
 	
 	// open the report in a new tab
 	$scope.openReport = function() { 
-		//$window.open(' http://report.altamira.com.br/manufacturing/bom/'+ $stateParams.orderNumber);
 		$window.open('http://altamira.elasticbeanstalk.com/webapi/reports/materials/'+ $stateParams.orderNumber);
 	};
 	

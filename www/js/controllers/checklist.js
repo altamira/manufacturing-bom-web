@@ -11,7 +11,7 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 	}, function(response) {
 		alert('error')
 	});
-	
+	/*******************/
 	$scope.prevPage = function() {
 		if ($scope.currentPage > 0) {
 		  $scope.currentPage--;
@@ -70,6 +70,8 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 		return ret;
 	};
 	
+	//*******************/
+	
 	//import order pop up data array
 	$scope.orderData = {};
 	
@@ -101,8 +103,8 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 					}).success(function(data) {
 						//post data to api
 						var postOrder = Restangular.all('manufacturing/bom');
-						postOrder.post(data).then(function(response) {
-							if(response.status == 201){alert(1);
+						postOrder.post(data).then(function(response) {alert(response.status);
+							if(response.status == 201 || response.status == 200){
 								$ionicPopup.alert({
 									title: 'Pedido ' + $scope.orderData.ordernumber,
 									content: 'Pedido ' + $scope.orderData.ordernumber + ' foi importado com sucesso !'
