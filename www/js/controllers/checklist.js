@@ -102,7 +102,7 @@ altamiraApp.controller('ChecklistCtrl', function($scope, $stateParams, $http, $i
 						//post data to api
 						var postOrder = Restangular.all('manufacturing/bom');
 						postOrder.post(data).then(function(response) {
-							if(response.status == 201){
+							if(response.status == 201){alert(1);
 								$ionicPopup.alert({
 									title: 'Pedido ' + $scope.orderData.ordernumber,
 									content: 'Pedido ' + $scope.orderData.ordernumber + ' foi importado com sucesso !'

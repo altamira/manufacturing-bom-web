@@ -86,6 +86,11 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	// Triggered to delte sequences
 	$scope.deleteOperation = function(id) {     
 		return mfgService.deleteOperation(id);
+	};	
+	
+	// open the report in a new tab
+	$scope.openReport = function(id) { 
+		$window.open('http://report.altamira.com.br/manufacturing/process/'+ id);
 	};
 	
 });
