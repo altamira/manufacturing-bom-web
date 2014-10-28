@@ -1,12 +1,12 @@
 <form name="mfgOprtnForm" novalidate>
 	<ion-header-bar class="bar-positive">
 		<div class="buttons header-margin">
-			<a href="#/app/manufacturesearch" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
+			<a href="#/app/manufacturing/process/{{processdata.id}}" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
 			<span class="btn-separator"></span>
 			<h4 class="mfg-page-titles">&nbsp;&nbsp;{{operation.sequence}}-{{operation.name}}&nbsp;&nbsp;</h4>
 			<span class="btn-separator"></span>
-			<button class="button button-icon" ng-click="saveOperation()" ><i class="fa fa-check"></i></button>
-			<button class="button button-icon" ng-click="deleteOperation()"><i class="fa fa-times"></i></button>
+			<button class="button button-icon" ng-click="saveOperation(processdata.id)" ><i class="fa fa-check"></i></button>
+			<button class="button button-icon" ng-click="deleteOperation(processdata.id, operation.id,'Main')"><i class="fa fa-times"></i></button>
 			<button class="button button-icon"><i class="fa fa-print"></i></button>		
 		</div>
 	</ion-header-bar>
@@ -17,51 +17,15 @@
 					OPERACAO&nbsp;&nbsp;{{operation.sequence}}-{{operation.name}}
 				</span>			
 			</div>
-			<!--<div class="item item-input-inset no-item-margin-border">
-				<span class="input-label input-label-flex">CODIGO</span>
-				<label class="item-input-wrapper  list-item-bgcolor border-all input-type-flex">
-					<input type="text" value="PPLCOL00113000000000">
-				</label>			
-			</div>
-			<div class="item item-input-inset no-item-margin-border">
-				<span class="input-label input-label-flex">DESCRICAO</span>
-				<label class="item-input-wrapper list-item-bgcolor border-all input-type-flex">
-					<input type="text" value="COLUNA NORMAL CH12 2800MM">
-				</label>			
-			</div>
-			<div class="item item-input-inset">
-				<span class="input-label input-label-flex">DESCRICAO</span>
-				<label class="item-input-wrapper list-item-bgcolor border-all input-type-flex">
-					<textarea value="{{operation.description}}" ng-model="operation.description"></textarea>
-				</label>			
-			</div>
-			<div class="item item-input-inset no-item-margin-border">
-				<span class="input-label input-label-flex">NAME</span>
-				<label class="item-input-wrapper  list-item-bgcolor border-all input-type-flex">
-					<input type="text" value="{{operation.name}}" ng-model="operation.name">
-				</label>			
-			</div>
-			<div class="item item-input-inset no-item-margin-border">
-				<span class="input-label input-label-flex">SEQUENCE</span>
-				<div class="item-input-wrapper list-item-bgcolor border-all input-type-flex" style="max-width:150px;">
-					<input type="text" value="{{operation.sequence}}" ng-model="operation.sequence">
-				</div>			
-			</div>
-			<div class="item item-input-inset no-item-margin-border">
-				<span class="input-label input-label-flex" >CROQUI</span>
-				<label class="input-type-flex">
-					<input type="file" ng-model="operation.croqui"/>
-				</label>			
-			</div>	-->
 			<!--The labels will be appear on top of the input field in small screen-->
 			<div id="input-div">
 				<label class="item item-input  no-item-margin-border">
 					<span class="input-label">CODIGO</span>
-					<input type="text" value="PPLCOL00113000000000">
+					<input type="text" value="{{processdata.code}}" readonly/>
 				</label>
 				<label class="item item-input no-item-margin-border">
 					<span class="input-label">DESCRICAO</span>
-					<input type="text" value="COLUNA NORMAL CH12 2800MM">
+					<input type="text" value="{{processdata.description}}" readonly/>
 				</label>
 				<hr style="color:#EEEEEE;"> 
 				<label class="item item-input no-item-margin-border">
@@ -82,7 +46,7 @@
 				</label>
 			</div>			
 			<br/>
-			<br>
+			<br/>
 			<div class="item item-divider item-icon-right">
 				<label>MATERIA PRIMA/INSUMOS/COMPONENTS</label>
 				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="addNewItem()"></i>

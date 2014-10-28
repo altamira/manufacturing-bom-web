@@ -2,18 +2,14 @@
 altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $window, $state, $stateParams, Restangular, mfgService) {
 	
 	//get data from api
-	if(!$state.newProcessCreation){
-	
+	if(!$state.newProcessCreation){	
 		//get data from api
-		Restangular.one('manufacturing/process', $stateParams.code).get().then(function(response) {	
+		Restangular.one('manufacturing/process', $stateParams.processid).get().then(function(response) {	
 		
 			//get the process data
 			$scope.process = response.data;			
 		}, function(response) {
-			$ionicPopup.alert({
-				title: 'Failed',
-				content: 'Failed to get the Process data.' 
-			}).then(function(response) {
+			mfgService.showAlert('Falhou', 'Failed to get the Process data.').then(function(response) {
 			
 				//move to the process list
 				$state.go('app.manufacturesearch');
@@ -25,51 +21,40 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	
 	// Triggered to mark as checked the process
 	$scope.saveProcess = function() { 
-		var confirmPopup = $ionicPopup.confirm({
-			title: 'Save Process',
-			template: 'Do you want to save the changes ?'
-		});
-		confirmPopup.then(function(res) {
+		mfgService.showConfirmBox('Save Process', 'Do you want to save the changes ?').then(function(res) {
 			if(res) {
 				if($state.newProcessCreation){
-					var processData = Restangular.all('manufacturing/process');
-					var processSave = processData.post($scope.process);
+					
+					//create record
+					Restangular.all('manufacturing/process').post($scope.process).then(function(response) {
+						if(response.status == 201){
+							mfgService.showAlert('Success', 'Processo foi importado com sucesso !').then(function(res){
+								mfgService.goToProcessForm(response.data.id);
+							});	
+						}
+					}, function() {
+						// alert if an error occurs
+						mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');						
+					});	
 				}else{
-					var processSave = $scope.process.customPUT();
-				}
-				processSave.then(function(response) {
-					if(response.status == 201){
-						$ionicPopup.alert({
-							title: 'Pedido ' ,
-							content: 'Pedido  foi importado com sucesso !'
-						}).then(function(res) {
-							$state.go($state.current, {}, {reload: true});
-						});	
-					}
-				}, function() {
-					// alert if an error occurs
-					$ionicPopup.alert({
-						title: 'Falhou',
-						content: 'Erro ao importar o Pedido '
-					}).then(function(res) {
-						
-					});
-				});					
-			} else {
-				
+					
+					//save edited record
+					mfgService.saveRecordRequest($scope.process);					
+				}								
+			} else {				
 			}
 		});
 	};
 	
 	//trigered when user click on sequence row
-	$scope.goToOperationForm = function (id) {
-		$state.go('app.mfgoperationform',{id:id});
+	$scope.goToOperationForm = function (processid,id) {
+		$state.go('app.mfgoperationform',{processid:processid,operationid:id});
 		$state.newOprtCreation = false;
     };
 	
 	//trigered when user click on to add a new operation
-	$scope.newOperationForm = function () {
-		$state.go('app.mfgoperationform',{id:""});
+	$scope.newOperationForm = function (processid) {
+		$state.go('app.mfgoperationform',{processid:processid,operationid:""});
 		$state.newOprtCreation = true;
     };
 	
@@ -84,8 +69,8 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
     };
 	
 	// Triggered to delte sequences
-	$scope.deleteOperation = function(id) {     
-		return mfgService.deleteOperation(id);
+	$scope.deleteOperation = function(processid, operationid) {     
+		return mfgService.deleteOperation(processid, operationid);
 	};	
 	
 	// open the report in a new tab

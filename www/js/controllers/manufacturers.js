@@ -39,7 +39,7 @@ altamiraApp.controller('ManufacturingProcsSearchCtrl', function($scope, $statePa
 	
 	//trigered when user click on process row
 	$scope.newProcess = function () {
-		$state.go('app.mfgprocessform', {code: ""});
+		$state.go('app.mfgprocessform', {processid: ""});
 		$state.newProcessCreation = true;
     }
 });

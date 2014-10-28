@@ -1,16 +1,25 @@
 //mfg operation form  controller
 altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular, mfgService) {
-	//get data from api
+
+	//get data from process api
+	var process = Restangular.one('manufacturing/process', $stateParams.processid);
+	process.get().then(function(response) {
+	
+		//get the operation data
+		$scope.processdata = response.data;			
+	}, function(response) {
+		$scope.processdata = {};	
+	});	
+	
 	if(!$state.newOprtCreation){
-		//get data from api
-		Restangular.one('manufacturing/operation', $stateParams.id).get().then(function(response) {			
+		//get data from operation api
+		process.one('operation', $stateParams.operationid).get().then(function(response) {
+		
 			//get the operation data
-			$scope.operation = response.data;			
+			$scope.operation = response.data;
+			
 		}, function(response) {
-			$ionicPopup.alert({
-				title: 'Failed',
-				content: 'Failed to get the Operation data.' 
-			}).then(function(response) {
+			mfgService.showAlert('Failed', 'Failed to get the Operation data.').then(function(response) {
 			
 				//move to the process list
 				$state.go('app.manufacturesearch');
@@ -19,25 +28,36 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	}else{
 		$scope.operation = {};
 	}
+	
 	// Triggered to mark as checked the operation
-	$scope.saveOperation = function(index) {     
-
-		var confirmPopup = $ionicPopup.confirm({
-			title: 'Save Operation',
-			template: 'Do you want to save the changes ?'
-		});
-		confirmPopup.then(function(res) {
+	$scope.saveOperation = function(id) {     
+		mfgService.showConfirmBox('Save Operation', 'Do you want to save the changes ?').then(function(res) {
 			if(res) {
-								
-			} else {
-				
+				if($state.newOprtCreation){
+					//create record
+					Restangular.one('manufacturing/process', id).all('operation').post($scope.operation).then(function(response) {
+						if(response.status == 201){
+							mfgService.showAlert('Success', 'Operation foi importado com sucesso !').then(function(res){
+								$state.go($state.current,{operationid:response.data.id});
+								$state.newOprtCreation = false;
+							});	
+						}
+					}, function() {
+						// alert if an error occurs
+						mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');						
+					});	
+				}else{
+					//save edited record
+					mfgService.saveRecordRequest($scope.operation);
+				}									
+			} else {				
 			}
 		});
 	};
 	
 	// Triggered to mark as checked the operation
-	$scope.deleteOperation = function(id) { 
-		return mfgService.deleteOperation(id);
+	$scope.deleteOperation = function(processid, operationid, type) { 
+		return mfgService.deleteOperation(processid, operationid, type);
 	};
 	
 	// Triggered to mark as checked the process

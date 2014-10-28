@@ -68,7 +68,7 @@ altamiraApp.run(function($ionicPlatform) {
     })
 	
 	.state('app.manufacturesearch', {
-      url: "/manufacturesearch",
+      url: "/manufacturing/process",
       views: {
         'menuContent' :{
           templateUrl: "templates/mfg-process-search.html",
@@ -77,7 +77,7 @@ altamiraApp.run(function($ionicPlatform) {
       }
     })
 	.state('app.mfgprocessform', {
-		url: "/manufacturesearch/:code",
+		url: "/manufacturing/process/:processid",
 		views: {
 			'menuContent' :{
 			  templateUrl: "templates/mfg-process-form.html",
@@ -86,7 +86,7 @@ altamiraApp.run(function($ionicPlatform) {
 		}
     })
 	.state('app.mfgoperationform', {
-		url: "/manufacturesearch/operation/:id",
+		url: "/manufacturesearch/process/:processid/operation/:operationid",
 		views: {
 			'menuContent' :{
 			  templateUrl: "templates/mfg-operation-form.html",
@@ -113,7 +113,7 @@ altamiraApp.run(function($ionicPlatform) {
 		'withCredentials': true
 	});*/
 	RestangularProvider.setRestangularFields({
-		id: "number"
+		id: "id"
 	});
 	//RestangularProvider.setDefaultRequestParams('jsonp', {callback: 'JSON_CALLBACK'});
 });

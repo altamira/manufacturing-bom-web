@@ -1,13 +1,28 @@
 altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $stateParams, Restangular) {
 	return {
+			
+		//to show alert box
+		showConfirmBox: function(title, content){
+			var confirmPopup = $ionicPopup.confirm({
+				title: title,
+				template: content
+			});
+			return confirmPopup;
+		},
+		
+		//to show alert box
+		showAlert: function(title, content){
+			var alertPopup = $ionicPopup.alert({
+				title: title,
+				content: content
+			});
+			return alertPopup;
+		},
+		
 		// Triggered to delte processes
 		deleteProcess:function(id, process) {     
 			process = process || "";
-			var confirmPopup = $ionicPopup.confirm({
-				title: 'Delete Process',
-				template: 'Are you sure you want to delete this process ?'
-			});
-			confirmPopup.then(function(res) {
+			this.showConfirmBox('Delete Process', 'Are you sure you want to delete this process ?').then(function(res) {
 				if(res) {
 					Restangular.one('manufacturing/process/'+id).remove().then(function () {
 						$ionicPopup.alert({
@@ -29,21 +44,17 @@ altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $state
 		},
 		
 		// Triggered to delte sequences
-		deleteOperation:function(id, type) {     
+		deleteOperation:function(processid, operationid, type) {     
 			type = type || "";
-			var confirmPopup = $ionicPopup.confirm({
-				title: 'Delete Operation',
-				template: 'Are you sure you want to delete this process operation ?'
-			});
-			confirmPopup.then(function(res) {
+			this.showConfirmBox('Delete Operation', 'Are you sure you want to delete this process operation ?').then(function(res) {
 				if(res) {
-					Restangular.one('manufacturing/operation/'+id).remove().then(function () {
+					Restangular.one('manufacturing/process', processid).one('operation', operationid).remove().then(function () {
 						$ionicPopup.alert({
 							title: 'Success',
 							content: 'Operation deleted.'
 						}).then(function(res) {	
 							if(type == "Main"){
-								$state.go("app.manufacturesearch");
+								$state.go('app.mfgprocessform', {processid: processid});
 							}else{
 								$state.go($state.current, {}, {reload: true});
 							}
@@ -56,8 +67,29 @@ altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $state
 		},
 		// Triggered to delte sequences
 		goToProcessForm:function(id) {     
-			$state.go('app.mfgprocessform', {code: id});
+			$state.go('app.mfgprocessform', {processid: id});
 			$state.newProcessCreation = false;			
+		},
+		
+		//put request for process or operation
+		saveRecordRequest: function(data){
+			data.put().then(function(response) {
+				if(response.status == 200){
+					$ionicPopup.alert({
+						title: 'Success',
+						content: 'Processo foi importado com sucesso !'
+					}).then(function(res){
+						$state.go($state.current, {}, {reload: true});
+					});	
+				}
+			}, function() {
+				// alert if an error occurs
+				$ionicPopup.alert({
+					title: 'Falhou',
+					content: 'Erro ao importar o Pedido.'
+				}).then(function(res) {						
+				});
+			});			
 		}
 	};
 });
