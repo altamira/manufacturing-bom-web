@@ -65,26 +65,7 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 		return mfgService.deleteProcess(id, process);
 	};
 	
-	// Form data for the login modal
-	$scope.newItemData = {};
 
-	// Create the login modal that we will use later
-	$ionicModal.fromTemplateUrl('templates/add-item.html', {
-		scope: $scope
-	}).then(function(modal) {
-		$scope.modal = modal;
-	});
-
-	// Triggered in the login modal to close it
-	$scope.closeAddItem = function() {
-		$scope.modal.remove();
-	};
-
-	// Open the login modal
-	$scope.addNewItem = function() {
-		$scope.modal.show();
-	};
-	
 	// Open the login modal
 	$scope.goToProcsSearch = function() {
 		$scope.modal.hide();
@@ -108,14 +89,22 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	
 	// onclick open the modal
 	$scope.openConsumeModal = function(processid, operationid, consumeid) {
+		consumeid = consumeid || "";
 		var url = 'add-item.html';
+		$scope.modalHeader = "MATERIA PRIMA/INSUMOS/COMPONENTS";
 		
-		Restangular.one('manufacturing/process', processid).one('operation', operationid).one('consume', consumeid).get().then(function(response) {		
-			//get the operation data
-			$scope.newItemData = response.data;			
-		}, function(response) {
-			$scope.newItemData = {};	
-		})
+		if(consumeid == ""){
+			$scope.newItemData = {};
+			$scope.createConsume = true;
+		}else{
+			Restangular.one('manufacturing/process', processid).one('operation', operationid).one('consume', consumeid).get().then(function(response) {		
+				//get the operation data
+				$scope.newItemData = response.data;			
+			}, function(response) {
+				$scope.newItemData = {};	
+			})
+		}
+		
 		// Create the modal that we will use later
 		$ionicModal.fromTemplateUrl('templates/'+url, {
 			scope: $scope
@@ -123,5 +112,10 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 			$scope.modal = modal;
 			modal.show();
 		});
+	};
+	
+	// Triggered in the login modal to close it
+	$scope.closeAddItem = function() {
+		$scope.modal.remove();
 	};
 });
