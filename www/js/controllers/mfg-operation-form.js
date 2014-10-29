@@ -82,7 +82,7 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 			var itemType = 'consume';
 		}else{
 			$scope.createProduce = true;
-			$scope.modalHeader = "MATERIA PRIMA/INSUMOS/COMPONENTS";
+			$scope.modalHeader = "PRODUTO ACABADO/ EM PROCESSO DE FABRICACAO";
 			var itemType = 'produce';
 		}
 		
