@@ -71,33 +71,28 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 		$scope.modal.hide();
 		$state.go('app.manufacturesearch');
 	};
-	
-	// Perform the login action when the user submits the login form
-	$scope.saveItem = function(processid, operationid) {
-		Restangular.one('manufacturing/process', processid).one('operation', operationid).all('consume').post($scope.newItemData).then(function(response) {
-			if(response.status == 201){
-				mfgService.showAlert('Success', 'Processo foi importado com sucesso !').then(function(res){
-					$scope.modal.hide();
-				});	
-			}
-		}, function() {
-			// alert if an error occurs
-			mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');						
-		});	
-		console.log($state.current);
-	};
-	
-	// onclick open the modal
-	$scope.openConsumeModal = function(processid, operationid, consumeid) {
-		consumeid = consumeid || "";
-		var url = 'add-item.html';
-		$scope.modalHeader = "MATERIA PRIMA/INSUMOS/COMPONENTS";
 		
-		if(consumeid == ""){
-			$scope.newItemData = {};
+	// onclick open the modal
+	$scope.openConsumeModal = function(type, processid, operationid, id) {
+		id = id || "";
+		
+		if(type == "CONSUME"){
 			$scope.createConsume = true;
+			$scope.modalHeader = "MATERIA PRIMA/INSUMOS/COMPONENTS";
+			var itemType = 'consume';
 		}else{
-			Restangular.one('manufacturing/process', processid).one('operation', operationid).one('consume', consumeid).get().then(function(response) {		
+			$scope.createProduce = true;
+			$scope.modalHeader = "MATERIA PRIMA/INSUMOS/COMPONENTS";
+			var itemType = 'produce';
+		}
+		
+		if(id == ""){
+			$scope.newItemData = {};			
+		}else{
+			$scope.createConsume = false;
+			$scope.createProduce = false;
+			
+			Restangular.one('manufacturing/process', processid).one('operation', operationid).one(itemType, id).get().then(function(response) {		
 				//get the operation data
 				$scope.newItemData = response.data;			
 			}, function(response) {
@@ -106,7 +101,7 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 		}
 		
 		// Create the modal that we will use later
-		$ionicModal.fromTemplateUrl('templates/'+url, {
+		$ionicModal.fromTemplateUrl('templates/add-item.html', {
 			scope: $scope
 		}).then(function(modal) {
 			$scope.modal = modal;
@@ -117,5 +112,47 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	// Triggered in the login modal to close it
 	$scope.closeAddItem = function() {
 		$scope.modal.remove();
+	};
+		
+	// Perform the login action when the user submits the login form
+	$scope.saveItem = function(processid, operationid) {
+		if($scope.createConsume){
+			Restangular.one('manufacturing/process', processid).one('operation', operationid).all('consume').post($scope.newItemData).then(function(response) {
+				if(response.status == 201){
+					mfgService.showAlert('Success', 'Processo foi importado com sucesso !').then(function(res){
+						$scope.modal.remove();
+					});	
+				}
+			}, function() {
+				// alert if an error occurs
+				mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');						
+			});	
+		}else if($scope.createProduce){
+			Restangular.one('manufacturing/process', processid).one('operation', operationid).all('produce').post($scope.newItemData).then(function(response) {
+					if(response.status == 201){
+						mfgService.showAlert('Success', 'Processo foi importado com sucesso !').then(function(res){
+							$scope.modal.remove();
+						});	
+					}
+				}, function() {
+					// alert if an error occurs
+					mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.').then(function(res){
+							$scope.modal.remove();
+					});						
+				});	
+		}else{
+			$scope.newItemData.put().then(function(response) {
+				if(response.status == 200){
+					mfgService.showAlert('Success', 'Processo foi importado com sucesso !').then(function(res){
+						$scope.modal.remove();
+					});	
+				}
+			}, function() {
+				mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.').then(function(res){
+					$scope.modal.remove();
+				});	
+			});					
+		}
+		$state.go($state.current, {}, {reload: true});
 	};
 });
