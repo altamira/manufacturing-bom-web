@@ -207,13 +207,15 @@ ion-nav-view{
 	padding:5px;
 }
 @media (max-width: 600px) {	
-	#input-div > label {
+	#input-div > label,
+	#modal-selectbox{
 		background-color: transparent;
 		box-shadow: none;
 		display: block;
 	}
 	
-	#input-div > label > span{
+	#input-div > label > span,
+	#modal-selectbox > span{
 		font-weight:bold;
 		font-size:10px;
 	}
