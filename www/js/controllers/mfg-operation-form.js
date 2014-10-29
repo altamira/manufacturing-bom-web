@@ -1,5 +1,5 @@
 //mfg operation form  controller
-altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular, mfgService) {
+altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular, mfgService, mfgModalService) {
 
 	//get data from process api
 	var process = Restangular.one('manufacturing/process', $stateParams.processid);
@@ -77,7 +77,7 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 
 	// Triggered in the login modal to close it
 	$scope.closeAddItem = function() {
-		$scope.modal.hide();
+		$scope.modal.remove();
 	};
 
 	// Open the login modal
@@ -106,9 +106,22 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 		console.log($state.current);
 	};
 	
-	// // onclick open the modal
-	// $scope.openConsumeModal = function() {
-		// var url = 'add-item.html';
-		// return mfgModalService.modalPopupBox(url);
-	// };
+	// onclick open the modal
+	$scope.openConsumeModal = function(processid, operationid, consumeid) {
+		var url = 'add-item.html';
+		
+		Restangular.one('manufacturing/process', processid).one('operation', operationid).one('consume', consumeid).get().then(function(response) {		
+			//get the operation data
+			$scope.newItemData = response.data;			
+		}, function(response) {
+			$scope.newItemData = {};	
+		})
+		// Create the modal that we will use later
+		$ionicModal.fromTemplateUrl('templates/'+url, {
+			scope: $scope
+		}).then(function(modal) {
+			$scope.modal = modal;
+			modal.show();
+		});
+	};
 });

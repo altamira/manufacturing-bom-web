@@ -52,7 +52,7 @@
 				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="addNewItem()"></i>
 			</div>
 			<div class="item item-icon-right" ng-repeat="input in operation.consume">
-				<p class="no-item-margin-border" ng-click="openConsumeModal()">{{input.code}} - {{input.description}}</p>
+				<p class="no-item-margin-border" ng-click="openConsumeModal(processdata.id, operation.id, input.id)">{{input.code}} - {{input.description}}</p>
 				<i class="icon fa fa-times-circle-o" ng-click="deleteOperationInput($index)"></i>
 			</div>
 			<br/>
