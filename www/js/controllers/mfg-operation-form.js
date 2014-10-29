@@ -92,13 +92,23 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	};
 	
 	// Perform the login action when the user submits the login form
-	$scope.saveItem = function() {
-		console.log('Doing login', $scope.newItemData);
-
-		// Simulate a login delay. Remove this and replace with your login
-		// code if using a login system
-		$timeout(function() {
-			$scope.closeAddItem();
-		}, 1000);
+	$scope.saveItem = function(processid, operationid) {
+		Restangular.one('manufacturing/process', processid).one('operation', operationid).all('consume').post($scope.newItemData).then(function(response) {
+			if(response.status == 201){
+				mfgService.showAlert('Success', 'Processo foi importado com sucesso !').then(function(res){
+					$scope.modal.hide();
+				});	
+			}
+		}, function() {
+			// alert if an error occurs
+			mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');						
+		});	
+		console.log($state.current);
 	};
+	
+	// // onclick open the modal
+	// $scope.openConsumeModal = function() {
+		// var url = 'add-item.html';
+		// return mfgModalService.modalPopupBox(url);
+	// };
 });
