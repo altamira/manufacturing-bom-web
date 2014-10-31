@@ -1,57 +1,71 @@
 //mfg operation form  controller
-altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular, mfgService, mfgModalService) {
-
-	//get data from process api
-	var process = Restangular.one('manufacturing/process', $stateParams.processid);
-	process.get().then(function(response) {
+altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular, mfgService) {
 	
-		//get the operation data
-		$scope.processdata = response.data;			
-	}, function(response) {
-		$scope.processdata = {};	
-	});	
+	$scope.processdata = mfgModalService.getData();	
+	$scope.operation = {};
 	
-	if(!$state.newOprtCreation){
-		//get data from operation api
-		process.one('operation', $stateParams.operationid).get().then(function(response) {
+	//if the process id is present get the data from API
+	if($stateParams.processid != ""){
+	
+		//get data from process api
+		var process = Restangular.one('manufacturing/process', $stateParams.processid);
+		process.get().then(function(response) {
 		
 			//get the operation data
-			$scope.operation = response.data;
-			
+			$scope.processdata = response.data;			
 		}, function(response) {
-			mfgService.showAlert('Failed', 'Failed to get the Operation data.').then(function(response) {
-			
-				//move to the process list
-				$state.go('app.manufacturesearch');
-			});	
+			$scope.processdata = {};	
 		});	
-	}else{
-		$scope.operation = {};
+		
+		if($stateParams.operationid != ""){		
+			//get data from operation api
+			process.one('operation', $stateParams.operationid).get().then(function(response) {
+			
+				//get the operation data
+				$scope.operation = response.data;				
+			}, function(response) {
+				mfgService.showAlert('Failed', 'Failed to get the Operation data.').then(function(response) {
+				
+					//move to the process list
+					$state.go('app.manufacturesearch');
+				});	
+			});	
+		}
 	}
-	
+		
 	// Triggered to mark as checked the operation
-	$scope.saveOperation = function(id) {     
+	$scope.saveOperation = function() {
 		mfgService.showConfirmBox('Save Operation', 'Do you want to save the changes ?').then(function(res) {
 			if(res) {
-				if($state.newOprtCreation){
-					//create record
-					Restangular.one('manufacturing/process', id).all('operation').post($scope.operation).then(function(response) {
-						if(response.status == 201){
-							mfgService.showAlert('Success', 'Operation foi importado com sucesso !').then(function(res){
-								$state.go($state.current,{operationid:response.data.id});
-								$state.newOprtCreation = false;
-							});	
-						}
-					}, function() {
-						// alert if an error occurs
-						mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');						
-					});	
-				}else{
-					//save edited record
+				//if process id and operation id are not null
+				if($stateParams.processid != "" && $stateParams.operationid != ""){
 					mfgService.saveRecordRequest($scope.operation);
-				}									
-			} else {				
-			}
+				}else{
+					//if process id is not null, create  a new process through API
+					if($stateParams.processid != ""){
+						//create record
+						Restangular.one('manufacturing/process', $stateParams.processid).all('operation').post($scope.operation).then(function(response) {
+							if(response.status == 201){
+								mfgService.showAlert('Success', 'Operation foi importado com sucesso !').then(function(res){
+									$state.go($state.current,{operationid:response.data.id});
+									$state.newOprtCreation = false;
+								});	
+							}
+						}, function() {
+							// alert if an error occurs
+							mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');						
+						});	
+					}else{console.log($scope.operation);
+						if (!$scope.processdata.operation) {
+							$scope.processdata.operation = [];
+						}
+						$scope.processdata.operation.push($scope.operation);console.log($scope.processdata);
+						//if process id is not there save the data in a array in client side
+						mfgService.setData($scope.processdata);
+						$state.go($state.current,{operationid:""});
+					}
+				}										
+			} 
 		});
 	};
 	

@@ -1,6 +1,22 @@
 altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $stateParams, Restangular) {
+	var formData = {};
+	
 	return {
-			
+		getData: function () {
+           
+            return formData;
+        },
+		
+        setData: function (newFormData) {
+            //You could also set specific attribute of the form data instead
+            formData = newFormData;
+        },
+		
+        resetData: function () {
+            //To be called when the data stored needs to be discarded
+            formData = {};
+        },
+		
 		//to show alert box
 		showConfirmBox: function(title, content){
 			var confirmPopup = $ionicPopup.confirm({
@@ -20,25 +36,28 @@ altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $state
 		},
 		
 		// Triggered to delte processes
-		deleteProcess:function(id, process) {     
+		deleteProcess:function(id, process) { 
+			id = id || "";
 			process = process || "";
 			this.showConfirmBox('Delete Process', 'Are you sure you want to delete this process ?').then(function(res) {
 				if(res) {
-					Restangular.one('manufacturing/process/'+id).remove().then(function () {
-						$ionicPopup.alert({
-							title: 'Success',
-							content: 'Process deleted.'
-						}).then(function(res) {	
-							if(process == "Main"){
-								$state.go("app.manufacturesearch");
-							}else{
-								$state.go($state.current, {}, {reload: true});
-							}
+					if(id != ""){
+						Restangular.one('manufacturing/process/'+id).remove().then(function () {
+							$ionicPopup.alert({
+								title: 'Success',
+								content: 'Process deleted.'
+							}).then(function(res) {	
+								if(process == "Main"){
+									$state.go("app.manufacturesearch");
+								}else{
+									$state.go($state.current, {}, {reload: true});
+								}
+							});	
 						});	
-					});	
-									
-				} else {
-					
+					}else{
+						//remove from the client side array
+						formData = {};
+					}					
 				}
 			});
 		},

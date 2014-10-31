@@ -30,24 +30,6 @@ altamiraApp.run(function($ionicPlatform) {
       controller: 'AppCtrl'
     })
 	
-    /*.state('app.search', {
-      url: "/search",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/search.html"
-        }
-      }
-    })
-
-    .state('app.browse', {
-      url: "/browse",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/browse.html"
-        }
-      }
-    })*/
-	
     .state('app.checklists', {
       url: "/checklist",
       views: {

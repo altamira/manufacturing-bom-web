@@ -1,8 +1,9 @@
 //orders detail controller
 altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $window, $state, $stateParams, Restangular, mfgService) {
+	$scope.process = mfgService.getData();
 	
 	//get data from api
-	if(!$state.newProcessCreation){	
+	if($stateParams.processid != ""){	
 		//get data from api
 		Restangular.one('manufacturing/process', $stateParams.processid).get().then(function(response) {	
 		
@@ -15,15 +16,13 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 				$state.go('app.manufacturesearch');
 			});	
 		});		
-	}else{
-		$scope.process = {};
 	}
 	
 	// Triggered to mark as checked the process
 	$scope.saveProcess = function() { 
 		mfgService.showConfirmBox('Save Process', 'Do you want to save the changes ?').then(function(res) {
 			if(res) {
-				if($state.newProcessCreation){
+				if($stateParams.processid == ""){
 					
 					//create record
 					Restangular.all('manufacturing/process').post($scope.process).then(function(response) {
@@ -48,14 +47,16 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	
 	//trigered when user click on sequence row
 	$scope.goToOperationForm = function (processid,id) {
-		$state.go('app.mfgoperationform',{processid:processid,operationid:id});
-		$state.newOprtCreation = false;
+		$state.go('app.mfgoperationform',{processid:processid,operationid:id});		
     };
 	
 	//trigered when user click on to add a new operation
 	$scope.newOperationForm = function (processid) {
-		$state.go('app.mfgoperationform',{processid:processid,operationid:""});
-		$state.newOprtCreation = true;
+		processid = processid || "";
+		if(processid == ""){
+			mfgService.setData($scope.process);
+		}
+		$state.go('app.mfgoperationform',{processid:processid,operationid:""});		
     };
 	
 	// Triggered to mark as checked the process

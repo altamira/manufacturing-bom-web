@@ -1,4 +1,5 @@
 altamiraApp.controller('ManufacturingProcsSearchCtrl', function($scope, $stateParams, $http, $ionicPopup, $timeout,  $state, Restangular, mfgService) {	
+
 	//get data from api
 	Restangular.one('manufacturing/process').get({start:0,max:10}).then(function(response) {
 		$scope.processes  = response.data;
@@ -39,7 +40,6 @@ altamiraApp.controller('ManufacturingProcsSearchCtrl', function($scope, $statePa
 	
 	//trigered when user click on process row
 	$scope.newProcess = function () {
-		$state.go('app.mfgprocessform', {processid: ""});
-		$state.newProcessCreation = true;
+		$state.go('app.mfgprocessform', {processid: ""});		
     }
 });
