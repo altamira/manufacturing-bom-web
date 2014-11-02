@@ -70,8 +70,8 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
     };
 	
 	// Triggered to delte sequences
-	$scope.deleteOperation = function(processid, operationid) {     
-		return mfgService.deleteOperation(processid, operationid);
+	$scope.deleteOperation = function(processid, operationid, index) {     
+		return mfgService.deleteOperation(processid, operationid, index);
 	};	
 	
 	// open the report in a new tab

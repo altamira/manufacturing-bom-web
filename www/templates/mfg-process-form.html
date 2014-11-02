@@ -55,11 +55,11 @@
 			<div ng-repeat="operation in process.operation">
 				<div class="item item-icon-right">
 					<p class="no-item-margin-border" ng-click="goToOperationForm(process.id, operation.id)">{{operation.sequence}} - {{operation.name}}</p>
-					<i class="icon fa fa-times-circle-o" ng-click="deleteOperation(process.id, operation.id)"></i>				
+					<i class="icon fa fa-times-circle-o" ng-click="deleteOperation(process.id, operation.id, $index)"></i>				
 				</div>				
 				<div class="item item-icon-right" ng-repeat="input in operation.consume">
 					<p class="procs-sequnce-margin" ng-click="goToProcessForm(input.id)">{{input.description}}</p>
-					<i class="icon fa fa-times-circle-o"  ng-click="deleteConsume(input.id,'OperationProcs')"></i>
+					<i class="icon fa fa-times-circle-o"  ng-click="deleteConsume(input.id, $index,'OperationProcs')"></i>
 				</div>			
 			</div>
 		</div>

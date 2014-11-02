@@ -1,7 +1,7 @@
 //mfg operation form  controller
 altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular, mfgService) {
 	
-	$scope.processdata = mfgModalService.getData();	
+	$scope.processdata = mfgService.getData();	
 	$scope.operation = {};
 	
 	//if the process id is present get the data from API
@@ -55,11 +55,11 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 							// alert if an error occurs
 							mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');						
 						});	
-					}else{console.log($scope.operation);
+					}else{
 						if (!$scope.processdata.operation) {
 							$scope.processdata.operation = [];
 						}
-						$scope.processdata.operation.push($scope.operation);console.log($scope.processdata);
+						$scope.processdata.operation.push($scope.operation);
 						//if process id is not there save the data in a array in client side
 						mfgService.setData($scope.processdata);
 						$state.go($state.current,{operationid:""});
@@ -87,26 +87,22 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	};
 		
 	// onclick open the modal
-	$scope.openConsumeModal = function(type, processid, operationid, id) {
+	$scope.openConsumeModal = function(type, id) {
 		id = id || "";
 		
 		if(type == "CONSUME"){
-			$scope.createConsume = true;
 			$scope.modalHeader = "MATERIA PRIMA/INSUMOS/COMPONENTS";
-			var itemType = 'consume';
+			$scope.itemType = 'consume';
 		}else{
-			$scope.createProduce = true;
 			$scope.modalHeader = "PRODUTO ACABADO/ EM PROCESSO DE FABRICACAO";
-			var itemType = 'produce';
+			$scope.itemType = 'produce';
 		}
 		
 		if(id == ""){
 			$scope.newItemData = {};			
 		}else{
-			$scope.createConsume = false;
-			$scope.createProduce = false;
-			
-			Restangular.one('manufacturing/process', processid).one('operation', operationid).one(itemType, id).get().then(function(response) {		
+
+			Restangular.one('manufacturing/process', $stateParams.processid).one('operation', $stateParams.operationid).one($scope.itemType, id).get().then(function(response) {		
 				//get the operation data
 				$scope.newItemData = response.data;			
 			}, function(response) {
@@ -129,20 +125,11 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	};
 		
 	// Perform the login action when the user submits the login form
-	$scope.saveItem = function(processid, operationid) {
-		if($scope.createConsume){
-			Restangular.one('manufacturing/process', processid).one('operation', operationid).all('consume').post($scope.newItemData).then(function(response) {
-				if(response.status == 201){
-					mfgService.showAlert('Success', 'Processo foi importado com sucesso !').then(function(res){
-						$scope.modal.remove();
-					});	
-				}
-			}, function() {
-				// alert if an error occurs
-				mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');						
-			});	
-		}else if($scope.createProduce){
-			Restangular.one('manufacturing/process', processid).one('operation', operationid).all('produce').post($scope.newItemData).then(function(response) {
+	$scope.saveItem = function(id) {
+		id = id || "";
+		if(id == ""){
+			if($stateParams.processid != "" && $stateParams.operationid != ""){
+				Restangular.one('manufacturing/process', $stateParams.processid).one('operation', $stateParams.operationid).all(itemType).post($scope.newItemData).then(function(response) {
 					if(response.status == 201){
 						mfgService.showAlert('Success', 'Processo foi importado com sucesso !').then(function(res){
 							$scope.modal.remove();
@@ -150,10 +137,24 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 					}
 				}, function() {
 					// alert if an error occurs
-					mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.').then(function(res){
-							$scope.modal.remove();
-					});						
+					mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');
+					$scope.modal.remove();
 				});	
+			}else{				
+				if($scope.itemType == 'consume'){
+					if (!$scope.operation.consume) {
+						$scope.operation.consume = [];
+					}
+					$scope.operation.consume.push($scope.newItemData);
+				}else{
+					if (!$scope.operation.produce) {
+						$scope.operation.produce = [];
+					}
+					$scope.operation.produce.push($scope.newItemData);
+				}
+				
+				$scope.modal.remove();
+			}
 		}else{
 			$scope.newItemData.put().then(function(response) {
 				if(response.status == 200){
@@ -167,6 +168,6 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 				});	
 			});					
 		}
-		$state.go($state.current, {}, {reload: true});
+		//$state.go($state.current, {}, {reload: true});
 	};
 });

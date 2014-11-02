@@ -49,20 +49,20 @@
 			<br/>
 			<div class="item item-divider item-icon-right">
 				<label>MATERIA PRIMA/INSUMOS/COMPONENTS</label>
-				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="openConsumeModal('CONSUME',processdata.id, operation.id)"></i>
+				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="openConsumeModal('CONSUME')"></i>
 			</div>
 			<div class="item item-icon-right" ng-repeat="input in operation.consume">
-				<p class="no-item-margin-border" ng-click="openConsumeModal('CONSUME', processdata.id, operation.id, input.id)">{{input.code}} - {{input.description}}</p>
+				<p class="no-item-margin-border" ng-click="openConsumeModal('CONSUME', input.id)">{{input.code}} - {{input.description}}</p>
 				<i class="icon fa fa-times-circle-o" ng-click="deleteOperationInput($index)"></i>
 			</div>
 			<br/>
 			<br>
 			<div class="item item-divider item-icon-right">
 				<label>PRODUTO ACABADO / EM PROCESSO DE FABRICACAO</label>
-				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="openConsumeModal('PRODUCE',processdata.id, operation.id)"></i>
+				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="openConsumeModal('PRODUCE')"></i>
 			</div>
 			<div class="item item-icon-right" ng-repeat="output in operation.produce">
-				<p class="no-item-margin-border" ng-click="openConsumeModal('PRODUCE',processdata.id, operation.id, output.id)">{{output.code}} - {{output.description}}</p>
+				<p class="no-item-margin-border" ng-click="openConsumeModal('PRODUCE', output.id)">{{output.code}} - {{output.description}}</p>
 				<i class="icon fa fa-times-circle-o" ng-click="deleteOperationOutput($index)"></i>
 			</div>
 		</ion-list>     

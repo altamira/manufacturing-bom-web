@@ -6,22 +6,22 @@
 		</div>
 	</ion-header-bar>
 	<ion-content class="has-header content-body">
-		<form ng-submit="saveItem(processdata.id, operation.id)">
+		<form ng-submit="saveItem(newItemData.id)">
 			<ion-list>
 				<div id="input-div">
 					<label class="item item-input  no-item-margin-border">
 						<span class="input-label">CODIGO</span>
-						<input type="text" value="PPLCOL00113000000000" ng-model="newItemData.code"/>
+						<input type="text" value="{{newItemData.code}}" ng-model="newItemData.code"/>
 					</label>
 					<label class="item item-input no-item-margin-border">
 						<span class="input-label">DESCRICAO</span>
-						<input type="text" value="COLUNA NORMAL CH12 2800MM" ng-model="newItemData.description"/>
+						<input type="text" value="{{newItemData.description}}" ng-model="newItemData.description"/>
 					</label>
 					<div class="item item-input-inset no-item-margin-border" id="modal-selectbox">
 						<span class="input-label input-label-flex" >QUANTITADE</span>
 						<div class="item item-input-inset no-item-margin-border no-padding input-type-flex">
 							<label class="border-all">
-								<input type="text" ng-model="newItemData.quantity">
+								<input type="text" ng-model="newItemData.quantity" value={{newItemData.quantity}}>
 							</label>&nbsp;&nbsp;&nbsp;
 							<select class="quantity-select-box" ng-model="newItemData.unit">
 								<option>gm</option>

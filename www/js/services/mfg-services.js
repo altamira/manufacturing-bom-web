@@ -63,22 +63,28 @@ altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $state
 		},
 		
 		// Triggered to delte sequences
-		deleteOperation:function(processid, operationid, type) {     
+		deleteOperation:function(processid, operationid, index, type) {     
 			type = type || "";
-			this.showConfirmBox('Delete Operation', 'Are you sure you want to delete this process operation ?').then(function(res) {
+			processid = processid || "";
+			operationid = operationid || "";
+			this.showConfirmBox('Delete Operation', 'Are you sure you want to delete this process operation ?').then(function(res) {debugger;
 				if(res) {
-					Restangular.one('manufacturing/process', processid).one('operation', operationid).remove().then(function () {
-						$ionicPopup.alert({
-							title: 'Success',
-							content: 'Operation deleted.'
-						}).then(function(res) {	
-							if(type == "Main"){
-								$state.go('app.mfgprocessform', {processid: processid});
-							}else{
-								$state.go($state.current, {}, {reload: true});
-							}
+					if(processid != "" && operationid != ""){
+						Restangular.one('manufacturing/process', processid).one('operation', operationid).remove().then(function () {
+							$ionicPopup.alert({
+								title: 'Success',
+								content: 'Operation deleted.'
+							}).then(function(res) {	
+								if(type == "Main"){
+									$state.go('app.mfgprocessform', {processid: processid});
+								}else{
+									$state.go($state.current, {}, {reload: true});
+								}
+							});	
 						});	
-					});				
+					}else{
+						formData.operation.splice(index);
+					}
 				} else {
 					
 				}
