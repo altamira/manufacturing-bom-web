@@ -1,13 +1,13 @@
 //mfg operation form  controller
-altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular, mfgService) {
+altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular, mfgService, mfgModalService) {
 
 	//regular expression to test an integer
 	var intTest = /^\+?(0|[1-9]\d*)$/;
 	
-	$scope.processdata = mfgService.getData();	
+	$scope.process = mfgService.getData();	
 	$scope.operation = {};
 	if($stateParams.operationid === "" && intTest.test(mfgService.indexValue)){
-		$scope.operation = $scope.processdata.operation[mfgService.indexValue];
+		$scope.operation = $scope.process.operation[mfgService.indexValue];
 	}
 	
 	//if the process id is present get the data from API
@@ -18,9 +18,9 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 		process.get().then(function(response) {
 		
 			//get the operation data
-			$scope.processdata = response.data;			
+			$scope.process = response.data;			
 		}, function(response) {
-			$scope.processdata = {};	
+			$scope.process = {};	
 		});	
 		
 		if($stateParams.operationid != ""){		
@@ -89,103 +89,10 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 		$state.go('app.manufacturesearch');
 	};
 		
-	// onclick open the modal
-	$scope.openConsumeModal = function(type, id, indexValue) {
-		id = id || "";
-		$scope.newItemData = {};
-		
-		if(type == "CONSUME"){
-			$scope.modalHeader = "MATERIA PRIMA/INSUMOS/COMPONENTS";
-			$scope.itemType = 'consume';
-		}else{
-			$scope.modalHeader = "PRODUTO ACABADO/ EM PROCESSO DE FABRICACAO";
-			$scope.itemType = 'produce';
-		}
-		
-		if(id == "" && intTest.test(indexValue)){
-			$scope.itemIndex = indexValue;
-			if(type == "CONSUME"){
-				$scope.newItemData = $scope.operation.consume[indexValue];
-			}else{
-				$scope.newItemData = $scope.operation.produce[indexValue];
-			}			
-		}else{
-
-			Restangular.one('manufacturing/process', $stateParams.processid).one('operation', $stateParams.operationid).one($scope.itemType, id).get().then(function(response) {		
-				//get the operation data
-				$scope.newItemData = response.data;			
-			}, function(response) {
-				$scope.newItemData = {};	
-			})
-		}
-		
-		// Create the modal that we will use later
-		$ionicModal.fromTemplateUrl('templates/add-item.html', {
-			scope: $scope
-		}).then(function(modal) {
-			$scope.modal = modal;
+	$scope.openConsumeModal = function(type, operationid, id, indexValue) {
+		mfgModalService.itemModal('templates/add-item.html', $scope, type, operationid, id, indexValue).then(function(modal) {
 			modal.show();
 		});
-	};
-	
-	// Triggered in the login modal to close it
-	$scope.closeAddItem = function() {
-		$scope.modal.remove();
-	};
-		
-	// Perform the login action when the user submits the login form
-	$scope.saveItem = function(id) {
-		id = id || "";
-		if(id == ""){
-			if($stateParams.processid != "" && $stateParams.operationid != ""){
-				Restangular.one('manufacturing/process', $stateParams.processid).one('operation', $stateParams.operationid).all($scope.itemType).post($scope.newItemData).then(function(response) {
-					if(response.status == 201){
-						mfgService.showAlert('Success', 'Processo foi importado com sucesso !').then(function(res){
-							$scope.modal.remove();
-						});	
-					}
-				}, function() {
-					// alert if an error occurs
-					mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');
-					$scope.modal.remove();
-				});	
-			}else{				
-				if($scope.itemType == 'consume'){
-					if (!$scope.operation.consume) {
-						$scope.operation.consume = [];
-					}
-					if(intTest.test($scope.itemIndex)){
-						$scope.operation.consume[$scope.itemIndex] = $scope.newItemData;		
-					}else{
-						$scope.operation.consume.push($scope.newItemData);
-					}
-				}else{
-					if (!$scope.operation.produce) {
-						$scope.operation.produce = [];
-					}
-					if(intTest.test($scope.itemIndex)){
-						$scope.operation.produce[$scope.itemIndex] = $scope.newItemData;		
-					}else{
-						$scope.operation.produce.push($scope.newItemData);
-					}
-					
-				}
-				
-				$scope.modal.remove();
-			}
-		}else{
-			$scope.newItemData.put().then(function(response) {
-				if(response.status == 200){
-					mfgService.showAlert('Success', 'Processo foi importado com sucesso !').then(function(res){
-						$scope.modal.remove();
-					});	
-				}
-			}, function() {
-				mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.').then(function(res){
-					$scope.modal.remove();
-				});	
-			});					
-		}	
 	};
 	
 	// Triggered to mark as checked the operation
