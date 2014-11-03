@@ -1,5 +1,5 @@
 //orders detail controller
-altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $window, $state, $stateParams, Restangular, mfgService) {
+altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $window, $state, $stateParams, Restangular, mfgService, mfgModalService) {
 	$scope.process = mfgService.getData();
 	
 	//get data from api
@@ -80,6 +80,12 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	// open the report in a new tab
 	$scope.openReport = function(id) { 
 		$window.open('http://report.altamira.com.br/manufacturing/process/'+ id);
+	};
+	
+	$scope.openOperationItem = function(type, operationid, id, indexValue) {
+		mfgModalService.itemModal('templates/add-item.html', $scope, type, operationid, id, indexValue).then(function(modal) {
+			modal.show();
+		});
 	};
 	
 });

@@ -1,12 +1,12 @@
 <form name="mfgOprtnForm" novalidate>
 	<ion-header-bar class="bar-positive">
 		<div class="buttons header-margin">
-			<a href="#/app/manufacturing/process/{{processdata.id}}" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
+			<a href="#/app/manufacturing/process/{{process.id}}" class="button button-icon"><i class="fa fa-chevron-left"></i></a>
 			<span class="btn-separator"></span>
 			<h4 class="mfg-page-titles">&nbsp;&nbsp;{{operation.sequence}}-{{operation.name}}&nbsp;&nbsp;</h4>
 			<span class="btn-separator"></span>
-			<button class="button button-icon" ng-click="saveOperation(processdata.id)" ><i class="fa fa-check"></i></button>
-			<button class="button button-icon" ng-click="deleteOperation(processdata.id, operation.id, $index, 'Main')"><i class="fa fa-times"></i></button>
+			<button class="button button-icon" ng-click="saveOperation(process.id)" ><i class="fa fa-check"></i></button>
+			<button class="button button-icon" ng-click="deleteOperation(process.id, operation.id, $index, 'Main')"><i class="fa fa-times"></i></button>
 			<button class="button button-icon"><i class="fa fa-print"></i></button>		
 		</div>
 	</ion-header-bar>
@@ -21,11 +21,11 @@
 			<div id="input-div">
 				<label class="item item-input  no-item-margin-border">
 					<span class="input-label">CODIGO</span>
-					<input type="text" value="{{processdata.code}}" readonly/>
+					<input type="text" value="{{process.code}}" readonly/>
 				</label>
 				<label class="item item-input no-item-margin-border">
 					<span class="input-label">DESCRICAO</span>
-					<input type="text" value="{{processdata.description}}" readonly/>
+					<input type="text" value="{{process.description}}" readonly/>
 				</label>
 				<hr style="color:#EEEEEE;"> 
 				<label class="item item-input no-item-margin-border">
@@ -52,7 +52,7 @@
 				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="openConsumeModal('CONSUME')"></i>
 			</div>
 			<div class="item item-icon-right" ng-repeat="input in operation.consume">
-				<p class="no-item-margin-border" ng-click="openConsumeModal('CONSUME', input.id, $index)">{{input.code}} - {{input.description}}</p>
+				<p class="no-item-margin-border" ng-click="openConsumeModal('CONSUME', operation.id, input.id, $index)">{{input.code}} - {{input.description}}</p>
 				<i class="icon fa fa-times-circle-o" ng-click="deleteOperationItem('CONSUME', input.id, $index)"></i>
 			</div>
 			<br/>
@@ -62,7 +62,7 @@
 				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="openConsumeModal('PRODUCE')"></i>
 			</div>
 			<div class="item item-icon-right" ng-repeat="output in operation.produce">
-				<p class="no-item-margin-border" ng-click="openConsumeModal('PRODUCE', output.id, $index)">{{output.code}} - {{output.description}}</p>
+				<p class="no-item-margin-border" ng-click="openConsumeModal('PRODUCE', operation.id, output.id, $index)">{{output.code}} - {{output.description}}</p>
 				<i class="icon fa fa-times-circle-o" ng-click="deleteOperationItem('PRODUCE', output.id, $index)"></i>
 			</div>
 		</ion-list>     
