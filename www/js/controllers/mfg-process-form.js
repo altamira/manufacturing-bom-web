@@ -46,17 +46,20 @@ altamiraApp.controller('ManufcProcsFormCtrl', function($scope, $ionicPopup, $win
 	};
 	
 	//trigered when user click on sequence row
-	$scope.goToOperationForm = function (processid,id) {
-		$state.go('app.mfgoperationform',{processid:processid,operationid:id});		
+	$scope.goToOperationForm = function (id, indexValue) {
+		id = id || "";
+		$state.go('app.mfgoperationform',{processid:$stateParams.processid,operationid:id});
+		if(id == ""){
+			mfgService.setIndex(indexValue);
+		}
     };
 	
 	//trigered when user click on to add a new operation
-	$scope.newOperationForm = function (processid) {
-		processid = processid || "";
-		if(processid == ""){
+	$scope.newOperationForm = function () {
+		if($stateParams.processid == ""){
 			mfgService.setData($scope.process);
 		}
-		$state.go('app.mfgoperationform',{processid:processid,operationid:""});		
+		$state.go('app.mfgoperationform',{processid:$stateParams.processid,operationid:""});		
     };
 	
 	// Triggered to mark as checked the process

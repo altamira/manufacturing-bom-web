@@ -1,8 +1,14 @@
 //mfg operation form  controller
 altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ionicModal, $timeout, $state, $stateParams, Restangular, mfgService) {
+
+	//regular expression to test an integer
+	var intTest = /^\+?(0|[1-9]\d*)$/;
 	
 	$scope.processdata = mfgService.getData();	
 	$scope.operation = {};
+	if($stateParams.operationid === "" && intTest.test(mfgService.indexValue)){
+		$scope.operation = $scope.processdata.operation[mfgService.indexValue];
+	}
 	
 	//if the process id is present get the data from API
 	if($stateParams.processid != ""){
@@ -59,7 +65,13 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 						if (!$scope.processdata.operation) {
 							$scope.processdata.operation = [];
 						}
-						$scope.processdata.operation.push($scope.operation);
+						
+						//save the operation if it is edit
+						if(intTest.test(mfgService.indexValue)){
+							$scope.processdata.operation[mfgService.indexValue] = $scope.operation;		
+						}else{
+							$scope.processdata.operation.push($scope.operation);
+						}
 						//if process id is not there save the data in a array in client side
 						mfgService.setData($scope.processdata);
 						$state.go($state.current,{operationid:""});
@@ -70,8 +82,8 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	};
 	
 	// Triggered to mark as checked the operation
-	$scope.deleteOperation = function(processid, operationid, type) { 
-		return mfgService.deleteOperation(processid, operationid, type);
+	$scope.deleteOperation = function(processid, operationid, indexValue, type) {
+		return mfgService.deleteOperation(processid, operationid, indexValue, type);
 	};
 	
 	// Triggered to mark as checked the process
@@ -87,8 +99,9 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 	};
 		
 	// onclick open the modal
-	$scope.openConsumeModal = function(type, id) {
+	$scope.openConsumeModal = function(type, id, indexValue) {
 		id = id || "";
+		$scope.newItemData = {};
 		
 		if(type == "CONSUME"){
 			$scope.modalHeader = "MATERIA PRIMA/INSUMOS/COMPONENTS";
@@ -98,8 +111,13 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 			$scope.itemType = 'produce';
 		}
 		
-		if(id == ""){
-			$scope.newItemData = {};			
+		if(id == "" && intTest.test(indexValue)){
+			$scope.itemIndex = indexValue;
+			if(type == "CONSUME"){
+				$scope.newItemData = $scope.operation.consume[indexValue];
+			}else{
+				$scope.newItemData = $scope.operation.produce[indexValue];
+			}			
 		}else{
 
 			Restangular.one('manufacturing/process', $stateParams.processid).one('operation', $stateParams.operationid).one($scope.itemType, id).get().then(function(response) {		
@@ -129,7 +147,7 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 		id = id || "";
 		if(id == ""){
 			if($stateParams.processid != "" && $stateParams.operationid != ""){
-				Restangular.one('manufacturing/process', $stateParams.processid).one('operation', $stateParams.operationid).all(itemType).post($scope.newItemData).then(function(response) {
+				Restangular.one('manufacturing/process', $stateParams.processid).one('operation', $stateParams.operationid).all($scope.itemType).post($scope.newItemData).then(function(response) {
 					if(response.status == 201){
 						mfgService.showAlert('Success', 'Processo foi importado com sucesso !').then(function(res){
 							$scope.modal.remove();
@@ -145,12 +163,21 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 					if (!$scope.operation.consume) {
 						$scope.operation.consume = [];
 					}
-					$scope.operation.consume.push($scope.newItemData);
+					if(intTest.test($scope.itemIndex)){
+						$scope.operation.consume[$scope.itemIndex] = $scope.newItemData;		
+					}else{
+						$scope.operation.consume.push($scope.newItemData);
+					}
 				}else{
 					if (!$scope.operation.produce) {
 						$scope.operation.produce = [];
 					}
-					$scope.operation.produce.push($scope.newItemData);
+					if(intTest.test($scope.itemIndex)){
+						$scope.operation.produce[$scope.itemIndex] = $scope.newItemData;		
+					}else{
+						$scope.operation.produce.push($scope.newItemData);
+					}
+					
 				}
 				
 				$scope.modal.remove();
@@ -167,7 +194,33 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 					$scope.modal.remove();
 				});	
 			});					
+		}	
+	};
+	
+	// Triggered to mark as checked the operation
+	$scope.deleteOperationItem = function(type, itemId, indexValue) {
+		// Triggered to delte sequences
+		itemId = itemId || "";
+		if(type == "CONSUME"){
+			var itemType = 'consume';
+		}else{
+			var itemType = 'produce';
 		}
-		//$state.go($state.current, {}, {reload: true});
+		mfgService.showConfirmBox('Delete Operation '+ itemType, 'Are you sure you want to delete this operation '+itemType+'?').then(function(res) {
+			if(res) {
+				if($stateParams.processid != "" && $stateParams.operationid != "" && itemId !== ""){
+					Restangular.one('manufacturing/process', $stateParams.processid).one('operation', $stateParams.operationid).one(itemType, itemId).remove().then(function () {
+						mfgService.showAlert('Success', itemType + 'deleted.');
+						$state.go($state.current, {}, {reload: true});						
+					});	
+				}else{
+					if(type == "CONSUME"){debugger;
+						$scope.operation.consume.splice(indexValue);
+					}else{
+						$scope.operation.produce.splice(indexValue);
+					}
+				}
+			} 
+		});		
 	};
 });

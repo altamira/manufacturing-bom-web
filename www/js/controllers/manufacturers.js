@@ -40,6 +40,9 @@ altamiraApp.controller('ManufacturingProcsSearchCtrl', function($scope, $statePa
 	
 	//trigered when user click on process row
 	$scope.newProcess = function () {
+	
+		//reset the array before going to new process form
+		mfgService.resetData();
 		$state.go('app.mfgprocessform', {processid: ""});		
     }
 });

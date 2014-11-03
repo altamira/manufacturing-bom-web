@@ -5,7 +5,7 @@
 			<span class="btn-separator"></span>
 			<h4 class="mfg-page-titles">&nbsp;&nbsp;{{process.code}}&nbsp;&nbsp;</h4>
 			<span class="btn-separator"></span>
-			<button class="button button-icon" ng-click="mfgProcessForm.$valid && mfgProcessForm.$dirty ? saveProcess() : '';"><i class="fa fa-check"></i></button>
+			<button class="button button-icon" ng-click="mfgProcessForm.$valid ? saveProcess() : '';"><i class="fa fa-check"></i></button>
 			<button class="button button-icon" ng-click="deleteProcess(process.id,'Main')"><i class="fa fa-times"></i></button>
 			<button class="button button-icon" ng-click="openReport(process.id)"><i class="fa fa-print"></i></button>		
 		</div>
@@ -50,15 +50,15 @@
 			<br/>
 			<div class="item item-divider item-icon-right">
 				<label>OPERACOES</label>
-				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="newOperationForm(process.id)"></i>
+				<i class="icon fa fa-plus-square-o" style="font-size:16px;right: 11px;" ng-click="newOperationForm()"></i>
 			</div>
 			<div ng-repeat="operation in process.operation">
 				<div class="item item-icon-right">
-					<p class="no-item-margin-border" ng-click="goToOperationForm(process.id, operation.id)">{{operation.sequence}} - {{operation.name}}</p>
+					<p class="no-item-margin-border" ng-click="goToOperationForm(operation.id, $index)">{{operation.sequence}} - {{operation.name}}</p>
 					<i class="icon fa fa-times-circle-o" ng-click="deleteOperation(process.id, operation.id, $index)"></i>				
 				</div>				
 				<div class="item item-icon-right" ng-repeat="input in operation.consume">
-					<p class="procs-sequnce-margin" ng-click="goToProcessForm(input.id)">{{input.description}}</p>
+					<p class="procs-sequnce-margin" >{{input.description}}</p>
 					<i class="icon fa fa-times-circle-o"  ng-click="deleteConsume(input.id, $index,'OperationProcs')"></i>
 				</div>			
 			</div>

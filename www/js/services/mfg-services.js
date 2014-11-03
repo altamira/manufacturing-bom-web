@@ -1,7 +1,12 @@
 altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $stateParams, Restangular) {
 	var formData = {};
-	
+	this.indexValue = null; 
+	 
 	return {
+		setIndex: function (index) {
+            this.indexValue = index;
+        },
+		
 		getData: function () {
            
             return formData;
@@ -57,6 +62,7 @@ altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $state
 					}else{
 						//remove from the client side array
 						formData = {};
+						$state.go($state.current, {}, {reload: true});
 					}					
 				}
 			});
@@ -67,7 +73,7 @@ altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $state
 			type = type || "";
 			processid = processid || "";
 			operationid = operationid || "";
-			this.showConfirmBox('Delete Operation', 'Are you sure you want to delete this process operation ?').then(function(res) {debugger;
+			this.showConfirmBox('Delete Operation', 'Are you sure you want to delete this process operation ?').then(function(res) {
 				if(res) {
 					if(processid != "" && operationid != ""){
 						Restangular.one('manufacturing/process', processid).one('operation', operationid).remove().then(function () {
@@ -84,16 +90,19 @@ altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $state
 						});	
 					}else{
 						formData.operation.splice(index);
+						$state.go('app.mfgprocessform', {processid: processid});
 					}
 				} else {
 					
 				}
 			});
 		},
+		
+		
 		// Triggered to delte sequences
-		goToProcessForm:function(id) {     
+		goToProcessForm:function(id) {
+			id = id || "";
 			$state.go('app.mfgprocessform', {processid: id});
-			$state.newProcessCreation = false;			
 		},
 		
 		//put request for process or operation
