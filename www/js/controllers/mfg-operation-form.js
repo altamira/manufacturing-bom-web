@@ -62,18 +62,9 @@ altamiraApp.controller('ManufcOprtnFormCtrl', function($scope, $ionicPopup, $ion
 							mfgService.showAlert('Falhou', 'Erro ao importar o Pedido.');						
 						});	
 					}else{
-						if (!$scope.processdata.operation) {
-							$scope.processdata.operation = [];
-						}
 						
-						//save the operation if it is edit
-						if(intTest.test(mfgService.indexValue)){
-							$scope.processdata.operation[mfgService.indexValue] = $scope.operation;		
-						}else{
-							$scope.processdata.operation.push($scope.operation);
-						}
 						//if process id is not there save the data in a array in client side
-						mfgService.setData($scope.processdata);
+						mfgService.setOpeartionData($scope.operation);
 						$state.go($state.current,{operationid:""});
 					}
 				}										

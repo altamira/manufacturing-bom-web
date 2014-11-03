@@ -9,15 +9,21 @@
 		<form ng-submit="saveItem(newItemData.id)">
 			<ion-list>
 				<div id="input-div">
-					<label class="item item-input  no-item-margin-border">
+					<div class="item item-input-inset no-item-margin-border no-padding" id="modal-selectbox">
 						<span class="input-label">CODIGO</span>
-						<input type="text" value="{{newItemData.code}}" ng-model="newItemData.code"/>
-					</label>
-					<label class="item item-input no-item-margin-border">
+						<div class="item item-input-wrapper no-item-margin-border no-padding list-item-bgcolor">
+							<input type="text" value="{{newItemData.code}}" ng-model="newItemData.code"/>
+							<button class="button  button-icon" ng-click="goToProcsSearch()"><i class="fa fa-search"></i></button>
+						</div>
+					</div>
+					<div class="item item-input-inset no-item-margin-border no-padding " id="modal-selectbox">
 						<span class="input-label">DESCRICAO</span>
-						<input type="text" value="{{newItemData.description}}" ng-model="newItemData.description"/>
-					</label>
-					<div class="item item-input-inset no-item-margin-border" id="modal-selectbox">
+						<div class="item item-input-wrapper no-item-margin-border no-padding list-item-bgcolor">
+							<input type="text" value="{{newItemData.description}}" ng-model="newItemData.description"/>
+							<button class="button  button-icon" ng-click="goToProcsSearch()"><i class="fa fa-search"></i></button>
+						</div>
+					</div>
+					<div class="item item-input-inset no-item-margin-border no-padding " id="modal-selectbox">
 						<span class="input-label input-label-flex" >QUANTITADE</span>
 						<div class="item item-input-inset no-item-margin-border no-padding input-type-flex">
 							<label class="border-all">
@@ -37,7 +43,7 @@
 					<button class="button icon-left fa fa-check"  type="submit">OK</button>&nbsp;&nbsp;&nbsp;
 					<button class="button icon-left fa fa-times" ng-click="closeAddItem()">CANCEL</button>				
 				</div>
-			</ion-list>   
+			</ion-list>
 		</form>
 	</ion-content>
 </div>

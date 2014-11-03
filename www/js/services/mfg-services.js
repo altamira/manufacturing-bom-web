@@ -1,7 +1,8 @@
 altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $stateParams, Restangular) {
 	var formData = {};
 	this.indexValue = null; 
-	 
+	var intTest = /^\+?(0|[1-9]\d*)$/;
+	
 	return {
 		setIndex: function (index) {
             this.indexValue = index;
@@ -15,6 +16,21 @@ altamiraApp.service('mfgService', function ($ionicPopup, $window, $state, $state
         setData: function (newFormData) {
             //You could also set specific attribute of the form data instead
             formData = newFormData;
+        },
+		
+		setOpeartionData: function (operationData) {
+			//check the operation array is present or not
+			if (!formData.operation) {
+				formData.operation = [];
+			}
+			//check for the exisance of the array element
+			if(intTest.test(this.indexValue)){
+				//update the element if present
+				formData.operation[this.indexValue] = operationData;		
+			}else{
+				//add to array if it is new element
+				formData.operation.push(operationData);
+			}            
         },
 		
         resetData: function () {
